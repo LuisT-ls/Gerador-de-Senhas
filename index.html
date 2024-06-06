@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Senhas Fortes e Divertidas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Crie Senhas Épicas e Seguras!</h1>
+    </header>
+
+    <main>
+      <section id="gerador">
+        <div id="opcoes">
+          <label for="comprimento">Comprimento:</label>
+          <input type="number" id="comprimento" value="12" />
+
+          <label for="incluirNumeros">Números:</label>
+          <input type="checkbox" id="incluirNumeros" checked />
+
+          <label for="incluirSimbolos">Símbolos:</label>
+          <input type="checkbox" id="incluirSimbolos" />
+
+          <button id="gerarSenha">Gerar Senha</button>
+        </div>
+
+        <div id="resultado">
+          <input type="text" id="senhaGerada" readonly />
+          <button id="copiarSenha">Copiar</button>
+        </div>
+      </section>
+
+      <section id="medidorForca">
+        <h2>Força da Senha:</h2>
+        <div id="barraForca"></div>
+        <p id="feedbackForca"></p>
+        <ul id="dicasForca"></ul>
+      </section>
+
+      <section id="geradorHistoria">
+        <h2>Crie uma Senha com Sua História:</h2>
+        <textarea
+          id="historia"
+          placeholder="Escreva uma frase ou história..."
+        ></textarea>
+        <button id="gerarSenhaHistoria">Gerar Senha da História</button>
+      </section>
+
+      <section id="geradorTematico">
+        <h2>Escolha um Tema para Sua Senha:</h2>
+        <select id="tema">
+          <option value="geral">Geral</option>
+          <option value="filmes">Filmes</option>
+          <option value="series">Séries</option>
+          <option value="games">Games</option>
+        </select>
+        <button id="gerarSenhaTema">Gerar Senha do Tema</button>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Luís Teixeira - Gerador de Senhas</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
