@@ -1,210 +1,164 @@
-/* Estilos Gerais */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+/* style.css */
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: #1e1e2f;
+  color: #cfcfcf;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  padding: 20px;
 }
 
 header {
-  background: linear-gradient(to right, #007bff, #0056b3);
-  color: white;
-  padding: 1rem 0;
-  text-align: center;
+  background: #3e3e50;
+  color: #fff;
+  padding: 20px;
   width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-h1 {
-  margin: 0;
-  font-size: 2.5rem;
+header h1 {
+  font-size: 2rem;
 }
 
 main {
-  padding: 2rem;
-  width: 80%;
+  background: #2a2a3d;
+  padding: 20px;
+  width: 100%;
   max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
 }
 
 section {
-  background-color: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 h2 {
-  color: #007bff; /* Cor de destaque (azul) */
-  margin-top: 0;
+  color: #ff6f61;
+  margin-bottom: 10px;
 }
 
-label {
-  display: block;
-  margin-bottom: 0.5rem;
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-input[type='number'],
-input[type='text'],
-textarea,
-select {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 1rem;
+form .input-group {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-/* Efeito de foco nos inputs */
-input[type='number']:focus,
-input[type='text']:focus,
-textarea:focus,
-select:focus {
-  outline: none; /* Remove a borda padrão do foco */
-  box-shadow: 0 0 5px #007bff; /* Adiciona uma sombra azul ao redor */
+form .input-group label {
+  flex-basis: 30%;
+  margin-right: 10px;
 }
 
-#copiarSenha::before {
-  content: '\f0c5'; /* Ícone de copiar (Font Awesome) */
-  margin-right: 0.5rem;
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
+form .input-group input[type='number'],
+form .input-group input[type='checkbox'],
+form .input-group textarea,
+form .input-group select {
+  flex-basis: 70%;
+  padding: 10px;
+  background: #3e3e50;
+  border: 2px solid #ff6f61;
+  border-radius: 5px;
+  color: #fff;
+}
+
+textarea {
+  flex-basis: 100%;
 }
 
 button {
-  background-color: #007bff; /* Cor de destaque (azul) */
-  color: white;
-  padding: 0.8rem 1.5rem;
+  background: #ff6f61;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s, transform 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+  background: #ff4b3e;
+  transform: scale(1.05);
 }
 
-/* Estilos Específicos */
-#opcoes label,
-#opcoes input {
-  display: inline-block;
-  width: auto;
-  margin-right: 1rem;
+output {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: #3e3e50;
+  border: 2px solid #ff6f61;
+  border-radius: 5px;
+  margin-top: 2%;
 }
 
-#resultado input {
-  font-size: 1.2rem;
+output input {
+  border: none;
+  background: transparent;
+  color: #fff;
+  flex-grow: 1;
+  padding: 10px;
 }
 
-#medidorForca {
-  text-align: center;
+#barraForca {
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
-.barraForca {
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 4px;
-  transition: width 0.3s ease;
-  transition: width 0.5s ease-in-out; /* Transição mais suave */
-}
-
-.forca-1 {
-  background-color: #ff0000;
-} /* Vermelho (muito fraca) */
-.forca-2 {
-  background-color: #ff6600;
-} /* Laranja (fraca) */
-.forca-3 {
-  background-color: #ffff00;
-} /* Amarelo (média) */
-.forca-4 {
-  background-color: #99ff00;
-} /* Verde claro (forte) */
-.forca-5 {
-  background-color: #00ff00;
-} /* Verde (muito forte) */
-
-#dicasForca li {
-  list-style: none;
+#barraForca::after {
+  content: '';
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff6f61, #ff9f6f, #ffd700);
+  width: 0;
+  transition: width 0.5s;
 }
 
 footer {
-  background-color: #333;
-  color: white;
-  padding: 1rem 0;
+  margin-top: 20px;
   text-align: center;
-  width: 100%;
-  margin-top: auto; /* Footer sempre no final da página */
+  font-size: 0.9rem;
+  color: #555;
 }
 
-/* Responsividade Reformulada */
 @media (max-width: 600px) {
-  main {
-    padding: 1rem;
+  form .input-group {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  #opcoes label,
-  #opcoes input {
-    display: block;
-    margin-bottom: 0.5rem;
+  form .input-group label {
+    flex-basis: 100%;
+    margin-right: 0;
   }
 
-  #resultado input {
-    margin-top: 1rem;
-    font-size: 1rem;
-  }
-
-  #dicasForca li {
-    font-size: 0.9rem;
-  }
-
-  footer {
-    padding: 0.5rem 0;
-  }
-
-  .barraForca {
-    height: 10px;
-  }
-
-  .forca-1,
-  .forca-2,
-  .forca-3,
-  .forca-4,
-  .forca-5 {
-    height: 10px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  input[type='number'],
-  input[type='text'],
-  textarea,
-  select {
-    padding: 0.5rem;
-  }
-
-  button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  #copiarSenha::before {
-    font-size: 0.9rem;
-  }
-
-  #medidorForca {
-    font-size: 0.9rem;
+  form .input-group input[type='number'],
+  form .input-group input[type='checkbox'],
+  form .input-group textarea,
+  form .input-group select {
+    flex-basis: 100%;
   }
 }

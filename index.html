@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerador de Senhas Fortes e Divertidas</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
   </head>
   <body>
     <header>
@@ -13,23 +21,40 @@
 
     <main>
       <section id="gerador">
-        <div id="opcoes">
-          <label for="comprimento">Comprimento:</label>
-          <input type="number" id="comprimento" value="12" />
+        <form id="opcoes">
+          <div class="input-group">
+            <label for="comprimento">Comprimento:</label>
+            <input type="number" id="comprimento" value="12" min="8" max="30" />
+          </div>
+          <div class="input-group">
+            <label for="incluirMaiusculas">Maiúsculas:</label>
+            <input type="checkbox" id="incluirMaiusculas" checked />
+          </div>
+          <div class="input-group">
+            <label for="incluirMinusculas">Minúsculas:</label>
+            <input type="checkbox" id="incluirMinusculas" checked />
+          </div>
+          <div class="input-group">
+            <label for="incluirNumeros">Números:</label>
+            <input type="checkbox" id="incluirNumeros" checked />
+          </div>
+          <div class="input-group">
+            <label for="incluirSimbolos">Símbolos:</label>
+            <input type="checkbox" id="incluirSimbolos" />
+          </div>
+          <div class="input-group">
+            <label for="excluirAmbiguos">Excluir Ambíguos:</label>
+            <input type="checkbox" id="excluirAmbiguos" />
+          </div>
+          <button id="gerarSenha" type="button">Gerar Senha</button>
+        </form>
 
-          <label for="incluirNumeros">Números:</label>
-          <input type="checkbox" id="incluirNumeros" checked />
-
-          <label for="incluirSimbolos">Símbolos:</label>
-          <input type="checkbox" id="incluirSimbolos" />
-
-          <button id="gerarSenha">Gerar Senha</button>
-        </div>
-
-        <div id="resultado">
+        <output id="resultado">
           <input type="text" id="senhaGerada" readonly />
-          <button id="copiarSenha">Copiar</button>
-        </div>
+          <button id="copiarSenha" type="button">
+            <i class="fas fa-copy"></i> Copiar
+          </button>
+        </output>
       </section>
 
       <section id="medidorForca">
@@ -41,22 +66,32 @@
 
       <section id="geradorHistoria">
         <h2>Crie uma Senha com Sua História:</h2>
-        <textarea
-          id="historia"
-          placeholder="Escreva uma frase ou história..."
-        ></textarea>
-        <button id="gerarSenhaHistoria">Gerar Senha da História</button>
+        <form>
+          <div class="input-group">
+            <textarea
+              id="historia"
+              placeholder="Escreva uma frase ou história..."
+            ></textarea>
+          </div>
+          <button id="gerarSenhaHistoria" type="button">
+            Gerar Senha da História
+          </button>
+        </form>
       </section>
 
       <section id="geradorTematico">
         <h2>Escolha um Tema para Sua Senha:</h2>
-        <select id="tema">
-          <option value="geral">Geral</option>
-          <option value="filmes">Filmes</option>
-          <option value="series">Séries</option>
-          <option value="games">Games</option>
-        </select>
-        <button id="gerarSenhaTema">Gerar Senha do Tema</button>
+        <form>
+          <div class="input-group">
+            <select id="tema">
+              <option value="geral">Geral</option>
+              <option value="filmes">Filmes</option>
+              <option value="series">Séries</option>
+              <option value="games">Games</option>
+            </select>
+          </div>
+          <button id="gerarSenhaTema" type="button">Gerar Senha do Tema</button>
+        </form>
       </section>
     </main>
 

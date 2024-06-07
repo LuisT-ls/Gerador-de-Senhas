@@ -10,6 +10,9 @@ const historiaInput = document.getElementById('historia')
 const gerarSenhaHistoriaButton = document.getElementById('gerarSenhaHistoria')
 const temaSelect = document.getElementById('tema')
 const gerarSenhaTemaButton = document.getElementById('gerarSenhaTema')
+const incluirMaiusculasInput = document.getElementById('incluirMaiusculas')
+const incluirMinusculasInput = document.getElementById('incluirMinusculas')
+const excluirAmbiguosInput = document.getElementById('excluirAmbiguos')
 
 // Caracteres para gerar as senhas
 const caracteres = {
@@ -29,12 +32,21 @@ const palavrasTematicas = {
 // Função para gerar a senha
 function gerarSenha() {
   const comprimento = parseInt(comprimentoInput.value)
+  const incluirMaiusculas = incluirMaiusculasInput.checked
+  const incluirMinusculas = incluirMinusculasInput.checked
   const incluirNumeros = incluirNumerosInput.checked
   const incluirSimbolos = incluirSimbolosInput.checked
+  const excluirAmbiguos = excluirAmbiguosInput.checked
 
-  let caracteresValidos = caracteres.letras
+  let caracteresValidos = ''
+  if (incluirMaiusculas) caracteresValidos += caracteres.letras.toUpperCase()
+  if (incluirMinusculas) caracteresValidos += caracteres.letras.toLowerCase()
   if (incluirNumeros) caracteresValidos += caracteres.numeros
   if (incluirSimbolos) caracteresValidos += caracteres.simbolos
+
+  if (excluirAmbiguos) {
+    caracteresValidos = caracteresValidos.replace(/[0O1Il]/g, '')
+  }
 
   let senha = ''
   for (let i = 0; i < comprimento; i++) {
