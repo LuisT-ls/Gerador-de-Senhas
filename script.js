@@ -29,6 +29,8 @@ const palavrasTematicas = {
   games: ['mario', 'zelda', 'sonic', 'kratos', 'link']
 }
 
+let encryptedPasswords = []
+
 // Função para gerar a senha
 function gerarSenha() {
   const comprimento = parseInt(comprimentoInput.value)
@@ -56,6 +58,8 @@ function gerarSenha() {
 
   senhaGeradaInput.value = senha
   calcularForcaSenha(senha)
+
+  salvarSenhaNoHistorico(senha)
 }
 
 // Função para calcular a força da senha e fornecer dicas
@@ -170,8 +174,85 @@ function gerarSenhaTema() {
   calcularForcaSenha(senha)
 }
 
-// Event listeners
+// Função para criptografar a senha
+async function encryptPassword(password) {
+  const key = await generateKey()
+  const iv = crypto.getRandomValues(new Uint8Array(12)) // Vetor de inicialização
+  const encoded = new TextEncoder().encode(password)
+
+  const ciphertext = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    encoded
+  )
+
+  return {
+    ciphertext: Array.from(new Uint8Array(ciphertext)),
+    iv: Array.from(iv)
+  }
+}
+
+// Função para descriptografar a senha
+async function decryptPassword(encryptedData) {
+  const key = await generateKey()
+  const ciphertext = new Uint8Array(encryptedData.ciphertext)
+  const iv = new Uint8Array(encryptedData.iv)
+
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    ciphertext
+  )
+
+  return new TextDecoder().decode(decrypted)
+}
+
+// Função para gerar a chave de criptografia (AES-GCM)
+async function generateKey() {
+  // Use uma senha mestra ou um método mais seguro para derivar a chave
+  const masterPassword = 'sua_senha_mestra_forte' // Substitua por uma senha forte ou outro método
+  const encoded = new TextEncoder().encode(masterPassword)
+  return await crypto.subtle.importKey(
+    'raw',
+    encoded,
+    { name: 'PBKDF2' },
+    false,
+    ['deriveKey']
+  )
+}
+
+// Função para salvar a senha criptografada no histórico (modificada)
+async function salvarSenhaNoHistorico(senha) {
+  const encryptedData = await encryptPassword(senha)
+  encryptedPasswords.push(encryptedData)
+
+  // Salva as senhas criptografadas no localStorage
+  localStorage.setItem('historicoSenhas', JSON.stringify(encryptedPasswords))
+}
+
+// Função para carregar o histórico de senhas (modificada)
+async function carregarHistoricoSenhas() {
+  const encryptedPasswordsString = localStorage.getItem('historicoSenhas')
+  if (encryptedPasswordsString) {
+    encryptedPasswords = JSON.parse(encryptedPasswordsString)
+  }
+
+  const decryptedPasswords = []
+  for (const encryptedData of encryptedPasswords) {
+    const decryptedPassword = await decryptPassword(encryptedData)
+    decryptedPasswords.push(decryptedPassword)
+  }
+  return decryptedPasswords
+}
+
+// Adiciona os eventos aos elementos do DOM
 gerarSenhaButton.addEventListener('click', gerarSenha)
 copiarSenhaButton.addEventListener('click', copiarSenha)
 gerarSenhaHistoriaButton.addEventListener('click', gerarSenhaHistoria)
 gerarSenhaTemaButton.addEventListener('click', gerarSenhaTema)
+
+// Carrega o histórico de senhas ao iniciar
+carregarHistoricoSenhas().then(decryptedPasswords => {
+  // Faça algo com as senhas descriptografadas, como exibir em uma lista
+  console.log(decryptedPasswords)
+})
