@@ -175,6 +175,44 @@ output input {
   background-color: #2ecc71;
 } /* Muito Forte (Green) */
 
+#listaSenhas {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0;
+}
+
+#listaSenhas li {
+  /* Estilos para os itens da lista */
+  background-color: #3e3e50; /* Cor de fundo dos itens */
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+#listaSenhas li {
+  display: flex; /* Permite o uso de flexbox */
+  justify-content: space-between; /* Distribui os elementos igualmente */
+  align-items: center; /* Centraliza os elementos verticalmente */
+}
+
+.acoes button {
+  margin: 0 5px; /* Adiciona um espaçamento entre os botões */
+}
+
+#listaSenhas li button {
+  margin-left: 10px; /* Adiciona um espaçamento entre os botões */
+  background-color: transparent; /* Remove o fundo padrão do botão */
+  border: none; /* Remove a borda padrão do botão */
+  color: #fff; /* Define a cor do texto */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  font-size: 16px; /* Tamanho da fonte */
+}
+
+#listaSenhas .cabecalho {
+  font-weight: bold;
+  border-bottom: 1px solid #555;
+}
+
 footer {
   margin-top: 20px;
   text-align: center;

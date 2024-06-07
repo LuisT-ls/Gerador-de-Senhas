@@ -13,6 +13,8 @@ const gerarSenhaTemaButton = document.getElementById('gerarSenhaTema')
 const incluirMaiusculasInput = document.getElementById('incluirMaiusculas')
 const incluirMinusculasInput = document.getElementById('incluirMinusculas')
 const excluirAmbiguosInput = document.getElementById('excluirAmbiguos')
+const feedbackForca = document.getElementById('feedbackForca')
+const dicasForca = document.getElementById('dicasForca')
 
 // Caracteres para gerar as senhas
 const caracteres = {
@@ -60,7 +62,14 @@ function gerarSenha() {
   calcularForcaSenha(senha)
 
   salvarSenhaNoHistorico(senha)
+  carregarHistoricoSenhas()
 }
+
+// Adiciona um event listener para verificar a senha em tempo real
+senhaGeradaInput.addEventListener('input', () => {
+  const senha = senhaGeradaInput.value
+  calcularForcaSenha(senha)
+})
 
 // Função para calcular a força da senha e fornecer dicas
 function calcularForcaSenha(senha) {
@@ -84,15 +93,11 @@ function calcularForcaSenha(senha) {
 
   barraForca.style.width = `${forca * 20}%` // Remove todas as classes de força anteriores
 
-  barraForca.classList.remove(
-    'forca-1',
-    'forca-2',
-    'forca-3',
-    'forca-4',
-    'forca-5'
-  ) // Adiciona a nova classe de força
+  for (let i = 1; i <= 5; i++) {
+    barraForca.classList.remove(`forca-${i}`)
+  }
 
-  barraForca.classList.add(`forca-${forca}`) // Feedback visual e dicas de melhoria
+  barraForca.classList.add(`forca-${forca}`)
 
   const feedbackForca = document.getElementById('feedbackForca')
   const dicasForca = document.getElementById('dicasForca')
@@ -124,13 +129,24 @@ function calcularForcaSenha(senha) {
       dicasForca.innerHTML = '<li>Parabéns! Sua senha é excelente.</li>'
       break
   }
+  dicasForca.style.display = 'block'
 }
 
 // Função para copiar a senha
-function copiarSenha() {
-  senhaGeradaInput.select()
-  document.execCommand('copy')
-  alert('Senha copiada para a área de transferência!')
+async function copiarSenha() {
+  const senha = senhaGeradaInput.value
+  if (senha) {
+    await navigator.clipboard.writeText(senha)
+
+    // Feedback visual de cópia (opcional)
+    const copiarButton = document.getElementById('copiarSenha')
+    copiarButton.innerHTML = '<i class="fas fa-check"></i> Copiado!' // Altera o ícone e o texto do botão para indicar sucesso
+    setTimeout(() => {
+      copiarButton.innerHTML = '<i class="fas fa-copy"></i> Copiar' // Retorna ao estado original após um tempo
+    }, 2000) // 2 segundos (2000 milissegundos)
+  } else {
+    alert('Não há senha para copiar.')
+  }
 }
 
 // Função para gerar senha com base na história
@@ -237,12 +253,53 @@ async function carregarHistoricoSenhas() {
     encryptedPasswords = JSON.parse(encryptedPasswordsString)
   }
 
-  const decryptedPasswords = []
-  for (const encryptedData of encryptedPasswords) {
-    const decryptedPassword = await decryptPassword(encryptedData)
-    decryptedPasswords.push(decryptedPassword)
+  const listaSenhas = document.getElementById('listaSenhas')
+  listaSenhas.innerHTML = '' // Limpa a lista
+
+  const cabecalho = document.createElement('li')
+  cabecalho.classList.add('cabecalho')
+  cabecalho.innerHTML = `
+    <span>Senha</span>
+    <span>Ações</span>
+  `
+  listaSenhas.appendChild(cabecalho)
+
+  // Declaração e preenchimento do array decryptedPasswords (corrigido)
+  const decryptedPasswords = await Promise.all(
+    encryptedPasswords.map(decryptPassword)
+  )
+
+  for (let i = 0; i < decryptedPasswords.length; i++) {
+    const senha = decryptedPasswords[i]
+    const listItem = document.createElement('li')
+    listItem.textContent = senha
+
+    const acoes = document.createElement('div')
+    acoes.classList.add('acoes')
+
+    const copiarButton = document.createElement('button')
+    copiarButton.innerHTML = '<i class="fas fa-copy"></i>'
+    copiarButton.addEventListener('click', () => {
+      navigator.clipboard.writeText(senha)
+      alert('Senha copiada para a área de transferência!')
+    })
+    acoes.appendChild(copiarButton)
+
+    const excluirButton = document.createElement('button')
+    excluirButton.innerHTML = '<i class="fas fa-trash-alt"></i>'
+    excluirButton.addEventListener('click', () => {
+      encryptedPasswords.splice(i, 1)
+      localStorage.setItem(
+        'historicoSenhas',
+        JSON.stringify(encryptedPasswords)
+      )
+      carregarHistoricoSenhas() // Recarrega o histórico
+    })
+    acoes.appendChild(excluirButton)
+
+    listItem.appendChild(acoes)
+    listaSenhas.appendChild(listItem)
   }
-  return decryptedPasswords
 }
 
 // Adiciona os eventos aos elementos do DOM
@@ -250,9 +307,10 @@ gerarSenhaButton.addEventListener('click', gerarSenha)
 copiarSenhaButton.addEventListener('click', copiarSenha)
 gerarSenhaHistoriaButton.addEventListener('click', gerarSenhaHistoria)
 gerarSenhaTemaButton.addEventListener('click', gerarSenhaTema)
+senhaGeradaInput.addEventListener('input', () => {
+  const senha = senhaGeradaInput.value
+  calcularForcaSenha(senha)
+})
 
 // Carrega o histórico de senhas ao iniciar
-carregarHistoricoSenhas().then(decryptedPasswords => {
-  // Faça algo com as senhas descriptografadas, como exibir em uma lista
-  console.log(decryptedPasswords)
-})
+carregarHistoricoSenhas()
