@@ -61,32 +61,35 @@ function gerarSenha() {
 // Função para calcular a força da senha e fornecer dicas
 function calcularForcaSenha(senha) {
   let forca = 0
-  const comprimento = senha.length
+  const comprimento = senha.length // Pontos por comprimento
 
-  // Pontos por comprimento
   if (comprimento >= 16) forca += 4
   else if (comprimento >= 12) forca += 3
   else if (comprimento >= 8) forca += 2
-  else forca += 1
+  else forca += 1 // Pontos por tipo de caractere
 
-  // Pontos por tipo de caractere
   if (senha.match(/[A-Z]/) && senha.match(/[a-z]/)) forca += 2
   if (senha.match(/[0-9]/)) forca += 2
-  if (senha.match(/[^A-Za-z0-9]/)) forca += 3
+  if (senha.match(/[^A-Za-z0-9]/)) forca += 3 // Pontos extras por combinações
 
-  // Pontos extras por combinações
   if (senha.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) forca += 2
   if (senha.match(/([a-zA-Z])/) && senha.match(/([0-9])/)) forca += 2
-  if (senha.match(/([a-zA-Z0-9])/) && senha.match(/([^A-Za-z0-9])/)) forca += 3
+  if (senha.match(/([a-zA-Z0-9])/) && senha.match(/([^A-Za-z0-9])/)) forca += 3 // Normalizar a força para 5 níveis
 
-  // Normalizar a força para 5 níveis
-  forca = Math.min(Math.round(forca / 3), 5)
+  forca = Math.min(Math.round(forca / 3), 5) // Atualizar a barra de força
 
-  // Atualizar a barra de força
-  barraForca.style.width = `${forca * 20}%`
-  barraForca.className = `forca-${forca}`
+  barraForca.style.width = `${forca * 20}%` // Remove todas as classes de força anteriores
 
-  // Feedback visual e dicas de melhoria
+  barraForca.classList.remove(
+    'forca-1',
+    'forca-2',
+    'forca-3',
+    'forca-4',
+    'forca-5'
+  ) // Adiciona a nova classe de força
+
+  barraForca.classList.add(`forca-${forca}`) // Feedback visual e dicas de melhoria
+
   const feedbackForca = document.getElementById('feedbackForca')
   const dicasForca = document.getElementById('dicasForca')
   dicasForca.innerHTML = ''

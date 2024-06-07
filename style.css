@@ -69,6 +69,10 @@ form .input-group label {
   margin-right: 10px;
 }
 
+label i {
+  margin-left: 0.5rem;
+}
+
 form .input-group input[type='number'],
 form .input-group input[type='checkbox'],
 form .input-group textarea,
@@ -95,6 +99,10 @@ button {
   transition: background 0.3s, transform 0.3s;
 }
 
+button i {
+  margin-right: 0.5rem;
+}
+
 button:hover {
   background: #ff4b3e;
   transform: scale(1.05);
@@ -119,23 +127,53 @@ output input {
   padding: 10px;
 }
 
+/* Ícones */
+.fa-lock,
+.fa-bolt,
+.fa-copy,
+.fa-book-reader,
+.fa-palette,
+.fa-ruler-horizontal {
+  margin-right: 5px;
+}
+
+/* Barra de Força */
 #barraForca {
   height: 10px;
-  background: #ddd;
+  background-color: #ddd; /* Cor de fundo padrão (cinza) */
   border-radius: 5px;
   margin-bottom: 10px;
-  position: relative;
-  overflow: hidden;
+  position: relative; /* Para posicionar o ::after */
+  overflow: hidden; /* Esconde o excesso do ::after */
+  transition: width 0.5s ease, background-color 0.5s ease; /* Transição suave para largura e cor de fundo */
 }
 
 #barraForca::after {
   content: '';
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-  background: linear-gradient(90deg, #ff6f61, #ff9f6f, #ffd700);
-  width: 0;
-  transition: width 0.5s;
+  width: 0%; /* Começa vazio */
+  border-radius: 5px; /* Borda arredondada */
+  transition: width 0.5s ease; /* Transição suave */
 }
+
+.forca-1 {
+  background-color: #ff4b3e;
+} /* Muito Fraca (Red) */
+.forca-2 {
+  background-color: #ff6f61;
+} /* Fraca (Orange) */
+.forca-3 {
+  background-color: #ff9f6f;
+} /* Média (Yellow) */
+.forca-4 {
+  background-color: #ffd700;
+} /* Forte (Greenish Yellow) */
+.forca-5 {
+  background-color: #2ecc71;
+} /* Muito Forte (Green) */
 
 footer {
   margin-top: 20px;

@@ -23,7 +23,9 @@
       <section id="gerador">
         <form id="opcoes">
           <div class="input-group">
-            <label for="comprimento">Comprimento:</label>
+            <label for="comprimento"
+              >Comprimento: <i class="fas fa-ruler-horizontal"></i
+            ></label>
             <input type="number" id="comprimento" value="12" min="8" max="30" />
           </div>
           <div class="input-group">
@@ -46,19 +48,29 @@
             <label for="excluirAmbiguos">Excluir Ambíguos:</label>
             <input type="checkbox" id="excluirAmbiguos" />
           </div>
-          <button id="gerarSenha" type="button">Gerar Senha</button>
+          <button
+            id="gerarSenha"
+            type="button"
+            aria-label="botão para gerar senha"
+          >
+            <i class="fas fa-bolt"></i> Gerar Senha
+          </button>
         </form>
 
         <output id="resultado">
           <input type="text" id="senhaGerada" readonly />
-          <button id="copiarSenha" type="button">
+          <button
+            id="copiarSenha"
+            type="button"
+            aria-label="botão copiar senha gerada"
+          >
             <i class="fas fa-copy"></i> Copiar
           </button>
         </output>
       </section>
 
       <section id="medidorForca">
-        <h2>Força da Senha:</h2>
+        <h2>Força da Senha: <i class="fas fa-lock"></i></h2>
         <div id="barraForca"></div>
         <p id="feedbackForca"></p>
         <ul id="dicasForca"></ul>
@@ -73,8 +85,12 @@
               placeholder="Escreva uma frase ou história..."
             ></textarea>
           </div>
-          <button id="gerarSenhaHistoria" type="button">
-            Gerar Senha da História
+          <button
+            id="gerarSenhaHistoria"
+            type="button"
+            aria-label="botão gerar senha da história"
+          >
+            <i class="fas fa-book-reader"></i> Gerar Senha da História
           </button>
         </form>
       </section>
@@ -90,7 +106,13 @@
               <option value="games">Games</option>
             </select>
           </div>
-          <button id="gerarSenhaTema" type="button">Gerar Senha do Tema</button>
+          <button
+            id="gerarSenhaTema"
+            type="button"
+            aria-label="botão gerar senha do tema"
+          >
+            <i class="fas fa-palette"></i> Gerar Senha do Tema
+          </button>
         </form>
       </section>
     </main>
