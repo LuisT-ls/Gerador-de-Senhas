@@ -31,8 +31,6 @@ const palavrasTematicas = {
   games: ['mario', 'zelda', 'sonic', 'kratos', 'link']
 }
 
-let encryptedPasswords = []
-
 // Função para gerar a senha
 function gerarSenha() {
   const comprimento = parseInt(comprimentoInput.value)
@@ -41,6 +39,11 @@ function gerarSenha() {
   const incluirNumeros = incluirNumerosInput.checked
   const incluirSimbolos = incluirSimbolosInput.checked
   const excluirAmbiguos = excluirAmbiguosInput.checked
+
+  if (comprimento < 8 || comprimento > 30) {
+    alert('O comprimento da senha deve ser entre 8 e 30 caracteres.')
+    return
+  }
 
   let caracteresValidos = ''
   if (incluirMaiusculas) caracteresValidos += caracteres.letras.toUpperCase()
@@ -60,9 +63,6 @@ function gerarSenha() {
 
   senhaGeradaInput.value = senha
   calcularForcaSenha(senha)
-
-  salvarSenhaNoHistorico(senha)
-  carregarHistoricoSenhas()
 }
 
 // Adiciona um event listener para verificar a senha em tempo real
@@ -74,24 +74,24 @@ senhaGeradaInput.addEventListener('input', () => {
 // Função para calcular a força da senha e fornecer dicas
 function calcularForcaSenha(senha) {
   let forca = 0
-  const comprimento = senha.length // Pontos por comprimento
+  const comprimento = senha.length
 
   if (comprimento >= 16) forca += 4
   else if (comprimento >= 12) forca += 3
   else if (comprimento >= 8) forca += 2
-  else forca += 1 // Pontos por tipo de caractere
+  else forca += 1
 
   if (senha.match(/[A-Z]/) && senha.match(/[a-z]/)) forca += 2
   if (senha.match(/[0-9]/)) forca += 2
-  if (senha.match(/[^A-Za-z0-9]/)) forca += 3 // Pontos extras por combinações
+  if (senha.match(/[^A-Za-z0-9]/)) forca += 3
 
   if (senha.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) forca += 2
   if (senha.match(/([a-zA-Z])/) && senha.match(/([0-9])/)) forca += 2
-  if (senha.match(/([a-zA-Z0-9])/) && senha.match(/([^A-Za-z0-9])/)) forca += 3 // Normalizar a força para 5 níveis
+  if (senha.match(/([a-zA-Z0-9])/) && senha.match(/([^A-Za-z0-9])/)) forca += 3
 
-  forca = Math.min(Math.round(forca / 3), 5) // Atualizar a barra de força
+  forca = Math.min(Math.round(forca / 3), 5)
 
-  barraForca.style.width = `${forca * 20}%` // Remove todas as classes de força anteriores
+  barraForca.style.width = `${forca * 20}%`
 
   for (let i = 1; i <= 5; i++) {
     barraForca.classList.remove(`forca-${i}`)
@@ -138,12 +138,14 @@ async function copiarSenha() {
   if (senha) {
     await navigator.clipboard.writeText(senha)
 
-    // Feedback visual de cópia (opcional)
-    const copiarButton = document.getElementById('copiarSenha')
-    copiarButton.innerHTML = '<i class="fas fa-check"></i> Copiado!' // Altera o ícone e o texto do botão para indicar sucesso
+    // Feedback visual de cópia
+    copiarSenhaButton.innerHTML = '<i class="fas fa-check"></i> Copiado!'
+    copiarSenhaButton.classList.add('copiado')
+
     setTimeout(() => {
-      copiarButton.innerHTML = '<i class="fas fa-copy"></i> Copiar' // Retorna ao estado original após um tempo
-    }, 2000) // 2 segundos (2000 milissegundos)
+      copiarSenhaButton.innerHTML = '<i class="fas fa-copy"></i> Copiar'
+      copiarSenhaButton.classList.remove('copiado')
+    }, 2000)
   } else {
     alert('Não há senha para copiar.')
   }
@@ -190,118 +192,6 @@ function gerarSenhaTema() {
   calcularForcaSenha(senha)
 }
 
-// Função para criptografar a senha
-async function encryptPassword(password) {
-  const key = await generateKey()
-  const iv = crypto.getRandomValues(new Uint8Array(12)) // Vetor de inicialização
-  const encoded = new TextEncoder().encode(password)
-
-  const ciphertext = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv },
-    key,
-    encoded
-  )
-
-  return {
-    ciphertext: Array.from(new Uint8Array(ciphertext)),
-    iv: Array.from(iv)
-  }
-}
-
-// Função para descriptografar a senha
-async function decryptPassword(encryptedData) {
-  const key = await generateKey()
-  const ciphertext = new Uint8Array(encryptedData.ciphertext)
-  const iv = new Uint8Array(encryptedData.iv)
-
-  const decrypted = await crypto.subtle.decrypt(
-    { name: 'AES-GCM', iv },
-    key,
-    ciphertext
-  )
-
-  return new TextDecoder().decode(decrypted)
-}
-
-// Função para gerar a chave de criptografia (AES-GCM)
-async function generateKey() {
-  // Use uma senha mestra ou um método mais seguro para derivar a chave
-  const masterPassword = 'sua_senha_mestra_forte' // Substitua por uma senha forte ou outro método
-  const encoded = new TextEncoder().encode(masterPassword)
-  return await crypto.subtle.importKey(
-    'raw',
-    encoded,
-    { name: 'PBKDF2' },
-    false,
-    ['deriveKey']
-  )
-}
-
-// Função para salvar a senha criptografada no histórico (modificada)
-async function salvarSenhaNoHistorico(senha) {
-  const encryptedData = await encryptPassword(senha)
-  encryptedPasswords.push(encryptedData)
-
-  // Salva as senhas criptografadas no localStorage
-  localStorage.setItem('historicoSenhas', JSON.stringify(encryptedPasswords))
-}
-
-// Função para carregar o histórico de senhas (modificada)
-async function carregarHistoricoSenhas() {
-  const encryptedPasswordsString = localStorage.getItem('historicoSenhas')
-  if (encryptedPasswordsString) {
-    encryptedPasswords = JSON.parse(encryptedPasswordsString)
-  }
-
-  const listaSenhas = document.getElementById('listaSenhas')
-  listaSenhas.innerHTML = '' // Limpa a lista
-
-  const cabecalho = document.createElement('li')
-  cabecalho.classList.add('cabecalho')
-  cabecalho.innerHTML = `
-    <span>Senha</span>
-    <span>Ações</span>
-  `
-  listaSenhas.appendChild(cabecalho)
-
-  // Declaração e preenchimento do array decryptedPasswords (corrigido)
-  const decryptedPasswords = await Promise.all(
-    encryptedPasswords.map(decryptPassword)
-  )
-
-  for (let i = 0; i < decryptedPasswords.length; i++) {
-    const senha = decryptedPasswords[i]
-    const listItem = document.createElement('li')
-    listItem.textContent = senha
-
-    const acoes = document.createElement('div')
-    acoes.classList.add('acoes')
-
-    const copiarButton = document.createElement('button')
-    copiarButton.innerHTML = '<i class="fas fa-copy"></i>'
-    copiarButton.addEventListener('click', () => {
-      navigator.clipboard.writeText(senha)
-      alert('Senha copiada para a área de transferência!')
-    })
-    acoes.appendChild(copiarButton)
-
-    const excluirButton = document.createElement('button')
-    excluirButton.innerHTML = '<i class="fas fa-trash-alt"></i>'
-    excluirButton.addEventListener('click', () => {
-      encryptedPasswords.splice(i, 1)
-      localStorage.setItem(
-        'historicoSenhas',
-        JSON.stringify(encryptedPasswords)
-      )
-      carregarHistoricoSenhas() // Recarrega o histórico
-    })
-    acoes.appendChild(excluirButton)
-
-    listItem.appendChild(acoes)
-    listaSenhas.appendChild(listItem)
-  }
-}
-
 // Adiciona os eventos aos elementos do DOM
 gerarSenhaButton.addEventListener('click', gerarSenha)
 copiarSenhaButton.addEventListener('click', copiarSenha)
@@ -311,6 +201,3 @@ senhaGeradaInput.addEventListener('input', () => {
   const senha = senhaGeradaInput.value
   calcularForcaSenha(senha)
 })
-
-// Carrega o histórico de senhas ao iniciar
-carregarHistoricoSenhas()

@@ -76,54 +76,47 @@
         <ul id="dicasForca"></ul>
       </section>
 
-      <section id="historicoSenhas">
-        <h2>Histórico de Senhas: <i class="fas fa-history"></i></h2>
-        <ul id="listaSenhas">
-          <li class="cabecalho">
-            <span>Senha</span>
-            <span>Ações</span>
-          </li>
-        </ul>
-      </section>
-
-      <section id="geradorHistoria">
-        <h2>Crie uma Senha com Sua História:</h2>
-        <form>
-          <div class="input-group">
-            <textarea
-              id="historia"
-              placeholder="Escreva uma frase ou história..."
-            ></textarea>
-          </div>
-          <button
-            id="gerarSenhaHistoria"
-            type="button"
-            aria-label="botão gerar senha da história"
-          >
-            <i class="fas fa-book-reader"></i> Gerar Senha da História
-          </button>
-        </form>
-      </section>
-
-      <section id="geradorTematico">
-        <h2>Escolha um Tema para Sua Senha:</h2>
-        <form>
-          <div class="input-group">
-            <select id="tema">
-              <option value="geral">Geral</option>
-              <option value="filmes">Filmes</option>
-              <option value="series">Séries</option>
-              <option value="games">Games</option>
-            </select>
-          </div>
-          <button
-            id="gerarSenhaTema"
-            type="button"
-            aria-label="botão gerar senha do tema"
-          >
-            <i class="fas fa-palette"></i> Gerar Senha do Tema
-          </button>
-        </form>
+      <section id="geradoresAdicionais">
+        <div class="input-group">
+          <section id="geradorHistoria">
+            <h2>Crie uma Senha com Sua História:</h2>
+            <form>
+              <div class="input-group">
+                <textarea
+                  id="historia"
+                  placeholder="Escreva uma frase ou história..."
+                ></textarea>
+              </div>
+              <button
+                id="gerarSenhaHistoria"
+                type="button"
+                aria-label="botão gerar senha da história"
+              >
+                <i class="fas fa-book-reader"></i> Gerar Senha da História
+              </button>
+            </form>
+          </section>
+          <section id="geradorTematico">
+            <h2>Escolha um Tema para Sua Senha:</h2>
+            <form>
+              <div class="input-group">
+                <select id="tema">
+                  <option value="geral">Geral</option>
+                  <option value="filmes">Filmes</option>
+                  <option value="series">Séries</option>
+                  <option value="games">Games</option>
+                </select>
+              </div>
+              <button
+                id="gerarSenhaTema"
+                type="button"
+                aria-label="botão gerar senha do tema"
+              >
+                <i class="fas fa-palette"></i> Gerar Senha do Tema
+              </button>
+            </form>
+          </section>
+        </div>
       </section>
     </main>
 
