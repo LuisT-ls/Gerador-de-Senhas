@@ -66,33 +66,58 @@ function atualizarBarraForca(senha) {
   const feedback = document.getElementById('feedbackForca')
   const dicas = document.getElementById('dicasForca')
 
-  const criterios = [
-    /[a-z]/.test(senha), // Minúsculas
-    /[A-Z]/.test(senha), // Maiúsculas
-    /[0-9]/.test(senha), // Números
-    /[^a-zA-Z0-9]/.test(senha) // Símbolos
-  ]
-  const forca = criterios.filter(Boolean).length * 25
+  const comprimento = senha.length
+  const temMinuscula = /[a-z]/.test(senha)
+  const temMaiuscula = /[A-Z]/.test(senha)
+  const temNumero = /[0-9]/.test(senha)
+  const temSimbolo = /[^a-zA-Z0-9]/.test(senha)
+
+  // Cálculo da força da senha (mais granular)
+  let forca = 0
+  if (comprimento >= 12) forca += 25
+  if (comprimento >= 16) forca += 15
+  if (temMinuscula) forca += 10
+  if (temMaiuscula) forca += 10
+  if (temNumero) forca += 10
+  if (temSimbolo) forca += 10
+  if (temMinuscula && temMaiuscula && temNumero && temSimbolo) forca += 20
 
   barra.style.width = `${forca}%`
 
-  if (forca < 50) {
+  // Mensagens de feedback mais detalhadas
+  if (forca < 30) {
     barra.style.backgroundColor = 'red'
+    feedback.textContent = 'Muito Fraca'
+  } else if (forca < 50) {
+    barra.style.backgroundColor = 'orange'
     feedback.textContent = 'Fraca'
-  } else if (forca < 75) {
+  } else if (forca < 70) {
     barra.style.backgroundColor = 'yellow'
     feedback.textContent = 'Média'
+  } else if (forca < 90) {
+    barra.style.backgroundColor = 'lightgreen'
+    feedback.textContent = 'Forte'
   } else {
     barra.style.backgroundColor = 'green'
-    feedback.textContent = 'Forte'
+    feedback.textContent = 'Muito Forte'
   }
 
-  // Dicas
+  // Estimativa de tempo para quebrar a senha (simplificada)
+  let tempoQuebra = 'instantaneamente'
+  if (forca >= 30) tempoQuebra = 'alguns minutos'
+  if (forca >= 50) tempoQuebra = 'algumas horas'
+  if (forca >= 70) tempoQuebra = 'alguns dias'
+  if (forca >= 90) tempoQuebra = 'muitos anos'
+  feedback.textContent += ` (quebrável em ${tempoQuebra})`
+
+  // Dicas mais específicas
   dicas.innerHTML = ''
-  if (!criterios[0]) dicas.innerHTML += '<li>Adicione letras minúsculas</li>'
-  if (!criterios[1]) dicas.innerHTML += '<li>Adicione letras maiúsculas</li>'
-  if (!criterios[2]) dicas.innerHTML += '<li>Adicione números</li>'
-  if (!criterios[3]) dicas.innerHTML += '<li>Adicione símbolos</li>'
+  if (comprimento < 12)
+    dicas.innerHTML += '<li>Use pelo menos 12 caracteres.</li>'
+  if (!temMinuscula) dicas.innerHTML += '<li>Inclua letras minúsculas.</li>'
+  if (!temMaiuscula) dicas.innerHTML += '<li>Inclua letras maiúsculas.</li>'
+  if (!temNumero) dicas.innerHTML += '<li>Inclua números.</li>'
+  if (!temSimbolo) dicas.innerHTML += '<li>Inclua símbolos (!@#$%).</li>'
 }
 
 // Função para copiar senha para a área de transferência
