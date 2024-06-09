@@ -9,19 +9,23 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
     <link rel="icon" type="image/x-icon" href="Logo/favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/your-font-awesome-kit.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <header>
+    <header class="animate__animated animate__fadeInDown">
       <h1>Crie Senhas Épicas e Seguras!</h1>
+      <button id="darkModeToggle">
+        <i class="fas fa-sun"></i>
+      </button>
     </header>
 
     <main>
-      <section id="gerador">
+      <section id="geradorPrincipal">
+        <h2><i class="fas fa-key"></i> Gerador de Senha Principal</h2>
         <form id="opcoes">
           <div class="input-group">
             <label for="comprimento"
@@ -77,8 +81,51 @@
         <ul id="dicasForca"></ul>
       </section>
 
-      <section id="geradoresAdicionais">
-        <div class="input-group">
+      <section id="ferramentasAdicionais">
+        <h2><i class="fas fa-tools"></i> Ferramentas Adicionais</h2>
+        <fieldset>
+          <legend>Testar Força da Senha</legend>
+          <section id="testeForca">
+            <div class="input-group">
+              <label for="senhaTeste">Sua Senha:</label>
+              <input type="password" id="senhaTeste" />
+            </div>
+            <button id="testarForca" type="button">
+              <i class="fas fa-check"></i> Testar Força
+            </button>
+          </section>
+        </fieldset>
+        <fieldset>
+          <legend>Geradores Rápidos</legend>
+          <section id="geradorWifi">
+            <h2>Gerador de Senha Wi-Fi</h2>
+            <button id="gerarSenhaWifi" type="button">
+              <i class="fas fa-wifi"></i> Gerar Senha Wi-Fi
+            </button>
+          </section>
+          <section id="geradorPin">
+            <h2>Gerador de PIN</h2>
+            <div class="input-group">
+              <label for="comprimentoPin">Comprimento:</label>
+              <input
+                type="number"
+                id="comprimentoPin"
+                value="4"
+                min="4"
+                max="12"
+              />
+            </div>
+            <button id="gerarPin" type="button">
+              <i class="fas fa-thumbtack"></i> Gerar PIN
+            </button>
+          </section>
+        </fieldset>
+      </section>
+
+      <section id="geradoresAlternativos">
+        <h2><i class="fas fa-random"></i> Geradores Alternativos</h2>
+        <fieldset>
+          <legend>Crie a sua Senha</legend>
           <section id="geradorHistoria">
             <h2>Crie uma Senha com Sua História:</h2>
             <form>
@@ -117,13 +164,49 @@
               </button>
             </form>
           </section>
-        </div>
+        </fieldset>
+      </section>
+
+      <section id="glossario">
+        <h2><i class="fas fa-book"></i> Glossário de Segurança</h2>
+        <dl>
+          <dt>Senha Forte:</dt>
+          <dd>
+            Uma senha que é difícil de adivinhar, contendo uma combinação de
+            letras maiúsculas e minúsculas, números e símbolos.
+          </dd>
+          <dt>Ataque de Força Bruta:</dt>
+          <dd>
+            Um método de ataque que tenta adivinhar uma senha testando todas as
+            combinações possíveis de caracteres.
+          </dd>
+          <dt>Phishing:</dt>
+          <dd>
+            Um tipo de golpe online em que os invasores tentam enganar as
+            vítimas para que revelem informações confidenciais, como senhas.
+          </dd>
+        </dl>
       </section>
     </main>
 
     <footer>
       <p>&copy; 2024 Luís Teixeira - Gerador de Senhas</p>
     </footer>
+
+    <script>
+      const toggleButton = document.getElementById('darkModeToggle')
+      const currentTheme = localStorage.getItem('theme') || 'light'
+      document.documentElement.setAttribute('data-theme', currentTheme)
+
+      toggleButton.addEventListener('click', () => {
+        const theme =
+          document.documentElement.getAttribute('data-theme') === 'dark'
+            ? 'light'
+            : 'dark'
+        document.documentElement.setAttribute('data-theme', theme)
+        localStorage.setItem('theme', theme)
+      })
+    </script>
 
     <script src="script.js"></script>
   </body>
