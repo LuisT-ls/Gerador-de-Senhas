@@ -4,6 +4,19 @@ darkModeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode')
 })
 
+// Detectar preferência de cor do sistema e definir o tema inicial
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)')
+const currentTheme = prefersDarkScheme.matches ? 'dark' : 'light'
+document.documentElement.setAttribute('data-theme', currentTheme)
+localStorage.setItem('theme', currentTheme)
+
+// Adicionar ouvinte de evento para mudanças na preferência de cor do sistema
+prefersDarkScheme.addEventListener('change', e => {
+  const newTheme = e.matches ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', newTheme)
+  localStorage.setItem('theme', newTheme)
+})
+
 // Animações de entrada
 const sections = document.querySelectorAll('main section')
 const observer = new IntersectionObserver(

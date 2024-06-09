@@ -296,15 +296,13 @@ footer p {
   }
 
   header h1 {
-    color: var(--primary-color);
+    color: var(--text-color);
   }
 
   header,
   footer,
   section {
-    background-color: var(
-      --header-footer-bg
-    );
+    background-color: var(--header-footer-bg);
   }
 
   header,
@@ -329,5 +327,25 @@ footer p {
 
   #barraForca {
     border-radius: 8px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  header,
+  footer,
+  section {
+    background-color: var(--header-footer-bg);
+  }
+
+  input,
+  textarea,
+  select {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
   }
 }
