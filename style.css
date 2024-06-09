@@ -163,8 +163,56 @@ output {
   margin-top: 1rem;
 }
 
+/* Estilos para os ícones */
+.material-icons {
+  font-size: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+/* Cores para os ícones */
+.material-icons.primary {
+  color: var(--primary-color);
+}
+.material-icons.secondary {
+  color: var(--secondary-color);
+}
+.material-icons.accent {
+  color: var(--accent-color);
+}
+
+/* Estilos específicos para ícones em botões */
+button .material-icons {
+  margin-right: 0.3rem;
+}
+
 fieldset {
   margin-bottom: 1.5rem;
+}
+
+#glossario {
+  /* Estilo da seção do glossário */
+  background-color: var(--header-footer-bg); /* Cor de fundo */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+#glossario h2 {
+  /* Estilo do título do glossário */
+  color: var(--accent-color); /* Cor de destaque */
+  margin-bottom: 1rem;
+}
+
+#glossario dt {
+  /* Estilo dos termos (dt) */
+  font-weight: bold;
+  margin-top: 1rem; /* Espaçamento entre os termos */
+}
+
+#glossario dd {
+  /* Estilo das definições (dd) */
+  margin-left: 1.5rem; /* Indentação das definições */
 }
 
 footer {
@@ -347,5 +395,13 @@ footer p {
   select {
     background-color: var(--input-bg);
     border-color: var(--input-border);
+  }
+
+  #glossario dt {
+    font-size: 1rem;
+  }
+
+  #glossario dd {
+    font-size: 0.9rem;
   }
 }

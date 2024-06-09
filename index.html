@@ -9,7 +9,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="Imagens/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/your-font-awesome-kit.js"
       crossorigin="anonymous"
@@ -25,7 +28,7 @@
 
     <main>
       <section id="geradorPrincipal">
-        <h2><i class="fas fa-key"></i> Gerador de Senha Principal</h2>
+        <h2><i class="material-icons">lock</i> Gerador de Senha Principal</h2>
         <form id="opcoes">
           <div class="input-group">
             <label for="comprimento"
@@ -56,9 +59,9 @@
           <button
             id="gerarSenha"
             type="button"
-            aria-label="botão para gerar senha"
+            aria-label="Gerar uma nova senha"
           >
-            <i class="fas fa-bolt"></i> Gerar Senha
+            <i class="material-icons">bolt</i> Gerar Senha
           </button>
         </form>
 
@@ -67,44 +70,46 @@
           <button
             id="copiarSenha"
             type="button"
-            aria-label="botão copiar senha gerada"
+            aria-label="Copiar senha gerada"
           >
-            <i class="fas fa-copy"></i> Copiar
+            <i class="material-icons">content_copy</i> Copiar
           </button>
         </output>
       </section>
 
       <section id="medidorForca">
-        <h2>Força da Senha: <i class="fas fa-lock"></i></h2>
+        <h2><i class="material-icons">security</i> Força da Senha:</h2>
         <div id="barraForca"></div>
         <p id="feedbackForca"></p>
         <ul id="dicasForca"></ul>
       </section>
 
       <section id="ferramentasAdicionais">
-        <h2><i class="fas fa-tools"></i> Ferramentas Adicionais</h2>
+        <h2><i class="material-icons">build</i> Ferramentas Adicionais</h2>
         <fieldset>
           <legend>Testar Força da Senha</legend>
           <section id="testeForca">
             <div class="input-group">
-              <label for="senhaTeste">Sua Senha:</label>
+              <label for="senhaTeste">
+                <i class="material-icons">password</i> Sua Senha:
+              </label>
               <input type="password" id="senhaTeste" />
             </div>
             <button id="testarForca" type="button">
-              <i class="fas fa-check"></i> Testar Força
+              <i class="material-icons">check_circle</i> Testar Força
             </button>
           </section>
         </fieldset>
         <fieldset>
           <legend>Geradores Rápidos</legend>
           <section id="geradorWifi">
-            <h2>Gerador de Senha Wi-Fi</h2>
+            <h2><i class="material-icons">wifi</i> Gerador de Senha Wi-Fi</h2>
             <button id="gerarSenhaWifi" type="button">
-              <i class="fas fa-wifi"></i> Gerar Senha Wi-Fi
+              <i class="material-icons">wifi_password</i> Gerar Senha Wi-Fi
             </button>
           </section>
           <section id="geradorPin">
-            <h2>Gerador de PIN</h2>
+            <h2><i class="material-icons">pin</i> Gerador de PIN</h2>
             <div class="input-group">
               <label for="comprimentoPin">Comprimento:</label>
               <input
@@ -115,19 +120,22 @@
                 max="12"
               />
             </div>
-            <button id="gerarPin" type="button">
-              <i class="fas fa-thumbtack"></i> Gerar PIN
+            <button id="gerarPin" type="button" aria-label="Gerar PIN">
+              <i class="material-icons">dialpad</i> Gerar PIN
             </button>
           </section>
         </fieldset>
       </section>
 
       <section id="geradoresAlternativos">
-        <h2><i class="fas fa-random"></i> Geradores Alternativos</h2>
+        <h2><i class="material-icons">autorenew</i> Geradores Alternativos</h2>
         <fieldset>
           <legend>Crie a sua Senha</legend>
           <section id="geradorHistoria">
-            <h2>Crie uma Senha com Sua História:</h2>
+            <h2>
+              <i class="material-icons">history_edu</i> Crie uma Senha com Sua
+              História:
+            </h2>
             <form>
               <div class="input-group">
                 <textarea
@@ -138,14 +146,18 @@
               <button
                 id="gerarSenhaHistoria"
                 type="button"
-                aria-label="botão gerar senha da história"
+                aria-label="Gerar senha da história"
               >
-                <i class="fas fa-book-reader"></i> Gerar Senha da História
+                <i class="material-icons">history_edu</i> Gerar Senha da
+                História
               </button>
             </form>
           </section>
           <section id="geradorTematico">
-            <h2>Escolha um Tema para Sua Senha:</h2>
+            <h2>
+              <i class="material-icons">category</i> Escolha um Tema para Sua
+              Senha:
+            </h2>
             <form>
               <div class="input-group">
                 <select id="tema">
@@ -158,9 +170,9 @@
               <button
                 id="gerarSenhaTema"
                 type="button"
-                aria-label="botão gerar senha do tema"
+                aria-label="Gerar senha do tema"
               >
-                <i class="fas fa-palette"></i> Gerar Senha do Tema
+                <i class="material-icons">palette</i> Gerar Senha do Tema
               </button>
             </form>
           </section>
@@ -168,22 +180,68 @@
       </section>
 
       <section id="glossario">
-        <h2><i class="fas fa-book"></i> Glossário de Segurança</h2>
+        <h2><i class="material-icons">book</i> Glossário de Segurança</h2>
         <dl>
           <dt>Senha Forte:</dt>
           <dd>
-            Uma senha que é difícil de adivinhar, contendo uma combinação de
-            letras maiúsculas e minúsculas, números e símbolos.
+            Uma senha longa e complexa, contendo uma combinação de letras
+            maiúsculas e minúsculas, números e símbolos. É difícil de adivinhar
+            e resistente a ataques de força bruta.
           </dd>
           <dt>Ataque de Força Bruta:</dt>
           <dd>
-            Um método de ataque que tenta adivinhar uma senha testando todas as
-            combinações possíveis de caracteres.
+            Um método de ataque que tenta descobrir uma senha testando
+            sistematicamente todas as combinações possíveis de caracteres até
+            encontrar a correta.
           </dd>
           <dt>Phishing:</dt>
           <dd>
-            Um tipo de golpe online em que os invasores tentam enganar as
-            vítimas para que revelem informações confidenciais, como senhas.
+            Um tipo de ataque cibernético em que os invasores tentam enganar as
+            vítimas para que revelem informações confidenciais, como senhas,
+            números de cartão de crédito ou dados pessoais, geralmente por meio
+            de e-mails, mensagens ou sites falsos.
+          </dd>
+          <dt>Keylogger:</dt>
+          <dd>
+            Um software malicioso que registra as teclas digitadas pelo usuário,
+            incluindo senhas, e envia essas informações para os invasores.
+          </dd>
+          <dt>Autenticação de Dois Fatores (2FA):</dt>
+          <dd>
+            Uma camada extra de segurança que exige que o usuário forneça duas
+            formas de identificação para acessar uma conta, como uma senha e um
+            código enviado por SMS ou gerado por um aplicativo.
+          </dd>
+          <dt>Gerenciador de Senhas:</dt>
+          <dd>
+            Um software que armazena e gerencia senhas de forma segura,
+            permitindo que o usuário utilize senhas fortes e diferentes para
+            cada conta sem precisar memorizá-las.
+          </dd>
+          <dt>Hashing de Senha:</dt>
+          <dd>
+            Um processo que transforma uma senha em um código criptografado
+            (hash) que não pode ser revertido para a senha original. Isso
+            protege as senhas armazenadas, pois mesmo que um invasor acesse o
+            banco de dados, ele não terá acesso às senhas em texto claro.
+          </dd>
+          <dt>Ataque de Dicionário:</dt>
+          <dd>
+            Um tipo de ataque de força bruta que utiliza uma lista de palavras
+            comuns, nomes e outras informações para tentar adivinhar a senha de
+            um usuário.
+          </dd>
+          <dt>Engenharia Social:</dt>
+          <dd>
+            Uma técnica de manipulação psicológica utilizada por invasores para
+            enganar as vítimas e obter informações confidenciais, como senhas ou
+            dados pessoais.
+          </dd>
+          <dt>Malware:</dt>
+          <dd>
+            Um software malicioso projetado para causar danos a um sistema de
+            computador, roubar dados ou realizar outras atividades maliciosas.
+            Exemplos de malware incluem vírus, worms, trojans e ransomware.
           </dd>
         </dl>
       </section>
