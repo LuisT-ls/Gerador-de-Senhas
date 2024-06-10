@@ -192,27 +192,27 @@ fieldset {
 
 #glossario {
   /* Estilo da seção do glossário */
-  background-color: var(--header-footer-bg); /* Cor de fundo */
+  background-color: var(--header-footer-bg);
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #glossario h2 {
   /* Estilo do título do glossário */
-  color: var(--accent-color); /* Cor de destaque */
+  color: var(--accent-color);
   margin-bottom: 1rem;
 }
 
 #glossario dt {
   /* Estilo dos termos (dt) */
   font-weight: bold;
-  margin-top: 1rem; /* Espaçamento entre os termos */
+  margin-top: 1rem;
 }
 
 #glossario dd {
   /* Estilo das definições (dd) */
-  margin-left: 1.5rem; /* Indentação das definições */
+  margin-left: 1.5rem;
 }
 
 footer {
@@ -232,6 +232,23 @@ footer p {
 
 .animate__fadeInDown {
   animation-name: fadeInDown;
+}
+
+/* Animação do botão ao copiar */
+.copiado {
+  animation: copiarAnimacao 0.5s ease-in-out;
+}
+
+@keyframes copiarAnimacao {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes fadeInDown {
@@ -293,16 +310,23 @@ footer p {
   transition: width 0.5s ease-in-out;
 }
 
+#barraForca .very-weak {
+  background: #ff0000; /* Vermelho */
+}
 #barraForca .weak {
-  background: var(--strength-weak);
+  background: #ff6600; /* Laranja */
 }
-
 #barraForca .medium {
-  background: var(--strength-medium);
+  background: #ffcc00; /* Amarelo */
 }
-
+#barraForca .good {
+  background: #99ff00; /* Verde claro */
+}
 #barraForca .strong {
-  background: var(--strength-strong);
+  background: #00cc00; /* Verde */
+}
+#barraForca .very-strong {
+  background: #006600; /* Verde escuro */
 }
 
 /* Feedback de força */
