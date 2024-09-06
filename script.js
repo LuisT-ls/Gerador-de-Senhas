@@ -32,76 +32,46 @@ document.addEventListener('DOMContentLoaded', function () {
   const temas = {
     geral: {
       palavras: [
-        'aventura',
-        'coragem',
-        'esperança',
-        'felicidade',
-        'liberdade',
-        'magia',
-        'mistério',
-        'sonho',
-        'viagem'
+        'aventura', 'coragem', 'esperança', 'felicidade', 'liberdade',
+        'magia', 'mistério', 'sonho', 'viagem'
       ]
     },
     filmes: {
       palavras: [
-        'jedi',
-        'hobbit',
-        'infinito',
-        'vingadores',
-        'avatar',
-        'matrix',
-        'batman',
-        'coringa',
-        'dumbledore'
+        'jedi', 'hobbit', 'infinito', 'vingadores', 'avatar',
+        'matrix', 'batman', 'coringa', 'dumbledore'
       ]
     },
     series: {
       palavras: [
-        'westeros',
-        'dragões',
-        'tardis',
-        'friends',
-        'sherlock',
-        'eleven',
-        'demogorgon',
-        'papel',
-        'professor'
+        'westeros', 'dragões', 'tardis', 'friends', 'sherlock',
+        'eleven', 'demogorgon', 'papel', 'professor'
       ]
     },
     games: {
       palavras: [
-        'mario',
-        'zelda',
-        'kratos',
-        'link',
-        'masterchief',
-        'cortana',
-        'overwatch',
-        'league',
-        'minecraft'
+        'mario', 'zelda', 'kratos', 'link', 'masterchief',
+        'cortana', 'overwatch', 'league', 'minecraft'
       ]
     }
   }
 
-  // Função para gerar a senha
+  let historicoSenhas = []
+
   function gerarSenha() {
     const comprimento = parseInt(comprimentoInput.value)
     let caracteresValidos = ''
     let senha = ''
 
-    incluirMaiusculasInput.checked &&
-      (caracteresValidos += caracteres.maiusculas)
-    incluirMinusculasInput.checked &&
-      (caracteresValidos += caracteres.minusculas)
+    incluirMaiusculasInput.checked && (caracteresValidos += caracteres.maiusculas)
+    incluirMinusculasInput.checked && (caracteresValidos += caracteres.minusculas)
     incluirNumerosInput.checked && (caracteresValidos += caracteres.numeros)
     incluirSimbolosInput.checked && (caracteresValidos += caracteres.simbolos)
 
-    excluirAmbiguosInput.checked &&
-      (caracteresValidos = caracteresValidos.replace(
-        new RegExp(`[${caracteres.ambiguos}]`, 'g'),
-        ''
-      ))
+    excluirAmbiguosInput.checked && (caracteresValidos = caracteresValidos.replace(
+      new RegExp(`[${caracteres.ambiguos}]`, 'g'),
+      ''
+    ))
 
     if (caracteresValidos.length === 0) {
       alert('Selecione pelo menos um tipo de caractere.')
@@ -109,27 +79,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (let i = 0; i < comprimento; i++) {
-      senha += caracteresValidos.charAt(
-        Math.floor(Math.random() * caracteresValidos.length)
-      )
+      senha += caracteresValidos.charAt(Math.floor(Math.random() * caracteresValidos.length))
     }
 
     senhaGeradaInput.value = senha
     avaliarForca(senha)
+    adicionarAoHistorico(senha)
   }
 
-  // Função para avaliar a força da senha e atualizar a barra de força
   function avaliarForca(senha) {
     let forca = 0
     const comprimento = senha.length
 
     comprimento >= 12 && forca++
-    ;/[A-Z]/.test(senha) && forca++
-    ;/[a-z]/.test(senha) && forca++
-    ;/[0-9]/.test(senha) && forca++
-    ;/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha) && forca++
+    /[A-Z]/.test(senha) && forca++
+    /[a-z]/.test(senha) && forca++
+    /[0-9]/.test(senha) && forca++
+    /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha) && forca++
 
-    // Níveis de força e cores da barra
     let nivelForca = 'Muito Fraca'
     let corBarra = 'very-weak'
     let tempoQuebra = 'instantaneamente'
@@ -157,62 +124,40 @@ document.addEventListener('DOMContentLoaded', function () {
       tempoQuebra = 'em anos'
     }
 
-    // Dicas para melhorar a senha
     comprimento < 12 && dicas.push('Use pelo menos 12 caracteres.')
     !/[A-Z]/.test(senha) && dicas.push('Inclua letras maiúsculas.')
     !/[a-z]/.test(senha) && dicas.push('Inclua letras minúsculas.')
     !/[0-9]/.test(senha) && dicas.push('Inclua números.')
-    !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha) &&
-      dicas.push('Inclua símbolos.')
+    !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha) && dicas.push('Inclua símbolos.')
 
-    // Atualiza a barra de força
-    barraForca.innerHTML = `<div class="${corBarra}" style="width:${
-      forca * 20
-    }%"></div>`
-
-    // Atualiza o feedback de força e as dicas
-    feedbackForca.textContent = `Força: ${nivelForca} (Quebra: ${tempoQuebra})`
+    barraForca.innerHTML = `<div class="${corBarra}" style="width:${forca * 20}%"></div>`
+    feedbackForca.innerHTML = `Força: ${nivelForca} <span class="forca-indicador forca-${corBarra.replace('very-', '')}"></span> (Quebra: ${tempoQuebra})`
     dicasForca.innerHTML = dicas.map(dica => `<li>${dica}</li>`).join('')
   }
 
-  // Função para copiar a senha gerada para a área de transferência
   function copiarSenha() {
     senhaGeradaInput.select()
     document.execCommand('copy')
-
-    // Adiciona a classe para a animação
     copiarSenhaButton.classList.add('copiado')
-
-    // Altera o texto do botão para "Copiado!"
     copiarSenhaButton.innerHTML = '<i class="material-icons">check</i> Copiado!'
-
-    // Remove a classe e restaura o texto após um curto período
     setTimeout(() => {
       copiarSenhaButton.classList.remove('copiado')
-      copiarSenhaButton.innerHTML =
-        '<i class="material-icons">content_copy</i> Copiar'
-    }, 1500) // 1.5 segundos
+      copiarSenhaButton.innerHTML = '<i class="material-icons">content_copy</i> Copiar'
+    }, 1500)
   }
 
-  // Função para gerar uma senha Wi-Fi
   function gerarSenhaWifi() {
     const comprimento = 12
     let senha = ''
-
-    // Inclui letras maiúsculas, minúsculas, números e alguns símbolos seguros para Wi-Fi
-    const caracteresValidos =
-      caracteres.maiusculas + caracteres.minusculas + caracteres.numeros + '-_.'
+    const caracteresValidos = caracteres.maiusculas + caracteres.minusculas + caracteres.numeros + '-_.'
     for (let i = 0; i < comprimento; i++) {
-      senha += caracteresValidos.charAt(
-        Math.floor(Math.random() * caracteresValidos.length)
-      )
+      senha += caracteresValidos.charAt(Math.floor(Math.random() * caracteresValidos.length))
     }
-
     senhaGeradaInput.value = senha
     avaliarForca(senha)
+    adicionarAoHistorico(senha)
   }
 
-  // Função para gerar um PIN
   function gerarPin() {
     const comprimento = parseInt(comprimentoPinInput.value)
     let pin = ''
@@ -221,9 +166,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     senhaGeradaInput.value = pin
     avaliarForca(pin)
+    adicionarAoHistorico(pin)
   }
 
-  // Função para gerar uma senha a partir de uma história
   function gerarSenhaHistoria() {
     const historia = historiaTextarea.value.toLowerCase()
     const palavras = historia.split(/\s+/)
@@ -233,31 +178,69 @@ document.addEventListener('DOMContentLoaded', function () {
       .replace(/[^a-zA-Z0-9]/g, '')
     senhaGeradaInput.value = senha
     avaliarForca(senha)
+    adicionarAoHistorico(senha)
   }
 
-  // Função para gerar uma senha a partir de um tema
   function gerarSenhaTema() {
     const tema = temaSelect.value
     const palavrasTema = temas[tema].palavras
-    const palavraAleatoria =
-      palavrasTema[Math.floor(Math.random() * palavrasTema.length)]
+    const palavraAleatoria = palavrasTema[Math.floor(Math.random() * palavrasTema.length)]
     const numeroAleatorio = Math.floor(Math.random() * 100)
-    const simboloAleatorio = caracteres.simbolos.charAt(
-      Math.floor(Math.random() * caracteres.simbolos.length)
-    )
+    const simboloAleatorio = caracteres.simbolos.charAt(Math.floor(Math.random() * caracteres.simbolos.length))
     const senha = `${palavraAleatoria}${numeroAleatorio}${simboloAleatorio}`
     senhaGeradaInput.value = senha
     avaliarForca(senha)
+    adicionarAoHistorico(senha)
   }
 
-  // Eventos
+  function adicionarAoHistorico(senha) {
+    historicoSenhas.unshift(senha)
+    if (historicoSenhas.length > 5) {
+      historicoSenhas.pop()
+    }
+    atualizarHistoricoUI()
+  }
+
+  function atualizarHistoricoUI() {
+    const lista = document.getElementById('listaSenhas')
+    if (!lista) return
+    lista.innerHTML = ''
+    historicoSenhas.forEach((senha, index) => {
+      const li = document.createElement('li')
+      li.textContent = senha
+      const btn = document.createElement('button')
+      btn.textContent = 'Usar'
+      btn.onclick = () => usarSenhaDoHistorico(index)
+      li.appendChild(btn)
+      lista.appendChild(li)
+    })
+  }
+
+  function usarSenhaDoHistorico(index) {
+    senhaGeradaInput.value = historicoSenhas[index]
+    avaliarForca(historicoSenhas[index])
+  }
+
+  // Event listeners
   gerarSenhaButton.addEventListener('click', gerarSenha)
   copiarSenhaButton.addEventListener('click', copiarSenha)
-  testarForcaButton.addEventListener('click', function () {
-    avaliarForca(senhaTesteInput.value)
-  })
+  testarForcaButton.addEventListener('click', () => avaliarForca(senhaTesteInput.value))
   gerarSenhaWifiButton.addEventListener('click', gerarSenhaWifi)
   gerarPinButton.addEventListener('click', gerarPin)
   gerarSenhaHistoriaButton.addEventListener('click', gerarSenhaHistoria)
   gerarSenhaTemaButton.addEventListener('click', gerarSenhaTema)
+
+  // Dark mode toggle
+  const toggleButton = document.getElementById('darkModeToggle')
+  const currentTheme = localStorage.getItem('theme') || 'light'
+  document.documentElement.setAttribute('data-theme', currentTheme)
+
+  toggleButton.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  })
+
+  // Inicialização
+  gerarSenha()
 })
