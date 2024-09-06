@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const gerarSenhaHistoriaButton = document.getElementById('gerarSenhaHistoria')
   const temaSelect = document.getElementById('tema')
   const gerarSenhaTemaButton = document.getElementById('gerarSenhaTema')
-
+  
   const caracteres = {
     maiusculas: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     minusculas: 'abcdefghijklmnopqrstuvwxyz',
@@ -55,33 +55,32 @@ document.addEventListener('DOMContentLoaded', function () {
       ]
     }
   }
-
+  
   let historicoSenhas = []
 
   function gerarSenha() {
     const comprimento = parseInt(comprimentoInput.value)
     let caracteresValidos = ''
     let senha = ''
-
-    incluirMaiusculasInput.checked && (caracteresValidos += caracteres.maiusculas)
-    incluirMinusculasInput.checked && (caracteresValidos += caracteres.minusculas)
-    incluirNumerosInput.checked && (caracteresValidos += caracteres.numeros)
-    incluirSimbolosInput.checked && (caracteresValidos += caracteres.simbolos)
-
-    excluirAmbiguosInput.checked && (caracteresValidos = caracteresValidos.replace(
-      new RegExp(`[${caracteres.ambiguos}]`, 'g'),
-      ''
-    ))
-
+  
+    if (incluirMaiusculasInput.checked) caracteresValidos += caracteres.maiusculas
+    if (incluirMinusculasInput.checked) caracteresValidos += caracteres.minusculas
+    if (incluirNumerosInput.checked) caracteresValidos += caracteres.numeros
+    if (incluirSimbolosInput.checked) caracteresValidos += caracteres.simbolos
+  
+    if (excluirAmbiguosInput.checked) {
+      caracteresValidos = caracteresValidos.replace(new RegExp(`[${caracteres.ambiguos}]`, 'g'), '')
+    }
+  
     if (caracteresValidos.length === 0) {
       alert('Selecione pelo menos um tipo de caractere.')
       return
     }
-
+  
     for (let i = 0; i < comprimento; i++) {
       senha += caracteresValidos.charAt(Math.floor(Math.random() * caracteresValidos.length))
     }
-
+  
     senhaGeradaInput.value = senha
     avaliarForca(senha)
     adicionarAoHistorico(senha)
@@ -91,10 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let forca = 0
     const comprimento = senha.length
 
-    comprimento >= 12 && forca++
-    /[A-Z]/.test(senha) && forca++
-    /[a-z]/.test(senha) && forca++
-    /[0-9]/.test(senha) && forca++
+    comprimento >= 12 && forca++,
+    /[A-Z]/.test(senha) && forca++,
+    /[a-z]/.test(senha) && forca++,
+    /[0-9]/.test(senha) && forca++,
     /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha) && forca++
 
     let nivelForca = 'Muito Fraca'
