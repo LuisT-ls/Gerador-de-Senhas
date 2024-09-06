@@ -221,26 +221,26 @@ document.addEventListener('DOMContentLoaded', function () {
     avaliarForca(historicoSenhas[index])
   }
 
-  // Event listeners
-  gerarSenhaButton.addEventListener('click', gerarSenha)
-  copiarSenhaButton.addEventListener('click', copiarSenha)
-  testarForcaButton.addEventListener('click', () => avaliarForca(senhaTesteInput.value))
-  gerarSenhaWifiButton.addEventListener('click', gerarSenhaWifi)
-  gerarPinButton.addEventListener('click', gerarPin)
-  gerarSenhaHistoriaButton.addEventListener('click', gerarSenhaHistoria)
-  gerarSenhaTemaButton.addEventListener('click', gerarSenhaTema)
+// Event listeners
+gerarSenhaButton.addEventListener('click', gerarSenha)
+copiarSenhaButton.addEventListener('click', copiarSenha)
+testarForcaButton.addEventListener('click', () => avaliarForca(senhaTesteInput.value))
+gerarSenhaWifiButton.addEventListener('click', gerarSenhaWifi)
+gerarPinButton.addEventListener('click', gerarPin)
+gerarSenhaHistoriaButton.addEventListener('click', gerarSenhaHistoria)
+gerarSenhaTemaButton.addEventListener('click', gerarSenhaTema)
 
-  // Dark mode toggle
-  const toggleButton = document.getElementById('darkModeToggle')
-  const currentTheme = localStorage.getItem('theme') || 'light'
-  document.documentElement.setAttribute('data-theme', currentTheme)
+// Dark mode toggle
+const toggleButton = document.getElementById('darkModeToggle')
+const currentTheme = localStorage.getItem('theme') || 'light'
+document.documentElement.setAttribute('data-theme', currentTheme)
 
-  toggleButton.addEventListener('click', () => {
-    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
-  })
+toggleButton.addEventListener('click', () => {
+  const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+  document.documentElement.setAttribute('data-theme', theme)
+  localStorage.setItem('theme', theme)
+})
 
-  // Inicialização
-  gerarSenha()
+// Inicialização
+gerarSenha()
 })
