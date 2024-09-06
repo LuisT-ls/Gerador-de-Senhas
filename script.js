@@ -256,11 +256,48 @@ document.addEventListener('DOMContentLoaded', function () {
       const li = document.createElement('li')
       li.textContent = senha
       const btn = document.createElement('button')
-      btn.textContent = 'Usar'
-      btn.onclick = () => usarSenhaDoHistorico(index)
+      btn.textContent = 'Copiar'
+      btn.onclick = () => copiarSenhaDoHistorico(senha, btn)
       li.appendChild(btn)
       lista.appendChild(li)
     })
+  }
+
+  function copiarSenhaDoHistorico(senha, button) {
+    navigator.clipboard
+      .writeText(senha)
+      .then(() => {
+        // Animação de copiado
+        button.classList.add('copiado')
+        const textoOriginal = button.textContent
+        button.innerHTML = '<i class="material-icons">check</i> Copiado!'
+
+        setTimeout(() => {
+          button.classList.remove('copiado')
+          button.textContent = textoOriginal
+        }, 1500)
+      })
+      .catch(err => {
+        console.error('Erro ao copiar senha: ', err)
+      })
+  }
+
+  function copiarSenha() {
+    navigator.clipboard
+      .writeText(senhaGeradaInput.value)
+      .then(() => {
+        copiarSenhaButton.classList.add('copiado')
+        copiarSenhaButton.innerHTML =
+          '<i class="material-icons">check</i> Copiado!'
+        setTimeout(() => {
+          copiarSenhaButton.classList.remove('copiado')
+          copiarSenhaButton.innerHTML =
+            '<i class="material-icons">content_copy</i> Copiar'
+        }, 1500)
+      })
+      .catch(err => {
+        console.error('Erro ao copiar senha: ', err)
+      })
   }
 
   function usarSenhaDoHistorico(index) {
