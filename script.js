@@ -337,6 +337,134 @@ document.addEventListener('DOMContentLoaded', function () {
     updateDarkModeIcon(currentTheme)
   })
 
+  // Sistema avançado de visualização de força de senha
+  class PasswordStrengthVisualizer {
+    constructor(passwordInput, outputElement) {
+      this.passwordInput = passwordInput
+      this.outputElement = outputElement
+      this.strengthCategories = [
+        {
+          name: 'Muito Fraca',
+          color: '#FF4D4D',
+          icon: '😱',
+          description: 'Extremamente vulnerável',
+          minScore: 0,
+          maxScore: 20
+        },
+        {
+          name: 'Fraca',
+          color: '#FFA64D',
+          icon: '🛡️',
+          description: 'Fácil de quebrar',
+          minScore: 21,
+          maxScore: 40
+        },
+        {
+          name: 'Média',
+          color: '#FFD700',
+          icon: '🔒',
+          description: 'Necessita melhorias',
+          minScore: 41,
+          maxScore: 60
+        },
+        {
+          name: 'Boa',
+          color: '#4DFF4D',
+          icon: '✅',
+          description: 'Razoavelmente segura',
+          minScore: 61,
+          maxScore: 80
+        },
+        {
+          name: 'Forte',
+          color: '#4D4DFF',
+          icon: '🚀',
+          description: 'Altamente segura',
+          minScore: 81,
+          maxScore: 95
+        },
+        {
+          name: 'Excepcionalmente Forte',
+          color: '#8A2BE2',
+          icon: '💎',
+          description: 'Praticamente inquebrável',
+          minScore: 96,
+          maxScore: 100
+        }
+      ]
+    }
+
+    calculateStrength(password) {
+      let score = 0
+
+      // Comprimento da senha
+      score += Math.min(password.length * 4, 40)
+
+      // Variedade de caracteres
+      const hasLowercase = /[a-z]/.test(password)
+      const hasUppercase = /[A-Z]/.test(password)
+      const hasNumbers = /[0-9]/.test(password)
+      const hasSymbols = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
+
+      if (hasLowercase) score += 10
+      if (hasUppercase) score += 10
+      if (hasNumbers) score += 10
+      if (hasSymbols) score += 15
+
+      // Penalidades para padrões comuns
+      if (/123|abc|qwe|password/i.test(password)) score -= 15
+
+      // Normaliza o score
+      score = Math.min(Math.max(score, 0), 100)
+      return score
+    }
+
+    getStrengthCategory(score) {
+      return this.strengthCategories.find(
+        category => score >= category.minScore && score <= category.maxScore
+      )
+    }
+
+    visualize(password) {
+      const score = this.calculateStrength(password)
+      const category = this.getStrengthCategory(score)
+
+      // Elemento de visualização circular
+      const circleElement = `
+      <div class="strength-circle" style="
+        background: conic-gradient(${category.color} ${score}%, #e0e0e0 ${score}%);
+      ">
+        <span class="strength-icon">${category.icon}</span>
+      </div>
+    `
+
+      // Feedback detalhado
+      const detailedFeedback = `
+      <div class="strength-details">
+        <h3>${category.name}</h3>
+        <p>${category.description}</p>
+        <small>Força: ${score}%</small>
+      </div>
+    `
+
+      this.outputElement.innerHTML = circleElement + detailedFeedback
+    }
+  }
+
+  // Exemplo de uso
+  document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('senha')
+    const strengthOutput = document.getElementById('forcaSenha')
+    const visualizer = new PasswordStrengthVisualizer(
+      passwordInput,
+      strengthOutput
+    )
+
+    passwordInput.addEventListener('input', () => {
+      visualizer.visualize(passwordInput.value)
+    })
+  })
+
   // Função para atualizar o ícone do botão de modo escuro (opcional)
   function updateDarkModeIcon(theme) {
     const iconPath =
