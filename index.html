@@ -34,54 +34,61 @@
         <h2><i class="material-icons">lock</i> Gerador de Senha Principal</h2>
         <form id="opcoes">
           <div class="input-group">
-            <label for="comprimento"
-              >Comprimento: <i class="fas fa-ruler-horizontal"></i
-            ></label>
+            <label for="comprimento">
+              Comprimento da Senha: <i class="fas fa-ruler-horizontal"></i>
+            </label>
             <input type="number" id="comprimento" value="12" min="8" max="30" />
           </div>
           <div class="input-group">
-            <label for="incluirMaiusculas">Maiúsculas:</label>
+            <label for="incluirMaiusculas"> Incluir Letras Maiúsculas: </label>
             <input type="checkbox" id="incluirMaiusculas" checked />
           </div>
           <div class="input-group">
-            <label for="incluirMinusculas">Minúsculas:</label>
+            <label for="incluirMinusculas"> Incluir Letras Minúsculas: </label>
             <input type="checkbox" id="incluirMinusculas" checked />
           </div>
           <div class="input-group">
-            <label for="incluirNumeros">Números:</label>
+            <label for="incluirNumeros"> Incluir Números: </label>
             <input type="checkbox" id="incluirNumeros" checked />
           </div>
           <div class="input-group">
-            <label for="incluirSimbolos">Símbolos:</label>
+            <label for="incluirSimbolos"> Incluir Símbolos: </label>
             <input type="checkbox" id="incluirSimbolos" />
           </div>
           <div class="input-group">
-            <label for="excluirAmbiguos">Excluir Ambíguos:</label>
+            <label for="excluirAmbiguos"> Excluir Caracteres Ambíguos: </label>
             <input type="checkbox" id="excluirAmbiguos" />
           </div>
-          <button id="gerarSenha" class="btn btn-primary" type="button">
+          <button id="gerarSenha" type="button">
             <i class="material-icons">bolt</i> Gerar Senha
           </button>
         </form>
-
-        <output id="resultado">
-          <input type="text" id="senhaGerada" readonly class="input-standard" />
-          <button
-            id="copiarSenha"
-            type="button"
-            aria-label="Copiar senha gerada"
-            class="btn btn-primary"
-          >
+        <div id="resultado">
+          <input
+            type="text"
+            id="senhaGerada"
+            readonly
+            placeholder="Sua senha aparecerá aqui..."
+          />
+          <button id="copiarSenha" type="button">
             <i class="material-icons">content_copy</i> Copiar
           </button>
-        </output>
+        </div>
       </section>
 
       <section id="medidorForca">
         <h2><i class="material-icons">security</i> Força da Senha:</h2>
-        <div id="barraForca"></div>
-        <p id="feedbackForca"></p>
-        <ul id="dicasForca"></ul>
+        <div id="barraForca">
+          <div class="medium"></div>
+          <!-- Adapte a classe conforme a força da senha -->
+        </div>
+        <p id="feedbackForca" class="medium-feedback">Força Média</p>
+        <!-- Adapte a classe e o texto -->
+        <ul id="dicasForca">
+          <li>Use pelo menos 12 caracteres.</li>
+          <li>Inclua letras maiúsculas, minúsculas, números e símbolos.</li>
+          <li>Evite senhas comuns como "123456".</li>
+        </ul>
       </section>
 
       <section id="historicoSenhas">
@@ -91,47 +98,49 @@
 
       <section id="ferramentasAdicionais">
         <h2><i class="material-icons">build</i> Ferramentas Adicionais</h2>
+
+        <!-- Testar Força da Senha -->
         <fieldset>
           <legend>Testar Força da Senha</legend>
           <section id="testeForca">
-            <div class="input-group">
-              <label for="senhaTeste">
-                <i class="material-icons">password</i> Sua Senha:
-              </label>
-              <input type="password" id="senhaTeste" class="input-standard" />
-            </div>
-            <button id="testarForca" type="button" class="btn btn-primary">
+            <label for="senhaTeste">
+              <i class="material-icons">password</i> Sua Senha:
+            </label>
+            <input
+              type="password"
+              id="senhaTeste"
+              placeholder="Digite sua senha..."
+            />
+            <button id="testarForca" type="button">
               <i class="material-icons">check_circle</i> Testar Força
             </button>
           </section>
         </fieldset>
+
+        <!-- Gerador de Senha Wi-Fi -->
         <fieldset>
-          <legend>Geradores Rápidos</legend>
+          <legend>Gerador de Senha Wi-Fi</legend>
           <section id="geradorWifi">
-            <h2><i class="material-icons">wifi</i> Gerador de Senha Wi-Fi</h2>
-            <button id="gerarSenhaWifi" type="button" class="btn btn-primary">
+            <h3><i class="material-icons">wifi</i> Senha Wi-Fi</h3>
+            <button id="gerarSenhaWifi" type="button">
               <i class="material-icons">wifi_password</i> Gerar Senha Wi-Fi
             </button>
           </section>
+        </fieldset>
+
+        <!-- Gerador de PIN -->
+        <fieldset>
+          <legend>Gerador de PIN</legend>
           <section id="geradorPin">
-            <h2><i class="material-icons">pin</i> Gerador de PIN</h2>
-            <div class="input-group">
-              <label for="comprimentoPin">Comprimento:</label>
-              <input
-                type="number"
-                id="comprimentoPin"
-                value="4"
-                min="4"
-                max="12"
-                class="input-standard"
-              />
-            </div>
-            <button
-              id="gerarPin"
-              type="button"
-              aria-label="Gerar PIN"
-              class="btn btn-primary"
-            >
+            <label for="comprimentoPin"> Comprimento do PIN: </label>
+            <input
+              type="number"
+              id="comprimentoPin"
+              value="4"
+              min="4"
+              max="12"
+            />
+            <button id="gerarPin" type="button">
               <i class="material-icons">dialpad</i> Gerar PIN
             </button>
           </section>
@@ -143,49 +152,35 @@
         <fieldset>
           <legend>Crie a sua Senha</legend>
           <section id="geradorHistoria">
-            <h2>
+            <h3>
               <i class="material-icons">history_edu</i> Crie uma Senha com Sua
               História:
-            </h2>
-            <form>
-              <div class="input-group">
-                <textarea
-                  id="historia"
-                  placeholder="Escreva uma frase ou história..."
-                  class="input-standard"
-                ></textarea>
-              </div>
-              <button
-                onclick="copiarSenhaDoHistorico(senha, this)"
-                class="btn btn-secondary"
-              >
-                Copiar
-              </button>
-            </form>
+            </h3>
+            <textarea
+              id="historia"
+              placeholder="Escreva uma frase ou história..."
+            ></textarea>
+            <button id="gerarSenhaHistoria" type="button">
+              <i class="material-icons">content_copy</i> Copiar Senha
+            </button>
           </section>
+        </fieldset>
+        <fieldset>
+          <legend>Escolha um Tema</legend>
           <section id="geradorTematico">
-            <h2>
+            <h3>
               <i class="material-icons">category</i> Escolha um Tema para Sua
               Senha:
-            </h2>
-            <form>
-              <div class="input-group">
-                <select id="tema" class="input-standard">
-                  <option value="geral">Geral</option>
-                  <option value="filmes">Filmes</option>
-                  <option value="series">Séries</option>
-                  <option value="games">Games</option>
-                </select>
-              </div>
-              <button
-                id="gerarSenhaTema"
-                type="button"
-                aria-label="Gerar senha do tema"
-                class="btn btn-primary"
-              >
-                <i class="material-icons">palette</i> Gerar Senha do Tema
-              </button>
-            </form>
+            </h3>
+            <select id="tema">
+              <option value="geral">Geral</option>
+              <option value="filmes">Filmes</option>
+              <option value="series">Séries</option>
+              <option value="games">Games</option>
+            </select>
+            <button id="gerarSenhaTema" type="button">
+              <i class="material-icons">palette</i> Gerar Senha do Tema
+            </button>
           </section>
         </fieldset>
       </section>
@@ -209,8 +204,7 @@
           <dd>
             Um tipo de ataque cibernético em que os invasores tentam enganar as
             vítimas para que revelem informações confidenciais, como senhas,
-            números de cartão de crédito ou dados pessoais, geralmente por meio
-            de e-mails, mensagens ou sites falsos.
+            números de cartão de crédito ou dados pessoais.
           </dd>
           <dt>Keylogger:</dt>
           <dd>
@@ -232,9 +226,7 @@
           <dt>Hashing de Senha:</dt>
           <dd>
             Um processo que transforma uma senha em um código criptografado
-            (hash) que não pode ser revertido para a senha original. Isso
-            protege as senhas armazenadas, pois mesmo que um invasor acesse o
-            banco de dados, ele não terá acesso às senhas em texto claro.
+            (hash) que não pode ser revertido para a senha original.
           </dd>
           <dt>Ataque de Dicionário:</dt>
           <dd>
@@ -252,7 +244,6 @@
           <dd>
             Um software malicioso projetado para causar danos a um sistema de
             computador, roubar dados ou realizar outras atividades maliciosas.
-            Exemplos de malware incluem vírus, worms, trojans e ransomware.
           </dd>
         </dl>
       </section>
