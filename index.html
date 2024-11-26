@@ -59,21 +59,18 @@
             <label for="excluirAmbiguos">Excluir Ambíguos:</label>
             <input type="checkbox" id="excluirAmbiguos" />
           </div>
-          <button
-            id="gerarSenha"
-            type="button"
-            aria-label="Gerar uma nova senha"
-          >
+          <button id="gerarSenha" class="btn btn-primary" type="button">
             <i class="material-icons">bolt</i> Gerar Senha
           </button>
         </form>
 
         <output id="resultado">
-          <input type="text" id="senhaGerada" readonly />
+          <input type="text" id="senhaGerada" readonly class="input-standard" />
           <button
             id="copiarSenha"
             type="button"
             aria-label="Copiar senha gerada"
+            class="btn btn-primary"
           >
             <i class="material-icons">content_copy</i> Copiar
           </button>
@@ -101,9 +98,9 @@
               <label for="senhaTeste">
                 <i class="material-icons">password</i> Sua Senha:
               </label>
-              <input type="password" id="senhaTeste" />
+              <input type="password" id="senhaTeste" class="input-standard" />
             </div>
-            <button id="testarForca" type="button">
+            <button id="testarForca" type="button" class="btn btn-primary">
               <i class="material-icons">check_circle</i> Testar Força
             </button>
           </section>
@@ -112,7 +109,7 @@
           <legend>Geradores Rápidos</legend>
           <section id="geradorWifi">
             <h2><i class="material-icons">wifi</i> Gerador de Senha Wi-Fi</h2>
-            <button id="gerarSenhaWifi" type="button">
+            <button id="gerarSenhaWifi" type="button" class="btn btn-primary">
               <i class="material-icons">wifi_password</i> Gerar Senha Wi-Fi
             </button>
           </section>
@@ -126,9 +123,15 @@
                 value="4"
                 min="4"
                 max="12"
+                class="input-standard"
               />
             </div>
-            <button id="gerarPin" type="button" aria-label="Gerar PIN">
+            <button
+              id="gerarPin"
+              type="button"
+              aria-label="Gerar PIN"
+              class="btn btn-primary"
+            >
               <i class="material-icons">dialpad</i> Gerar PIN
             </button>
           </section>
@@ -149,15 +152,14 @@
                 <textarea
                   id="historia"
                   placeholder="Escreva uma frase ou história..."
+                  class="input-standard"
                 ></textarea>
               </div>
               <button
-                id="gerarSenhaHistoria"
-                type="button"
-                aria-label="Gerar senha da história"
+                onclick="copiarSenhaDoHistorico(senha, this)"
+                class="btn btn-secondary"
               >
-                <i class="material-icons">history_edu</i> Gerar Senha da
-                História
+                Copiar
               </button>
             </form>
           </section>
@@ -168,7 +170,7 @@
             </h2>
             <form>
               <div class="input-group">
-                <select id="tema">
+                <select id="tema" class="input-standard">
                   <option value="geral">Geral</option>
                   <option value="filmes">Filmes</option>
                   <option value="series">Séries</option>
@@ -179,6 +181,7 @@
                 id="gerarSenhaTema"
                 type="button"
                 aria-label="Gerar senha do tema"
+                class="btn btn-primary"
               >
                 <i class="material-icons">palette</i> Gerar Senha do Tema
               </button>

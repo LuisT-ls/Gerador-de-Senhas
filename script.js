@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function adicionarAoHistorico(senha) {
     historicoSenhas.unshift(senha)
-    if (historicoSenhas.length > 5) {
+    if (historicoSenhas.length > 8) {
       historicoSenhas.pop()
     }
     atualizarHistoricoUI()
