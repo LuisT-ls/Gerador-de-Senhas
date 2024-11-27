@@ -186,66 +186,157 @@
       </section>
 
       <section id="glossario">
+        <p class="glossario-introducao">
+          Compreender os termos de segurança digital é essencial para proteger
+          suas informações online. Aqui está um guia prático dos principais
+          conceitos de cibersegurança.
+        </p>
+
         <h2><i class="material-icons">book</i> Glossário de Segurança</h2>
-        <dl>
-          <dt>Senha Forte:</dt>
-          <dd>
-            Uma senha longa e complexa, contendo uma combinação de letras
-            maiúsculas e minúsculas, números e símbolos. É difícil de adivinhar
-            e resistente a ataques de força bruta.
-          </dd>
-          <dt>Ataque de Força Bruta:</dt>
-          <dd>
-            Um método de ataque que tenta descobrir uma senha testando
-            sistematicamente todas as combinações possíveis de caracteres até
-            encontrar a correta.
-          </dd>
-          <dt>Phishing:</dt>
-          <dd>
-            Um tipo de ataque cibernético em que os invasores tentam enganar as
-            vítimas para que revelem informações confidenciais, como senhas,
-            números de cartão de crédito ou dados pessoais.
-          </dd>
-          <dt>Keylogger:</dt>
-          <dd>
-            Um software malicioso que registra as teclas digitadas pelo usuário,
-            incluindo senhas, e envia essas informações para os invasores.
-          </dd>
-          <dt>Autenticação de Dois Fatores (2FA):</dt>
-          <dd>
-            Uma camada extra de segurança que exige que o usuário forneça duas
-            formas de identificação para acessar uma conta, como uma senha e um
-            código enviado por SMS ou gerado por um aplicativo.
-          </dd>
-          <dt>Gerenciador de Senhas:</dt>
-          <dd>
-            Um software que armazena e gerencia senhas de forma segura,
-            permitindo que o usuário utilize senhas fortes e diferentes para
-            cada conta sem precisar memorizá-las.
-          </dd>
-          <dt>Hashing de Senha:</dt>
-          <dd>
-            Um processo que transforma uma senha em um código criptografado
-            (hash) que não pode ser revertido para a senha original.
-          </dd>
-          <dt>Ataque de Dicionário:</dt>
-          <dd>
-            Um tipo de ataque de força bruta que utiliza uma lista de palavras
-            comuns, nomes e outras informações para tentar adivinhar a senha de
-            um usuário.
-          </dd>
-          <dt>Engenharia Social:</dt>
-          <dd>
-            Uma técnica de manipulação psicológica utilizada por invasores para
-            enganar as vítimas e obter informações confidenciais, como senhas ou
-            dados pessoais.
-          </dd>
-          <dt>Malware:</dt>
-          <dd>
-            Um software malicioso projetado para causar danos a um sistema de
-            computador, roubar dados ou realizar outras atividades maliciosas.
-          </dd>
-        </dl>
+
+        <div class="categorias">
+          <div class="categoria">
+            <div class="categoria-titulo">
+              <i class="material-icons">security</i>
+              Conceitos Básicos
+            </div>
+            <dl>
+              <dt>Senha Forte</dt>
+              <dd>Uma senha complexa e difícil de adivinhar.</dd>
+
+              <dt>Ataque de Força Bruta</dt>
+              <dd>
+                Método de tentar descobrir senhas testando todas combinações
+                possíveis.
+              </dd>
+
+              <dt>Vulnerabilidade</dt>
+              <dd>
+                Falha de segurança que pode ser explorada por invasores.
+              </dd>
+              
+              <dt>Entropia de Senha</dt>
+              <dd>
+                Medida da força de uma senha com base na aleatoriedade dos
+                caracteres.
+              </dd>
+
+              <dt>Hash de Senha</dt>
+              <dd>
+                Valor criptografado de uma senha para armazenamento seguro.
+              </dd>
+
+              <dt>Credencial</dt>
+              <dd>
+                Informações de identificação, como nome de usuário e senha.
+              </dd>
+
+              <dt>Sal Criptográfico</dt>
+              <dd>
+                Dado aleatório adicionado a uma senha para tornar o hash único.
+              </dd>
+            </dl>
+          </div>
+
+          <div class="categoria">
+            <div class="categoria-titulo">
+              <i class="material-icons">warning</i>
+              Tipos de Ameaças
+            </div>
+            <dl>
+              <dt>Phishing</dt>
+              <dd>
+                Técnica de enganar usuários para revelar informações
+                confidenciais por meio de e-mails ou sites falsos.
+              </dd>
+
+              <dt>Malware</dt>
+              <dd>
+                Software malicioso projetado para causar danos a um sistema ou
+                rede de computadores.
+              </dd>
+
+              <dt>Ransomware</dt>
+              <dd>
+                Tipo de malware que criptografa arquivos e exige um resgate para
+                desbloqueá-los.
+              </dd>
+
+              <dt>Engenharia Social</dt>
+              <dd>
+                Técnica de manipular pessoas para obter informações confidenciais
+                ou acesso a sistemas.
+              </dd>
+
+              <dt>DDoS</dt>
+              <dd>
+                Ataque de negação de serviço que sobrecarrega um servidor com
+                tráfego para torná-lo inacessível.
+              </dd>
+
+              <dt>Keylogger</dt>
+              <dd>
+                Software que registra as teclas digitadas para capturar senhas e
+                informações pessoais.
+              </dd>
+
+              <dt>Botnet</dt>
+              <dd>
+                Rede de dispositivos infectados controlados remotamente por um
+                invasor.
+              </dd>
+            </dl>
+          </div>
+
+          <div class="categoria">
+            <div class="categoria-titulo">
+              <i class="material-icons">shield</i>
+              Proteção e Prevenção
+            </div>
+            <dl>
+              <dt>Autenticação de Dois Fatores</dt>
+              <dd>
+                Camada extra de segurança que exige duas formas de identificação
+                do usuário para acessar uma conta online.
+              </dd>
+
+              <dt>Gerenciador de Senhas</dt>
+              <dd>
+                Software que armazena e gerencia senhas de forma segura e
+                criptografada.
+              </dd>
+
+              <dt>Criptografia</dt>
+              <dd>
+                Processo de codificar informações para que somente o
+                destinatário correto possa decifrá-las.
+              </dd>
+
+              <dt>VPN</dt>
+              <dd>
+                Rede privada virtual que protege a conexão de internet de um
+                usuário.
+              </dd>
+
+              <dt>Firewall</dt>
+              <dd>
+                Software ou hardware que monitora e controla o tráfego de rede.
+              </dd>
+
+              <dt>Atualizações de Segurança</dt>
+              <dd>
+                Correções e patches para vulnerabilidades de segurança em
+                software e sistemas operacionais.
+              </dd>
+
+              <dt>Backup Regular</dt>
+              <dd>
+                Cópia de segurança de dados importantes para proteção contra
+                perda de informações.
+              </dd>
+            </dl>
+          </div>
+        </div>
       </section>
     </main>
 

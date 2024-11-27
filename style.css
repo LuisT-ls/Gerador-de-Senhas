@@ -20,7 +20,8 @@
   --spacing-small: 0.5rem;
   --spacing-medium: 1rem;
   --spacing-large: 2rem;
-  --border-radius: 8px;
+  --spacing-xlarge: 3rem;
+  --border-radius: 12px;
 
   /* Transições e Animações */
   --transition-speed: 0.3s;
@@ -48,7 +49,7 @@
   padding: 0;
   box-sizing: border-box;
   transition: background-color var(--transition-speed),
-    color var(--transition-speed);
+    color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 body {
@@ -66,14 +67,15 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-medium) 5%;
+  padding: var(--spacing-large) 7%;
   background: var(--color-card);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--color-primary-light);
+  font-weight: 700;
 }
 
 #darkModeToggle {
@@ -91,17 +93,26 @@ header h1 {
 /* Layout Principal */
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-large);
-  padding: var(--spacing-large) 5%;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xlarge);
+  padding: var(--spacing-xlarge) 5%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 section {
   background: var(--color-card);
   border-radius: var(--border-radius);
-  padding: var(--spacing-medium);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: var(--spacing-medium) 0;
+  padding: var(--spacing-large);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed);
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08), 0 8px 10px rgba(0, 0, 0, 0.12);
 }
 
 section h2 {
@@ -109,11 +120,15 @@ section h2 {
   align-items: center;
   gap: var(--spacing-small);
   color: var(--color-primary-light);
-  margin-bottom: var(--spacing-medium);
+  margin-bottom: var(--spacing-large);
+  font-size: 1.6rem;
+  border-bottom: 2px solid var(--color-primary-light);
+  padding-bottom: var(--spacing-small);
 }
 
 section h2 i {
   color: var(--color-secondary-light);
+  margin-right: var(--spacing-small);
 }
 
 /* Formulários e Entradas */
@@ -492,6 +507,26 @@ textarea:focus {
   gap: var(--spacing-small);
 }
 
+/* Seções Agrupadas */
+#ferramentasAdicionais,
+#geradoresAlternativos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-large);
+}
+
+#ferramentasAdicionais fieldset,
+#geradoresAlternativos fieldset {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  transition: border-color var(--transition-speed);
+}
+
+#ferramentasAdicionais fieldset:hover,
+#geradoresAlternativos fieldset:hover {
+  border-color: var(--color-primary-light);
+}
+
 fieldset {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
@@ -751,76 +786,123 @@ fieldset legend {
 
 /* Glossário de Segurança */
 #glossario {
-  max-width: 900px; /* Aumentando largura */
+  grid-column: 1 / -1;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-medium);
   background: var(--color-card);
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-large);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+#glossario .glossario-introducao {
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 #glossario h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--color-primary-light);
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+  border-bottom: 3px solid var(--color-primary-light);
+  padding-bottom: var(--spacing-small);
+}
+
+#glossario .categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-large);
+}
+
+#glossario .categoria {
+  background: var(--color-background);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed);
+}
+
+#glossario .categoria:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+#glossario .categoria-titulo {
   display: flex;
   align-items: center;
   gap: var(--spacing-small);
+  font-size: 1.2rem;
+  color: var(--color-primary-light);
   margin-bottom: var(--spacing-medium);
+  font-weight: bold;
+}
+
+#glossario .categoria-titulo i {
+  font-size: 1.5rem;
+  color: var(--color-secondary-light);
 }
 
 #glossario dl {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-medium);
+  gap: var(--spacing-small);
 }
 
 #glossario dt {
   font-weight: bold;
   font-size: 1rem;
-  color: var(--color-primary-light);
+  color: var(--color-text-primary);
   margin-bottom: var(--spacing-small);
+  position: relative;
+  padding-left: var(--spacing-large);
 }
 
 #glossario dd {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
-  line-height: 1.4;
-  margin-bottom: var(--spacing-medium);
+  line-height: 1.5;
+  margin-left: var(--spacing-medium);
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--spacing-small);
 }
 
 /* Ícones para DT */
 #glossario dt::before {
   content: '🔒';
-  margin-right: var(--spacing-small);
-  font-size: 1.2rem;
-  color: var(--color-secondary-light);
-}
-
-/* Responsividade */
-@media screen and (max-width: 768px) {
-  #glossario dl {
-    grid-template-columns: 1fr;
-  }
-
-  #geradoresAlternativos fieldset {
-    padding: var(--spacing-small);
-  }
+  position: absolute;
+  left: 0;
+  color: var(--color-primary-light);
+  font-weight: bold;
 }
 
 /* Responsividade */
 @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
+    text-align: center;
     gap: var(--spacing-medium);
   }
 
   main {
     grid-template-columns: 1fr;
-    padding: var(--spacing-medium) 3%;
+    padding: var(--spacing-large) 3%;
+    gap: var(--spacing-large);
   }
 
   section {
     padding: var(--spacing-medium);
+  }
+
+  #glossario dl {
+    grid-template-columns: 1fr;
+  }
+
+  #geradoresAlternativos fieldset {
+    padding: var(--spacing-small);
   }
 }
 
