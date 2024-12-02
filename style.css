@@ -497,7 +497,7 @@ textarea:focus {
 /* Melhorias visuais */
 #medidorForca h2 {
   margin-bottom: var(--spacing-small);
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   color: var(--color-primary-light);
 }
 
