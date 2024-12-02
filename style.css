@@ -98,6 +98,7 @@ main {
   padding: var(--spacing-xlarge) 5%;
   max-width: 1600px;
   margin: 0 auto;
+  align-items: start;
 }
 
 section {
@@ -108,6 +109,16 @@ section {
   border: 1px solid var(--color-border);
   transition: transform var(--transition-speed),
     box-shadow var(--transition-speed);
+
+  /* Make sections more adaptable to content */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  /* Ensure minimum and maximum heights are more flexible */
+  min-height: auto;
+  max-height: none;
 }
 
 section:hover {
@@ -207,6 +218,16 @@ textarea:focus {
 
 .btn-secondary:active {
   background: #1e8449;
+}
+
+#geradorPrincipal,
+#medidorForca,
+#historicoSenhas,
+#ferramentasAdicionais,
+#geradoresAlternativos,
+#glossario {
+  flex-grow: 1;
+  justify-content: flex-start;
 }
 
 /* Gerador de Senha Principal */
@@ -336,7 +357,6 @@ textarea:focus {
 #historicoSenhas {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium);
 }
 
 #listaSenhas {
@@ -512,7 +532,7 @@ textarea:focus {
 #geradoresAlternativos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-large);
+  gap: var(--spacing-medium);
 }
 
 #ferramentasAdicionais fieldset,
@@ -879,7 +899,40 @@ fieldset legend {
   font-weight: bold;
 }
 
+.categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-large);
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoria-titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+  font-weight: bold;
+  color: var(--color-primary-light);
+  border-bottom: 2px solid var(--color-primary-light);
+  padding-bottom: var(--spacing-small);
+}
+
 /* Responsividade */
+@media screen and (max-width: 1024px) {
+  main {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-large);
+  }
+
+  .categorias {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
@@ -890,7 +943,7 @@ fieldset legend {
   main {
     grid-template-columns: 1fr;
     padding: var(--spacing-large) 3%;
-    gap: var(--spacing-large);
+    gap: var(--spacing-medium);
   }
 
   section {
@@ -903,6 +956,11 @@ fieldset legend {
 
   #geradoresAlternativos fieldset {
     padding: var(--spacing-small);
+  }
+
+  #ferramentasAdicionais,
+  #geradoresAlternativos {
+    grid-template-columns: 1fr;
   }
 }
 
