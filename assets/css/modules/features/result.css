@@ -1,0 +1,51 @@
+/* Resultado da senha */
+#resultado {
+  display: flex;
+  gap: var(--spacing-small);
+  margin-top: var(--spacing-medium);
+}
+
+#senhaGerada {
+  flex: 1;
+  padding: var(--spacing-small);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Barra de força da senha */
+#barraForca {
+  height: 10px;
+  background-color: var(--color-border);
+  border-radius: var(--border-radius);
+  margin: var(--spacing-small) 0;
+  overflow: hidden;
+}
+
+#barraForca div {
+  height: 100%;
+  width: 0;
+  background-color: var(--color-secondary-light);
+  transition: width var(--transition-speed);
+}
+
+/* Feedback de força da senha */
+#feedbackForca {
+  font-weight: bold;
+  margin-bottom: var(--spacing-medium);
+}
+
+.weak {
+  color: #e74c3c;
+}
+
+.medium {
+  color: #f1c40f;
+}
+
+.strong {
+  color: #2ecc71;
+}

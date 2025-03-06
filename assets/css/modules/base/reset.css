@@ -1,0 +1,31 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos globais */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  transition: background-color var(--transition-speed),
+    color var(--transition-speed);
+}
+
+/* Main content */
+main {
+  padding: var(--spacing-large);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  background-color: var(--color-card);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-large);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

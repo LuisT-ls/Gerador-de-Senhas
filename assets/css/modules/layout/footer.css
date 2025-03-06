@@ -1,0 +1,9 @@
+/* Footer */
+footer {
+  text-align: center;
+  padding: var(--spacing-large);
+  background-color: var(--color-card);
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: var(--spacing-large);
+  color: var(--color-text-secondary);
+}

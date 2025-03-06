@@ -1,0 +1,15 @@
+/* Responsividade */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #darkModeToggle {
+    margin-top: var(--spacing-small);
+  }
+
+  .categorias {
+    grid-template-columns: 1fr;
+  }
+}

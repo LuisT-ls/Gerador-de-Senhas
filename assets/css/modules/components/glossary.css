@@ -1,0 +1,45 @@
+/* Glossário */
+.glossario-introducao {
+  font-style: italic;
+  margin-bottom: var(--spacing-large);
+  color: var(--color-text-secondary);
+}
+
+.categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-large);
+}
+
+.categoria {
+  background-color: var(--color-background);
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.categoria-titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+}
+
+.categoria-titulo i {
+  color: var(--color-primary-light);
+}
+
+dl {
+  display: grid;
+  gap: var(--spacing-small);
+}
+
+dt {
+  font-weight: bold;
+  color: var(--color-primary-light);
+}
+
+dd {
+  margin-left: var(--spacing-medium);
+  color: var(--color-text-secondary);
+}

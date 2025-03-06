@@ -1,0 +1,30 @@
+/* Botões */
+button {
+  padding: var(--spacing-small) var(--spacing-medium);
+  background-color: var(--color-primary-light);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed),
+    transform var(--transition-speed);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small);
+}
+
+button:hover {
+  background-color: var(--color-secondary-light);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button i {
+  font-size: 1.2rem;
+}

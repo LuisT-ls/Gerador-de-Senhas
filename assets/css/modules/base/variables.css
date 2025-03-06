@@ -1,0 +1,44 @@
+:root {
+  /* Paleta de Cores */
+  --color-primary-light: #3498db;
+  --color-secondary-light: #2ecc71;
+  --color-background-light: #f4f4f4;
+  --color-card-light: #ffffff;
+  --color-border-light: #e0e0e0;
+  --color-text-primary-light: #333;
+  --color-text-secondary-light: #666;
+
+  --color-primary-dark: #4a90e2;
+  --color-secondary-dark: #48db76;
+  --color-background-dark: #121212;
+  --color-card-dark: #1e1e1e;
+  --color-border-dark: #333;
+  --color-text-primary-dark: #e0e0e0;
+  --color-text-secondary-dark: #a0a0a0;
+
+  /* Espaçamento e Bordas */
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+  --spacing-xlarge: 3rem;
+  --border-radius: 12px;
+
+  /* Transições e Animações */
+  --transition-speed: 0.3s;
+}
+
+[data-theme='light'] {
+  --color-background: var(--color-background-light);
+  --color-card: var(--color-card-light);
+  --color-border: var(--color-border-light);
+  --color-text-primary: var(--color-text-primary-light);
+  --color-text-secondary: var(--color-text-secondary-light);
+}
+
+[data-theme='dark'] {
+  --color-background: var(--color-background-dark);
+  --color-card: var(--color-card-dark);
+  --color-border: var(--color-border-dark);
+  --color-text-primary: var(--color-text-primary-dark);
+  --color-text-secondary: var(--color-text-secondary-dark);
+}
