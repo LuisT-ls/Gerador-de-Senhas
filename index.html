@@ -3,363 +3,1118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gerador de Senhas Fortes e Divertidas</title>
+    <meta
+      name="description"
+      content="Gerador de senhas seguras com ferramentas avançadas de criação e verificação de senhas"
+    />
+    <title>Gerador de Senhas Fortes e Seguras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/assets/css/main.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/your-font-awesome-kit.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
   <body>
-    <header class="animate__animated animate__fadeInDown">
-      <h1>Crie Senhas Épicas e Seguras!</h1>
-      <button id="darkModeToggle">
-        <img
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cline x1='12' y1='1' x2='12' y2='3'/%3E%3Cline x1='12' y1='21' x2='12' y2='23'/%3E%3Cline x1='4.22' y1='4.22' x2='5.64' y2='5.64'/%3E%3Cline x1='18.36' y1='18.36' x2='19.78' y2='19.78'/%3E%3Cline x1='1' y1='12' x2='3' y2='12'/%3E%3Cline x1='21' y1='12' x2='23' y2='12'/%3E%3Cline x1='4.22' y1='19.78' x2='5.64' y2='18.36'/%3E%3Cline x1='18.36' y1='5.64' x2='19.78' y2='4.22'/%3E%3C/svg%3E"
-          alt="Toggle dark mode"
-        />
-      </button>
+    <header>
+      <div class="container">
+        <h1>Gerador de Senhas Seguras</h1>
+        <nav aria-label="Navegação principal">
+          <ul>
+            <li><a href="#geradorPrincipal" class="active">Gerador</a></li>
+            <li><a href="#ferramentasAdicionais">Ferramentas</a></li>
+            <li><a href="#gerenciarSenhas">Gerenciar</a></li>
+            <li><a href="#glossario">Glossário</a></li>
+          </ul>
+        </nav>
+        <button
+          id="darkModeToggle"
+          aria-label="Alternar modo escuro"
+          title="Alternar tema"
+        >
+          <span class="material-icons" aria-hidden="true">dark_mode</span>
+        </button>
+      </div>
     </header>
 
     <main>
-      <section id="geradorPrincipal">
-        <h2><i class="material-icons">lock</i> Gerador de Senha Principal</h2>
-        <form id="opcoes">
-          <div class="input-group">
-            <label for="comprimento">
-              Comprimento da Senha: <i class="fas fa-ruler-horizontal"></i>
-            </label>
-            <input type="number" id="comprimento" value="12" min="8" max="30" />
-          </div>
-          <div class="input-group">
-            <label for="incluirMaiusculas"> Incluir Letras Maiúsculas: </label>
-            <input type="checkbox" id="incluirMaiusculas" checked />
-          </div>
-          <div class="input-group">
-            <label for="incluirMinusculas"> Incluir Letras Minúsculas: </label>
-            <input type="checkbox" id="incluirMinusculas" checked />
-          </div>
-          <div class="input-group">
-            <label for="incluirNumeros"> Incluir Números: </label>
-            <input type="checkbox" id="incluirNumeros" checked />
-          </div>
-          <div class="input-group">
-            <label for="incluirSimbolos"> Incluir Símbolos: </label>
-            <input type="checkbox" id="incluirSimbolos" />
-          </div>
-          <div class="input-group">
-            <label for="excluirAmbiguos"> Excluir Caracteres Ambíguos: </label>
-            <input type="checkbox" id="excluirAmbiguos" />
-          </div>
-          <button id="gerarSenha" type="button">
-            <i class="material-icons">bolt</i> Gerar Senha
-          </button>
-        </form>
-        <div id="resultado">
-          <input
-            type="text"
-            id="senhaGerada"
-            readonly
-            placeholder="Sua senha aparecerá aqui..."
-          />
-          <button id="copiarSenha" type="button">
-            <i class="material-icons">content_copy</i> Copiar
-          </button>
-        </div>
-      </section>
+      <div class="container">
+        <section id="geradorPrincipal" aria-labelledby="titulo-gerador">
+          <h2 id="titulo-gerador">
+            <span class="material-icons" aria-hidden="true">lock</span> Gerador
+            de Senha
+          </h2>
 
-      <section id="medidorForca">
-        <h2><i class="material-icons">security</i> Força da Senha:</h2>
-        <div id="barraForca">
-          <div class="medium"></div>
-          <!-- Adapte a classe conforme a força da senha -->
-        </div>
-        <p id="feedbackForca" class="medium-feedback">Força Média</p>
-        <!-- Adapte a classe e o texto -->
-        <ul id="dicasForca">
-          <li>Use pelo menos 12 caracteres.</li>
-          <li>Inclua letras maiúsculas, minúsculas, números e símbolos.</li>
-          <li>Evite senhas comuns como "123456".</li>
-        </ul>
-      </section>
+          <form id="opcoes">
+            <div class="opcoes-grid">
+              <div class="input-group">
+                <label for="comprimento">Comprimento da Senha:</label>
+                <div class="slider-container">
+                  <input
+                    type="range"
+                    id="comprimento"
+                    value="16"
+                    min="8"
+                    max="64"
+                    aria-describedby="comprimentoValor"
+                  />
+                  <output id="comprimentoValor">16</output>
+                </div>
+              </div>
 
-      <section id="historicoSenhas">
-        <h2><i class="material-icons">history</i> Histórico de Senhas</h2>
-        <ul id="listaSenhas"></ul>
-      </section>
+              <fieldset class="checkbox-group">
+                <legend>Tipos de caracteres</legend>
+                <div class="checkbox-container">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="incluirMaiusculas" checked />
+                    <label for="incluirMaiusculas"
+                      >Letras Maiúsculas (A-Z)</label
+                    >
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="incluirMinusculas" checked />
+                    <label for="incluirMinusculas"
+                      >Letras Minúsculas (a-z)</label
+                    >
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="incluirNumeros" checked />
+                    <label for="incluirNumeros">Números (0-9)</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="incluirSimbolos" checked />
+                    <label for="incluirSimbolos">Símbolos (!@#$%)</label>
+                  </div>
+                </div>
+              </fieldset>
 
-      <section id="ferramentasAdicionais">
-        <h2><i class="material-icons">build</i> Ferramentas Adicionais</h2>
+              <fieldset class="checkbox-group">
+                <legend>Opções avançadas</legend>
+                <div class="checkbox-container">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="excluirAmbiguos" />
+                    <label
+                      for="excluirAmbiguos"
+                      title="Exclui caracteres como 1, l, I, 0, O"
+                      >Excluir Caracteres Ambíguos</label
+                    >
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="excluirRepetidos" />
+                    <label for="excluirRepetidos"
+                      >Evitar Caracteres Repetidos</label
+                    >
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="iniciaMaiuscula" />
+                    <label for="iniciaMaiuscula"
+                      >Iniciar com Letra Maiúscula</label
+                    >
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="terminaNumero" />
+                    <label for="terminaNumero">Terminar com Número</label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
 
-        <!-- Testar Força da Senha -->
-        <fieldset>
-          <legend>Testar Força da Senha</legend>
-          <section id="testeForca">
-            <label for="senhaTeste">
-              <i class="material-icons">password</i> Sua Senha:
-            </label>
+            <div class="button-group">
+              <button id="gerarSenha" type="button" class="btn-primary">
+                <span class="material-icons" aria-hidden="true">bolt</span>
+                Gerar Senha
+              </button>
+              <button id="gerarMultiplas" type="button" class="btn-secondary">
+                <span class="material-icons" aria-hidden="true">dashboard</span>
+                Gerar Várias
+              </button>
+            </div>
+          </form>
+
+          <div id="resultado" aria-live="polite">
+            <div class="password-display">
+              <input
+                type="text"
+                id="senhaGerada"
+                readonly
+                aria-label="Senha gerada"
+                placeholder="A senha será exibida aqui..."
+              />
+              <div class="actions">
+                <button
+                  id="verSenha"
+                  type="button"
+                  aria-label="Mostrar/ocultar senha"
+                  title="Mostrar/ocultar senha"
+                >
+                  <span class="material-icons" aria-hidden="true"
+                    >visibility</span
+                  >
+                </button>
+                <button
+                  id="atualizarSenha"
+                  type="button"
+                  aria-label="Gerar nova senha"
+                  title="Gerar nova senha"
+                >
+                  <span class="material-icons" aria-hidden="true">refresh</span>
+                </button>
+                <button
+                  id="copiarSenha"
+                  type="button"
+                  aria-label="Copiar senha"
+                  title="Copiar senha"
+                >
+                  <span class="material-icons" aria-hidden="true"
+                    >content_copy</span
+                  >
+                </button>
+                <button
+                  id="salvarSenha"
+                  type="button"
+                  aria-label="Salvar senha"
+                  title="Salvar senha"
+                >
+                  <span class="material-icons" aria-hidden="true"
+                    >bookmark</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <div id="medidorForca" aria-live="polite">
+              <h3>
+                <span class="material-icons" aria-hidden="true">security</span>
+                Força da Senha:
+              </h3>
+              <div class="forca-container">
+                <div id="barraForca" aria-hidden="true">
+                  <div class="barra-progresso" data-strength="medium"></div>
+                </div>
+                <p id="feedbackForca">Força Média</p>
+              </div>
+
+              <details id="detalhesSeguranca">
+                <summary>Análise de Segurança</summary>
+                <ul id="analiseSeguranca">
+                  <li class="positivo">16 caracteres - bom comprimento</li>
+                  <li class="positivo">Inclui letras maiúsculas</li>
+                  <li class="positivo">Inclui números</li>
+                  <li class="negativo">Não inclui símbolos especiais</li>
+                  <li class="info">Tempo estimado para quebrar: 52 anos</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+
+          <div id="senhasMultiplas" class="hidden">
+            <h3>Múltiplas Senhas Geradas</h3>
+            <div class="senhas-grid">
+              <!-- As senhas serão geradas dinamicamente via JavaScript -->
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="ferramentasAdicionais"
+          aria-labelledby="titulo-ferramentas"
+        >
+          <h2 id="titulo-ferramentas">
+            <span class="material-icons" aria-hidden="true">build</span>
+            Ferramentas Adicionais
+          </h2>
+
+          <div class="tabs">
+            <nav class="tab-navigation" aria-label="Ferramentas de senha">
+              <button
+                id="tab-analisador"
+                class="tab-button active"
+                aria-selected="true"
+                aria-controls="panel-analisador"
+              >
+                <span class="material-icons" aria-hidden="true">search</span>
+                Analisador
+              </button>
+              <button
+                id="tab-wifi"
+                class="tab-button"
+                aria-selected="false"
+                aria-controls="panel-wifi"
+              >
+                <span class="material-icons" aria-hidden="true">wifi</span>
+                Wi-Fi
+              </button>
+              <button
+                id="tab-pin"
+                class="tab-button"
+                aria-selected="false"
+                aria-controls="panel-pin"
+              >
+                <span class="material-icons" aria-hidden="true">dialpad</span>
+                PIN
+              </button>
+              <button
+                id="tab-frase"
+                class="tab-button"
+                aria-selected="false"
+                aria-controls="panel-frase"
+              >
+                <span class="material-icons" aria-hidden="true"
+                  >history_edu</span
+                >
+                Passphrase
+              </button>
+            </nav>
+
+            <div class="tab-panels">
+              <div
+                id="panel-analisador"
+                class="tab-panel active"
+                role="tabpanel"
+                aria-labelledby="tab-analisador"
+              >
+                <h3>Analisador de Senhas</h3>
+                <p>Verifique a força e segurança de uma senha existente.</p>
+
+                <div class="password-input">
+                  <label for="senhaTeste"
+                    >Digite uma senha para analisar:</label
+                  >
+                  <div class="input-with-button">
+                    <input
+                      type="password"
+                      id="senhaTeste"
+                      placeholder="Digite sua senha..."
+                      autocomplete="off"
+                    />
+                    <button
+                      id="verSenhaTeste"
+                      type="button"
+                      aria-label="Mostrar/ocultar senha"
+                      title="Mostrar/ocultar senha"
+                    >
+                      <span class="material-icons" aria-hidden="true"
+                        >visibility</span
+                      >
+                    </button>
+                  </div>
+                </div>
+
+                <button id="testarForca" type="button" class="btn-primary">
+                  <span class="material-icons" aria-hidden="true"
+                    >check_circle</span
+                  >
+                  Analisar Senha
+                </button>
+
+                <div id="resultadoAnalise" class="hidden" aria-live="polite">
+                  <div class="result-card">
+                    <h4>Resultado da Análise</h4>
+                    <div id="forcaAnalise"></div>
+                    <div id="detalhesAnalise"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="panel-wifi"
+                class="tab-panel"
+                role="tabpanel"
+                aria-labelledby="tab-wifi"
+                hidden
+              >
+                <h3>Gerador de Senha para Wi-Fi</h3>
+                <p>
+                  Crie senhas ideais para redes Wi-Fi: fáceis de compartilhar,
+                  mas seguras.
+                </p>
+
+                <div class="input-group">
+                  <label for="comprimentoWifi">Comprimento da Senha:</label>
+                  <div class="slider-container">
+                    <input
+                      type="range"
+                      id="comprimentoWifi"
+                      value="12"
+                      min="8"
+                      max="20"
+                      aria-describedby="wifiValor"
+                    />
+                    <output id="wifiValor">12</output>
+                  </div>
+                </div>
+
+                <div class="checkbox-item">
+                  <input type="checkbox" id="wifiMemorizavel" checked />
+                  <label for="wifiMemorizavel">Senha memorizável</label>
+                </div>
+
+                <button id="gerarSenhaWifi" type="button" class="btn-primary">
+                  <span class="material-icons" aria-hidden="true"
+                    >wifi_password</span
+                  >
+                  Gerar Senha Wi-Fi
+                </button>
+
+                <div id="senhaWifiResultado" class="hidden">
+                  <div class="result-card">
+                    <h4>Senha Wi-Fi Gerada</h4>
+                    <p id="senhaWifiTexto"></p>
+                    <button id="copiarSenhaWifi" class="btn-secondary">
+                      <span class="material-icons" aria-hidden="true"
+                        >content_copy</span
+                      >
+                      Copiar
+                    </button>
+                    <p class="card-info">
+                      Dica: Você pode usar esta senha para configurar sua rede
+                      Wi-Fi
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="panel-pin"
+                class="tab-panel"
+                role="tabpanel"
+                aria-labelledby="tab-pin"
+                hidden
+              >
+                <h3>Gerador de PIN</h3>
+                <p>
+                  Crie códigos PIN numéricos para uso em dispositivos e
+                  aplicativos.
+                </p>
+
+                <div class="input-group">
+                  <label for="comprimentoPin">Comprimento do PIN:</label>
+                  <select id="comprimentoPin">
+                    <option value="4">4 dígitos (Padrão)</option>
+                    <option value="6">6 dígitos (Recomendado)</option>
+                    <option value="8">8 dígitos (Forte)</option>
+                    <option value="10">10 dígitos (Extra forte)</option>
+                  </select>
+                </div>
+
+                <div class="checkbox-item">
+                  <input type="checkbox" id="evitarSequencias" checked />
+                  <label for="evitarSequencias"
+                    >Evitar sequências (123, 789)</label
+                  >
+                </div>
+
+                <div class="checkbox-item">
+                  <input type="checkbox" id="evitarRepeticoes" checked />
+                  <label for="evitarRepeticoes"
+                    >Evitar repetições (555, 999)</label
+                  >
+                </div>
+
+                <button id="gerarPin" type="button" class="btn-primary">
+                  <span class="material-icons" aria-hidden="true">dialpad</span>
+                  Gerar PIN
+                </button>
+
+                <div id="pinResultado" class="hidden">
+                  <div class="pin-display">
+                    <div id="pinGerado"></div>
+                    <button id="copiarPin" class="btn-secondary">
+                      <span class="material-icons" aria-hidden="true"
+                        >content_copy</span
+                      >
+                      Copiar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="panel-frase"
+                class="tab-panel"
+                role="tabpanel"
+                aria-labelledby="tab-frase"
+                hidden
+              >
+                <h3>Gerador de Passphrase</h3>
+                <p>
+                  Crie senhas baseadas em frases, mais fáceis de lembrar e muito
+                  seguras.
+                </p>
+
+                <div class="input-group">
+                  <label for="numeropalavras">Número de palavras:</label>
+                  <div class="slider-container">
+                    <input
+                      type="range"
+                      id="numeropalavras"
+                      value="4"
+                      min="3"
+                      max="8"
+                      aria-describedby="palavrasValor"
+                    />
+                    <output id="palavrasValor">4</output>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="separador">Separador:</label>
+                  <select id="separador">
+                    <option value="-">Hífen (-)</option>
+                    <option value=".">Ponto (.)</option>
+                    <option value="_">Sublinhado (_)</option>
+                    <option value=" ">Espaço</option>
+                    <option value="">Sem separador</option>
+                  </select>
+                </div>
+
+                <div class="checkbox-item">
+                  <input type="checkbox" id="capitalizarPalavras" checked />
+                  <label for="capitalizarPalavras">Capitalizar palavras</label>
+                </div>
+
+                <div class="checkbox-item">
+                  <input type="checkbox" id="adicionarNumeros" checked />
+                  <label for="adicionarNumeros">Adicionar números</label>
+                </div>
+
+                <button id="gerarPassphrase" type="button" class="btn-primary">
+                  <span class="material-icons" aria-hidden="true"
+                    >auto_stories</span
+                  >
+                  Gerar Passphrase
+                </button>
+
+                <div id="passphraseResultado" class="hidden">
+                  <div class="result-card">
+                    <h4>Passphrase Gerada</h4>
+                    <p id="passphraseTexto"></p>
+                    <button id="copiarPassphrase" class="btn-secondary">
+                      <span class="material-icons" aria-hidden="true"
+                        >content_copy</span
+                      >
+                      Copiar
+                    </button>
+                    <p class="card-info">
+                      Dica: Passphrases são fáceis de lembrar e difíceis de
+                      quebrar
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="gerenciarSenhas" aria-labelledby="titulo-gerenciar">
+          <h2 id="titulo-gerenciar">
+            <span class="material-icons" aria-hidden="true">folder</span>
+            Gerenciar Senhas
+          </h2>
+
+          <div
+            class="tab-navigation secondary"
+            aria-label="Gerenciamento de senhas"
+          >
+            <button
+              id="tab-salvas"
+              class="tab-button active"
+              aria-selected="true"
+              aria-controls="panel-salvas"
+            >
+              <span class="material-icons" aria-hidden="true">bookmark</span>
+              Senhas Salvas
+            </button>
+            <button
+              id="tab-historico"
+              class="tab-button"
+              aria-selected="false"
+              aria-controls="panel-historico"
+            >
+              <span class="material-icons" aria-hidden="true">history</span>
+              Histórico
+            </button>
+            <button
+              id="tab-exportar"
+              class="tab-button"
+              aria-selected="false"
+              aria-controls="panel-exportar"
+            >
+              <span class="material-icons" aria-hidden="true"
+                >file_download</span
+              >
+              Exportar/Importar
+            </button>
+          </div>
+
+          <div class="tab-panels">
+            <div
+              id="panel-salvas"
+              class="tab-panel active"
+              role="tabpanel"
+              aria-labelledby="tab-salvas"
+            >
+              <div class="actions-bar">
+                <div class="search-container">
+                  <input
+                    type="search"
+                    id="pesquisaSenhas"
+                    placeholder="Pesquisar senhas..."
+                    aria-label="Pesquisar senhas salvas"
+                  />
+                  <span class="material-icons" aria-hidden="true">search</span>
+                </div>
+                <button id="limparSalvas" class="btn-danger" type="button">
+                  <span class="material-icons" aria-hidden="true">delete</span>
+                  Limpar Tudo
+                </button>
+              </div>
+
+              <div id="senhasSalvas">
+                <p class="empty-state">
+                  Nenhuma senha salva. Use o botão
+                  <span class="material-icons" aria-hidden="true"
+                    >bookmark</span
+                  >
+                  para salvar senhas.
+                </p>
+              </div>
+            </div>
+
+            <div
+              id="panel-historico"
+              class="tab-panel"
+              role="tabpanel"
+              aria-labelledby="tab-historico"
+              hidden
+            >
+              <div class="actions-bar">
+                <p id="historicoContagem">
+                  Senhas geradas recentemente: <strong>0</strong>
+                </p>
+                <button id="limparHistorico" class="btn-danger" type="button">
+                  <span class="material-icons" aria-hidden="true">delete</span>
+                  Limpar Histórico
+                </button>
+              </div>
+
+              <ul id="listaSenhas" class="senha-lista">
+                <!-- O histórico será gerado dinamicamente via JavaScript -->
+              </ul>
+            </div>
+
+            <div
+              id="panel-exportar"
+              class="tab-panel"
+              role="tabpanel"
+              aria-labelledby="tab-exportar"
+              hidden
+            >
+              <div class="export-options">
+                <h3>Exportar Senhas</h3>
+                <p>Faça backup das suas senhas salvas em um arquivo.</p>
+                <p class="warning">
+                  <span class="material-icons" aria-hidden="true">warning</span>
+                  Atenção: Guarde este arquivo em local seguro!
+                </p>
+
+                <div class="checkbox-item">
+                  <input type="checkbox" id="encriptarExportacao" checked />
+                  <label for="encriptarExportacao"
+                    >Encriptar arquivo de exportação</label
+                  >
+                </div>
+
+                <div class="button-group">
+                  <button id="exportarCSV" class="btn-secondary" type="button">
+                    <span class="material-icons" aria-hidden="true"
+                      >description</span
+                    >
+                    Exportar CSV
+                  </button>
+                  <button id="exportarJSON" class="btn-secondary" type="button">
+                    <span class="material-icons" aria-hidden="true">code</span>
+                    Exportar JSON
+                  </button>
+                </div>
+              </div>
+
+              <div class="import-options">
+                <h3>Importar Senhas</h3>
+                <p>Restaure suas senhas a partir de um arquivo de backup.</p>
+
+                <div class="file-upload">
+                  <label for="importArquivo" class="btn-secondary">
+                    <span class="material-icons" aria-hidden="true"
+                      >upload_file</span
+                    >
+                    Selecionar Arquivo
+                  </label>
+                  <input type="file" id="importArquivo" accept=".csv,.json" />
+                  <span id="arquivoSelecionado"
+                    >Nenhum arquivo selecionado</span
+                  >
+                </div>
+
+                <button
+                  id="importarSenhas"
+                  class="btn-primary"
+                  type="button"
+                  disabled
+                >
+                  <span class="material-icons" aria-hidden="true"
+                    >file_upload</span
+                  >
+                  Importar Senhas
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="glossario" aria-labelledby="titulo-glossario">
+          <h2 id="titulo-glossario">
+            <span class="material-icons" aria-hidden="true">book</span>
+            Glossário de Segurança
+          </h2>
+
+          <p class="glossario-introducao">
+            Compreender os termos de segurança digital é essencial para proteger
+            suas informações online. Aqui está um guia prático dos principais
+            conceitos de cibersegurança.
+          </p>
+
+          <div class="search-container">
             <input
-              type="password"
-              id="senhaTeste"
-              placeholder="Digite sua senha..."
+              type="search"
+              id="pesquisaGlossario"
+              placeholder="Pesquisar no glossário..."
+              aria-label="Pesquisar no glossário"
             />
-            <button id="testarForca" type="button">
-              <i class="material-icons">check_circle</i> Testar Força
-            </button>
-          </section>
-        </fieldset>
-
-        <!-- Gerador de Senha Wi-Fi -->
-        <fieldset>
-          <legend>Gerador de Senha Wi-Fi</legend>
-          <section id="geradorWifi">
-            <h3><i class="material-icons">wifi</i> Senha Wi-Fi</h3>
-            <button id="gerarSenhaWifi" type="button">
-              <i class="material-icons">wifi_password</i> Gerar Senha Wi-Fi
-            </button>
-          </section>
-        </fieldset>
-
-        <!-- Gerador de PIN -->
-        <fieldset>
-          <legend>Gerador de PIN</legend>
-          <section id="geradorPin">
-            <label for="comprimentoPin"> Comprimento do PIN: </label>
-            <input
-              type="number"
-              id="comprimentoPin"
-              value="4"
-              min="4"
-              max="12"
-            />
-            <button id="gerarPin" type="button">
-              <i class="material-icons">dialpad</i> Gerar PIN
-            </button>
-          </section>
-        </fieldset>
-      </section>
-
-      <section id="geradoresAlternativos">
-        <h2><i class="material-icons">autorenew</i> Geradores Alternativos</h2>
-        <fieldset>
-          <legend>Crie a sua Senha</legend>
-          <section id="geradorHistoria">
-            <h3>
-              <i class="material-icons">history_edu</i> Crie uma Senha com Sua
-              História:
-            </h3>
-            <textarea
-              id="historia"
-              placeholder="Escreva uma frase ou história..."
-            ></textarea>
-            <button id="gerarSenhaHistoria" type="button">
-              <i class="material-icons">content_copy</i> Copiar Senha
-            </button>
-          </section>
-        </fieldset>
-        <fieldset>
-          <legend>Escolha um Tema</legend>
-          <section id="geradorTematico">
-            <h3>
-              <i class="material-icons">category</i> Escolha um Tema para Sua
-              Senha:
-            </h3>
-            <select id="tema">
-              <option value="geral">Geral</option>
-              <option value="filmes">Filmes</option>
-              <option value="series">Séries</option>
-              <option value="games">Games</option>
-            </select>
-            <button id="gerarSenhaTema" type="button">
-              <i class="material-icons">palette</i> Gerar Senha do Tema
-            </button>
-          </section>
-        </fieldset>
-      </section>
-
-      <section id="glossario">
-        <p class="glossario-introducao">
-          Compreender os termos de segurança digital é essencial para proteger
-          suas informações online. Aqui está um guia prático dos principais
-          conceitos de cibersegurança.
-        </p>
-
-        <h2><i class="material-icons">book</i> Glossário de Segurança</h2>
-
-        <div class="categorias">
-          <div class="categoria">
-            <div class="categoria-titulo">
-              <i class="material-icons">security</i>
-              Conceitos Básicos
-            </div>
-            <dl>
-              <dt>Senha Forte</dt>
-              <dd>Uma senha complexa e difícil de adivinhar.</dd>
-
-              <dt>Ataque de Força Bruta</dt>
-              <dd>
-                Método de tentar descobrir senhas testando todas combinações
-                possíveis.
-              </dd>
-
-              <dt>Vulnerabilidade</dt>
-              <dd>Falha de segurança que pode ser explorada por invasores.</dd>
-
-              <dt>Entropia de Senha</dt>
-              <dd>
-                Medida da força de uma senha com base na aleatoriedade dos
-                caracteres.
-              </dd>
-
-              <dt>Hash de Senha</dt>
-              <dd>
-                Valor criptografado de uma senha para armazenamento seguro.
-              </dd>
-
-              <dt>Credencial</dt>
-              <dd>
-                Informações de identificação, como nome de usuário e senha.
-              </dd>
-
-              <dt>Sal Criptográfico</dt>
-              <dd>
-                Dado aleatório adicionado a uma senha para tornar o hash único.
-              </dd>
-            </dl>
+            <span class="material-icons" aria-hidden="true">search</span>
           </div>
 
-          <div class="categoria">
-            <div class="categoria-titulo">
-              <i class="material-icons">warning</i>
-              Tipos de Ameaças
-            </div>
-            <dl>
-              <dt>Phishing</dt>
-              <dd>
-                Técnica de enganar usuários para revelar informações
-                confidenciais por meio de e-mails ou sites falsos.
-              </dd>
+          <div class="categorias">
+            <article class="categoria">
+              <h3 class="categoria-titulo">
+                <span class="material-icons" aria-hidden="true">security</span>
+                Conceitos Básicos
+              </h3>
+              <dl>
+                <div class="termo-container">
+                  <dt>Senha Forte</dt>
+                  <dd>
+                    Combinação complexa de caracteres difícil de adivinhar,
+                    geralmente incluindo letras maiúsculas e minúsculas, números
+                    e símbolos.
+                  </dd>
+                </div>
 
-              <dt>Malware</dt>
-              <dd>
-                Software malicioso projetado para causar danos a um sistema ou
-                rede de computadores.
-              </dd>
+                <div class="termo-container">
+                  <dt>Ataque de Força Bruta</dt>
+                  <dd>
+                    Método de tentar descobrir senhas testando todas as
+                    combinações possíveis de caracteres até encontrar a correta.
+                  </dd>
+                </div>
 
-              <dt>Ransomware</dt>
-              <dd>
-                Tipo de malware que criptografa arquivos e exige um resgate para
-                desbloqueá-los.
-              </dd>
+                <div class="termo-container">
+                  <dt>Entropia de Senha</dt>
+                  <dd>
+                    Medida matemática da aleatoriedade de uma senha, indicando
+                    sua imprevisibilidade e resistência a ataques.
+                  </dd>
+                </div>
 
-              <dt>Engenharia Social</dt>
-              <dd>
-                Técnica de manipular pessoas para obter informações
-                confidenciais ou acesso a sistemas.
-              </dd>
+                <div class="termo-container">
+                  <dt>Hash de Senha</dt>
+                  <dd>
+                    Função criptográfica que converte senhas em uma sequência
+                    fixa de caracteres, permitindo armazenamento seguro sem
+                    revelar a senha original.
+                  </dd>
+                </div>
 
-              <dt>DDoS</dt>
-              <dd>
-                Ataque de negação de serviço que sobrecarrega um servidor com
-                tráfego para torná-lo inacessível.
-              </dd>
+                <div class="termo-container">
+                  <dt>Sal Criptográfico</dt>
+                  <dd>
+                    Dados aleatórios que são adicionados a uma senha antes de
+                    ser transformada em hash para tornar o resultado único,
+                    mesmo para senhas idênticas.
+                  </dd>
+                </div>
 
-              <dt>Keylogger</dt>
-              <dd>
-                Software que registra as teclas digitadas para capturar senhas e
-                informações pessoais.
-              </dd>
+                <div class="termo-container">
+                  <dt>Zero Trust</dt>
+                  <dd>
+                    Modelo de segurança que não confia em nenhum usuário ou
+                    sistema por padrão, exigindo verificação contínua para
+                    acesso a recursos.
+                  </dd>
+                </div>
+              </dl>
+            </article>
 
-              <dt>Botnet</dt>
-              <dd>
-                Rede de dispositivos infectados controlados remotamente por um
-                invasor.
-              </dd>
-            </dl>
+            <article class="categoria">
+              <h3 class="categoria-titulo">
+                <span class="material-icons" aria-hidden="true">warning</span>
+                Tipos de Ameaças
+              </h3>
+              <dl>
+                <div class="termo-container">
+                  <dt>Phishing</dt>
+                  <dd>
+                    Técnica de enganar usuários para revelar informações
+                    confidenciais como senhas e dados bancários por meio de
+                    e-mails ou sites falsos.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Credential Stuffing</dt>
+                  <dd>
+                    Ataque que utiliza combinações de nomes de usuário e senhas
+                    vazadas para tentar acessar múltiplas contas online.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Keylogger</dt>
+                  <dd>
+                    Software malicioso que registra as teclas digitadas pelo
+                    usuário para capturar senhas e outras informações sensíveis.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Ataque de Dicionário</dt>
+                  <dd>
+                    Método que testa senhas comuns e palavras de dicionário para
+                    quebrar a segurança de contas.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Engenharia Social</dt>
+                  <dd>
+                    Manipulação psicológica que induz pessoas a revelarem
+                    informações confidenciais ou realizarem ações que
+                    comprometem a segurança.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Password Spraying</dt>
+                  <dd>
+                    Ataque que tenta senhas comuns em muitas contas diferentes
+                    para evitar bloqueios por tentativas múltiplas.
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="categoria">
+              <h3 class="categoria-titulo">
+                <span class="material-icons" aria-hidden="true">shield</span>
+                Proteção e Prevenção
+              </h3>
+              <dl>
+                <div class="termo-container">
+                  <dt>Autenticação de Dois Fatores (2FA)</dt>
+                  <dd>
+                    Sistema de segurança que requer dois métodos de verificação:
+                    algo que você sabe (senha) e algo que você possui (como um
+                    celular).
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Gerenciador de Senhas</dt>
+                  <dd>
+                    Aplicativo que armazena e gerencia senhas de forma segura e
+                    criptografada, permitindo o uso de senhas únicas e complexas
+                    sem precisar memorizá-las.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Passphrase</dt>
+                  <dd>
+                    Sequência de palavras usada como alternativa às senhas
+                    tradicionais, geralmente mais fácil de lembrar e mais
+                    difícil de quebrar.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Rotação de Senhas</dt>
+                  <dd>
+                    Prática de alterar senhas periodicamente para reduzir o
+                    risco de acesso não autorizado por senhas comprometidas.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>FIDO2/WebAuthn</dt>
+                  <dd>
+                    Padrões de autenticação que permitem login seguro sem senha,
+                    usando chaves de segurança físicas ou biometria.
+                  </dd>
+                </div>
+
+                <div class="termo-container">
+                  <dt>Autenticação Biométrica</dt>
+                  <dd>
+                    Método de verificação de identidade baseado em
+                    características físicas únicas como impressões digitais,
+                    reconhecimento facial ou de íris.
+                  </dd>
+                </div>
+              </dl>
+            </article>
           </div>
 
-          <div class="categoria">
-            <div class="categoria-titulo">
-              <i class="material-icons">shield</i>
-              Proteção e Prevenção
-            </div>
-            <dl>
-              <dt>Autenticação de Dois Fatores</dt>
-              <dd>
-                Camada extra de segurança que exige duas formas de identificação
-                do usuário para acessar uma conta online.
-              </dd>
-
-              <dt>Gerenciador de Senhas</dt>
-              <dd>
-                Software que armazena e gerencia senhas de forma segura e
-                criptografada.
-              </dd>
-
-              <dt>Criptografia</dt>
-              <dd>
-                Processo de codificar informações para que somente o
-                destinatário correto possa decifrá-las.
-              </dd>
-
-              <dt>VPN</dt>
-              <dd>
-                Rede privada virtual que protege a conexão de internet de um
-                usuário.
-              </dd>
-
-              <dt>Firewall</dt>
-              <dd>
-                Software ou hardware que monitora e controla o tráfego de rede.
-              </dd>
-
-              <dt>Atualizações de Segurança</dt>
-              <dd>
-                Correções e patches para vulnerabilidades de segurança em
-                software e sistemas operacionais.
-              </dd>
-
-              <dt>Backup Regular</dt>
-              <dd>
-                Cópia de segurança de dados importantes para proteção contra
-                perda de informações.
-              </dd>
-            </dl>
+          <div class="dicas-seguranca">
+            <h3>Dicas para Senhas Seguras</h3>
+            <ul>
+              <li>Use senhas longas (pelo menos 12 caracteres)</li>
+              <li>Crie senhas únicas para cada serviço</li>
+              <li>Combine letras, números e símbolos</li>
+              <li>Evite informações pessoais facilmente descobertas</li>
+              <li>Considere usar um gerenciador de senhas</li>
+              <li>Ative a autenticação de dois fatores quando disponível</li>
+              <li>
+                Troque senhas regularmente, especialmente após vazamentos de
+                dados
+              </li>
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
+    <aside id="notificacoes" aria-live="polite">
+      <!-- Notificações serão adicionadas dinamicamente pelo JavaScript -->
+    </aside>
+
     <footer>
-      <p>
-        &copy; <time datetime="2025">2025</time> Luís Teixeira - Gerador de
-        Senhas
-      </p>
+      <div class="container">
+        <div class="footer-content">
+          <p>
+            &copy; <time datetime="2025">2025</time> Luís Teixeira - Gerador de
+            Senhas
+          </p>
+          <nav aria-label="Links úteis">
+            <ul>
+              <li><a href="#sobre">Sobre</a></li>
+              <li><a href="#privacidade">Política de Privacidade</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </footer>
 
-    <script>
-      const toggleButton = document.getElementById('darkModeToggle')
-      const currentTheme = localStorage.getItem('theme') || 'light'
-      document.documentElement.setAttribute('data-theme', currentTheme)
+    <!-- Diálogos Modais -->
+    <dialog id="modalSalvar" aria-labelledby="modalSalvarTitulo">
+      <h2 id="modalSalvarTitulo">
+        <span class="material-icons" aria-hidden="true">save</span> Salvar Senha
+      </h2>
+      <form method="dialog" id="formSalvarSenha">
+        <div class="form-group">
+          <label for="nomeSenha">Nome para esta senha:</label>
+          <input
+            type="text"
+            id="nomeSenha"
+            required
+            placeholder="Ex: Email pessoal, Netflix, Banco"
+          />
+        </div>
+        <div class="form-group">
+          <label for="categoriaSenha">Categoria:</label>
+          <select id="categoriaSenha">
+            <option value="email">Email</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="trabalho">Trabalho</option>
+            <option value="entretenimento">Entretenimento</option>
+            <option value="redes-sociais">Redes Sociais</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="notasSenha">Notas (opcional):</label>
+          <textarea
+            id="notasSenha"
+            placeholder="Informações adicionais sobre esta senha"
+          ></textarea>
+        </div>
+        <div class="button-group">
+          <button type="button" class="btn-secondary" id="cancelarSalvar">
+            Cancelar
+          </button>
+          <button type="submit" class="btn-primary">Salvar</button>
+        </div>
+      </form>
+    </dialog>
 
-      toggleButton.addEventListener('click', () => {
-        const theme =
-          document.documentElement.getAttribute('data-theme') === 'dark'
-            ? 'light'
-            : 'dark'
-        document.documentElement.setAttribute('data-theme', theme)
-        localStorage.setItem('theme', theme)
-      })
-    </script>
+    <dialog id="modalMultiplas" aria-labelledby="modalMultiplasTitulo">
+      <h2 id="modalMultiplasTitulo">
+        <span class="material-icons" aria-hidden="true">dashboard</span> Gerar
+        Múltiplas Senhas
+      </h2>
+      <form method="dialog" id="formMultiplasSenhas">
+        <div class="form-group">
+          <label for="quantidadeSenhas">Quantidade de senhas:</label>
+          <input
+            type="number"
+            id="quantidadeSenhas"
+            min="2"
+            max="20"
+            value="5"
+            required
+          />
+        </div>
+        <p class="info-text">
+          As senhas serão geradas com as configurações atuais do gerador
+          principal.
+        </p>
+        <div class="button-group">
+          <button type="button" class="btn-secondary" id="cancelarMultiplas">
+            Cancelar
+          </button>
+          <button type="submit" class="btn-primary">Gerar</button>
+        </div>
+      </form>
+    </dialog>
 
-    <script src="/js/app.js"></script>
+    <dialog id="modalDetalhes" aria-labelledby="modalDetalhesTitulo">
+      <h2 id="modalDetalhesTitulo">
+        <span class="material-icons" aria-hidden="true">info</span> Detalhes da
+        Senha
+      </h2>
+      <div id="senhaDetalhes">
+        <div class="senha-header">
+          <h3 id="detalheNome"></h3>
+          <span class="badge" id="detalheCategoria"></span>
+        </div>
+
+        <div class="senha-info">
+          <div class="senha-item">
+            <strong>Senha:</strong>
+            <div class="password-display">
+              <input type="password" id="detalheSenha" readonly />
+              <button
+                type="button"
+                class="toggle-visibility"
+                aria-label="Mostrar/ocultar senha"
+              >
+                <span class="material-icons" aria-hidden="true"
+                  >visibility</span
+                >
+              </button>
+            </div>
+          </div>
+
+          <div class="senha-item">
+            <strong>Data de criação:</strong>
+            <span id="detalheData"></span>
+          </div>
+
+          <div class="senha-item">
+            <strong>Notas:</strong>
+            <p id="detalheNotas"></p>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn-danger" id="excluirSenha">
+            <span class="material-icons" aria-hidden="true">delete</span>
+            Excluir
+          </button>
+          <button type="button" class="btn-secondary" id="copiarSenhaDetalhe">
+            <span class="material-icons" aria-hidden="true">content_copy</span>
+            Copiar
+          </button>
+          <button type="button" class="btn-primary" id="fecharDetalhes">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="modalConfirmacao" aria-labelledby="modalConfirmacaoTitulo">
+      <h2 id="modalConfirmacaoTitulo">
+        <span class="material-icons" aria-hidden="true">warning</span>
+        Confirmação
+      </h2>
+      <p id="mensagemConfirmacao">Tem certeza que deseja realizar esta ação?</p>
+      <div class="button-group">
+        <button type="button" class="btn-secondary" id="cancelarConfirmacao">
+          Cancelar
+        </button>
+        <button type="button" class="btn-danger" id="confirmarAcao">
+          Confirmar
+        </button>
+      </div>
+    </dialog>
+
+    <dialog id="modalDicas" aria-labelledby="modalDicasTitulo">
+      <h2 id="modalDicasTitulo">
+        <span class="material-icons" aria-hidden="true">lightbulb</span> Dicas
+        de Segurança
+      </h2>
+      <div class="dicas-container">
+        <article class="dica">
+          <h3>Por que as senhas são importantes?</h3>
+          <p>
+            Senhas fortes são sua primeira linha de defesa contra acesso não
+            autorizado às suas contas. Uma senha comprometida pode resultar em
+            roubo de identidade, perda financeira e acesso a informações
+            pessoais.
+          </p>
+        </article>
+
+        <article class="dica">
+          <h3>Como criar senhas seguras e memorizáveis</h3>
+          <ol>
+            <li>Use frases em vez de palavras simples</li>
+            <li>Combine maiúsculas, minúsculas, números e símbolos</li>
+            <li>Evite informações óbvias como datas de nascimento</li>
+            <li>Crie um sistema pessoal para gerar senhas diferentes</li>
+          </ol>
+        </article>
+
+        <article class="dica">
+          <h3>Autenticação de múltiplos fatores</h3>
+          <p>
+            Sempre que possível, ative a autenticação de dois fatores (2FA) ou
+            múltiplos fatores (MFA). Isso adiciona uma camada extra de
+            segurança, exigindo algo que você sabe (senha) e algo que você
+            possui (como seu telefone).
+          </p>
+        </article>
+
+        <article class="dica">
+          <h3>Gerenciadores de senhas</h3>
+          <p>
+            Usar um gerenciador de senhas permite criar senhas únicas e
+            complexas para cada site sem precisar memorizá-las. O gerenciador
+            armazena suas senhas de forma segura e pode preenchê-las
+            automaticamente.
+          </p>
+        </article>
+      </div>
+      <button type="button" class="btn-primary" id="fecharDicas">
+        Entendi
+      </button>
+    </dialog>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/app.js"></script>
   </body>
 </html>

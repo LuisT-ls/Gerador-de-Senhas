@@ -1,0 +1,36 @@
+/* Export/Import */
+.export-options,
+.import-options {
+  background-color: var(--bg-light);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--warning-color);
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(244, 140, 6, 0.1);
+  border-radius: var(--border-radius-md);
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  flex-wrap: wrap;
+}
+
+.file-upload input {
+  display: none;
+}
+
+#arquivoSelecionado {
+  color: var(--text-secondary);
+  font-style: italic;
+}

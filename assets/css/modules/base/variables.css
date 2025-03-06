@@ -1,44 +1,94 @@
+/* Base Variables */
 :root {
-  /* Paleta de Cores */
-  --color-primary-light: #3498db;
-  --color-secondary-light: #2ecc71;
-  --color-background-light: #f4f4f4;
-  --color-card-light: #ffffff;
-  --color-border-light: #e0e0e0;
-  --color-text-primary-light: #333;
-  --color-text-secondary-light: #666;
+  /* Color Palette */
+  --primary-color: #4361ee;
+  --primary-light: #5f78ff;
+  --primary-dark: #2845c7;
 
-  --color-primary-dark: #4a90e2;
-  --color-secondary-dark: #48db76;
-  --color-background-dark: #121212;
-  --color-card-dark: #1e1e1e;
-  --color-border-dark: #333;
-  --color-text-primary-dark: #e0e0e0;
-  --color-text-secondary-dark: #a0a0a0;
+  --secondary-color: #3a0ca3;
+  --tertiary-color: #7209b7;
 
-  /* Espaçamento e Bordas */
-  --spacing-small: 0.5rem;
-  --spacing-medium: 1rem;
-  --spacing-large: 2rem;
-  --spacing-xlarge: 3rem;
-  --border-radius: 12px;
+  --success-color: #38b000;
+  --warning-color: #f48c06;
+  --danger-color: #e5383b;
+  --info-color: #4cc9f0;
 
-  /* Transições e Animações */
-  --transition-speed: 0.3s;
+  --bg-color: #ffffff;
+  --bg-light: #f8f9fa;
+  --bg-dark: #e9ecef;
+
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-light: #adb5bd;
+
+  --border-color: #dee2e6;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  /* Typography */
+  --font-family: 'Montserrat', sans-serif;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Container Widths */
+  --container-width: 1200px;
+
+  /* Z-index levels */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-tooltip: 1070;
+
+  /* Password Strength Colors */
+  --strength-weak: #ff4d4d;
+  --strength-medium: #ffb84d;
+  --strength-good: #48bb78;
+  --strength-strong: #38b000;
 }
 
-[data-theme='light'] {
-  --color-background: var(--color-background-light);
-  --color-card: var(--color-card-light);
-  --color-border: var(--color-border-light);
-  --color-text-primary: var(--color-text-primary-light);
-  --color-text-secondary: var(--color-text-secondary-light);
-}
-
+/* For dark mode theme (will be toggled with JS) */
 [data-theme='dark'] {
-  --color-background: var(--color-background-dark);
-  --color-card: var(--color-card-dark);
-  --color-border: var(--color-border-dark);
-  --color-text-primary: var(--color-text-primary-dark);
-  --color-text-secondary: var(--color-text-secondary-dark);
+  --primary-color: #4cc9f0;
+  --primary-light: #70d6f7;
+  --primary-dark: #3a9dc0;
+
+  --bg-color: #121212;
+  --bg-light: #1e1e1e;
+  --bg-dark: #2d2d2d;
+
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
+  --text-light: #6c757d;
+
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }

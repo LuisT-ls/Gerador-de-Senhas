@@ -16,13 +16,19 @@
 @import url('./modules/layout/container.css');
 @import url('./modules/layout/header.css');
 @import url('./modules/layout/footer.css');
+@import url('./modules/layout/section.css');
 
 /* Componentes */
 @import url('./modules/components/buttons.css');
 @import url('./modules/components/icon.css');
 @import url('./modules/components/watermark.css');
 @import url('./modules/components/glossary.css');
+@import url('./modules/components/cards.css');
 
 /* Features */
 @import url('./modules/features/history.css');
 @import url('./modules/features/result.css');
+@import url('./modules/features/savepasswd.css');
+@import url('./modules/features/ex-import.css');
+@import url('./modules/features/tabs.css');
+@import url('./modules/features/notifications.css');

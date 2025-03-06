@@ -1,0 +1,69 @@
+/* Tabs */
+.tabs {
+  margin-top: var(--spacing-xl);
+}
+
+.tab-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: var(--spacing-xl);
+}
+
+.tab-button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab-button:hover,
+.tab-button:focus {
+  color: var(--primary-color);
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  font-weight: 700;
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn var(--transition-normal);
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.input-with-button {
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--border-radius-md);
+  border: 2px solid var(--border-color);
+}
+
+.input-with-button input {
+  flex: 1;
+  border: none;
+  border-radius: 0;
+}
+
+.input-with-button input:focus {
+  box-shadow: none;
+}
+
+.input-with-button button {
+  background-color: var(--bg-light);
+  padding: 0 var(--spacing-md);
+  color: var(--text-secondary);
+  border-left: 2px solid var(--border-color);
+}

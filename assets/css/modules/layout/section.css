@@ -1,0 +1,21 @@
+/* Main Content */
+main {
+  flex: 1;
+  padding: var(--spacing-xl) 0;
+}
+
+section {
+  margin-bottom: var(--spacing-2xl);
+  animation: fadeIn var(--transition-normal);
+}
+
+section h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+section h2 .material-icons {
+  color: var(--primary-color);
+}

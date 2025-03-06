@@ -1,34 +1,90 @@
 /* Header */
 header {
+  background-color: var(--bg-light);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+}
+
+header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-large);
-  background-color: var(--color-card);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: var(--spacing-large);
+  flex-wrap: wrap;
 }
 
 header h1 {
-  margin: 0;
+  margin-bottom: 0;
+  font-size: var(--font-size-xl);
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--tertiary-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
   font-weight: 700;
-  font-size: 2.2rem;
+}
+
+nav ul {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+  position: relative;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: rgba(67, 97, 238, 0.1);
+  color: var(--primary-color);
+}
+
+nav a.active {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-pill);
 }
 
 #darkModeToggle {
-  background: none;
+  background: transparent;
   border: none;
-  cursor: pointer;
-  padding: var(--spacing-small);
-  border-radius: var(--border-radius);
-  transition: background-color var(--transition-speed);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color var(--transition-fast);
 }
 
 #darkModeToggle:hover {
-  background-color: var(--color-border);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-#darkModeToggle img {
-  width: 24px;
-  height: 24px;
+[data-theme='dark'] #darkModeToggle .material-icons {
+  transform: rotate(180deg);
 }

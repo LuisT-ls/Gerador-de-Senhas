@@ -1,0 +1,47 @@
+/* Saved Passwords */
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.search-container {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-container input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.search-container .material-icons {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--text-secondary);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-lg);
+  border: 2px dashed var(--border-color);
+}
+
+.empty-state .material-icons {
+  vertical-align: middle;
+  margin: 0 var(--spacing-xs);
+}
+
+.senha-lista {
+  display: grid;
+  gap: var(--spacing-md);
+}

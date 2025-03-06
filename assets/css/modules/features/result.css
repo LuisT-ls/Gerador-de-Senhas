@@ -1,51 +1,161 @@
-/* Resultado da senha */
-#resultado {
+/* Password Result */
+.password-display {
+  margin-top: var(--spacing-lg);
   display: flex;
-  gap: var(--spacing-small);
-  margin-top: var(--spacing-medium);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--border-color);
 }
 
 #senhaGerada {
   flex: 1;
-  padding: var(--spacing-small);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  font-size: 1rem;
-  text-align: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  font-family: monospace;
+  font-size: var(--font-size-lg);
+  background-color: transparent;
 }
 
-/* Barra de força da senha */
+.password-display .actions {
+  display: flex;
+  border-left: 2px solid var(--border-color);
+}
+
+.password-display button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-secondary);
+  background-color: transparent;
+  transition: color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.password-display button:hover {
+  color: var(--primary-color);
+  background-color: rgba(67, 97, 238, 0.1);
+}
+
+.forca-container {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
 #barraForca {
+  width: 100%;
   height: 10px;
-  background-color: var(--color-border);
-  border-radius: var(--border-radius);
-  margin: var(--spacing-small) 0;
+  background-color: var(--bg-dark);
+  border-radius: var(--border-radius-pill);
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.barra-progresso {
+  height: 100%;
+  border-radius: var(--border-radius-pill);
+  transition: width var(--transition-normal),
+    background-color var(--transition-normal);
+}
+
+.barra-progresso[data-strength='weak'] {
+  width: 25%;
+  background-color: var(--strength-weak);
+}
+
+.barra-progresso[data-strength='medium'] {
+  width: 50%;
+  background-color: var(--strength-medium);
+}
+
+.barra-progresso[data-strength='good'] {
+  width: 75%;
+  background-color: var(--strength-good);
+}
+
+.barra-progresso[data-strength='strong'] {
+  width: 100%;
+  background-color: var(--strength-strong);
+}
+
+#feedbackForca {
+  font-weight: 700;
+}
+
+#detalhesSeguranca {
+  margin-top: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
   overflow: hidden;
 }
 
-#barraForca div {
-  height: 100%;
-  width: 0;
-  background-color: var(--color-secondary-light);
-  transition: width var(--transition-speed);
+summary {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--bg-light);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
 }
 
-/* Feedback de força da senha */
-#feedbackForca {
-  font-weight: bold;
-  margin-bottom: var(--spacing-medium);
+summary:hover {
+  background-color: var(--bg-dark);
 }
 
-.weak {
-  color: #e74c3c;
+#analiseSeguranca {
+  padding: var(--spacing-md);
 }
 
-.medium {
-  color: #f1c40f;
+#analiseSeguranca li {
+  margin-bottom: var(--spacing-sm);
+  padding-left: 24px;
+  position: relative;
 }
 
-.strong {
-  color: #2ecc71;
+#analiseSeguranca li::before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-family: 'Material Icons';
+  font-size: 18px;
+}
+
+#analiseSeguranca li.positivo::before {
+  content: 'check_circle';
+  color: var(--success-color);
+}
+
+#analiseSeguranca li.negativo::before {
+  content: 'error';
+  color: var(--danger-color);
+}
+
+#analiseSeguranca li.info::before {
+  content: 'info';
+  color: var(--info-color);
+}
+
+#senhasMultiplas {
+  margin-top: var(--spacing-xl);
+}
+
+.senhas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.senha-item {
+  background-color: var(--bg-light);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border-left: 4px solid var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.senha-item:hover {
+  box-shadow: var(--shadow-md);
 }

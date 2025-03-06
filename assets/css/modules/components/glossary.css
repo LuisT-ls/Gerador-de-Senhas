@@ -43,3 +43,111 @@ dd {
   margin-left: var(--spacing-medium);
   color: var(--color-text-secondary);
 }
+
+.glossario-introducao {
+  max-width: 800px;
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+}
+
+.categorias {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .categorias {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .categorias {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.categoria {
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.categoria:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.categoria-titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--primary-color);
+  color: white;
+  margin-bottom: 0;
+}
+
+.categoria dl {
+  padding: var(--spacing-lg);
+}
+
+.termo-container {
+  margin-bottom: var(--spacing-lg);
+}
+
+.termo-container:last-child {
+  margin-bottom: 0;
+}
+
+.termo-container dt {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-lg);
+}
+
+.dicas-seguranca {
+  margin-top: var(--spacing-2xl);
+  background-color: var(--bg-light);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  border-left: 4px solid var(--success-color);
+}
+
+.dicas-seguranca h3 {
+  color: var(--success-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.dicas-seguranca ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .dicas-seguranca ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dicas-seguranca li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.dicas-seguranca li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success-color);
+  font-weight: 700;
+}
