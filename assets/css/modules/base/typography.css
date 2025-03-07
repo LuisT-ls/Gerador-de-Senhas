@@ -1,4 +1,5 @@
-/* Typography */
+/* typography.css - Estilos tipográficos */
+
 h1,
 h2,
 h3,
@@ -8,28 +9,240 @@ h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
 }
 
 h1 {
-  font-size: var(--font-size-3xl);
+  font-size: 3rem;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: var(--font-size-2xl);
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
-  display: inline-block;
+  font-size: 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  letter-spacing: -0.01em;
+}
+
+h2 .material-icons {
+  color: var(--color-primary);
+  font-size: 2.2rem;
 }
 
 h3 {
-  font-size: var(--font-size-xl);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+h3 .material-icons {
+  color: var(--color-secondary);
+  font-size: 1.8rem;
 }
 
 h4 {
-  font-size: var(--font-size-lg);
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-sm);
 }
 
 p {
   margin-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+strong,
+b {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+small {
+  font-size: 1.4rem;
+  color: var(--color-text-tertiary);
+}
+
+.text-sm {
+  font-size: 1.4rem;
+}
+
+.text-lg {
+  font-size: 1.8rem;
+}
+
+.text-xl {
+  font-size: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 15rem;
+  padding: var(--spacing-md);
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-bg-secondary);
+  border: 1px dashed var(--color-border);
+}
+
+.empty-state .material-icons {
+  margin-right: var(--spacing-xs);
+}
+
+.info-text {
+  background-color: var(--color-info-light);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.4rem;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.info-text::before {
+  content: 'info';
+  font-family: 'Material Icons';
+  margin-right: var(--spacing-sm);
+  color: var(--color-info);
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-warning-light);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.4rem;
+  color: var(--color-text-primary);
+}
+
+.warning .material-icons {
+  color: var(--color-warning);
+  margin-right: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.card-info {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-sm);
+  font-style: italic;
+}
+
+/* Badges e tags */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--border-radius-full);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+}
+
+/* Estados e feedbacks nas listas */
+.positivo,
+.neutro,
+.negativo,
+.info {
+  position: relative;
+  padding-left: 2.8rem;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+}
+
+.positivo::before,
+.neutro::before,
+.negativo::before,
+.info::before {
+  font-family: 'Material Icons';
+  position: absolute;
+  left: 0;
+  font-size: 1.8rem;
+}
+
+.positivo {
+  color: var(--color-success);
+}
+
+.positivo::before {
+  content: 'check_circle';
+}
+
+.neutro {
+  color: var(--color-text-secondary);
+}
+
+.neutro::before {
+  content: 'remove_circle_outline';
+  color: var(--color-text-tertiary);
+}
+
+.negativo {
+  color: var(--color-error);
+}
+
+.negativo::before {
+  content: 'error_outline';
+}
+
+.info {
+  color: var(--color-info);
+}
+
+.info::before {
+  content: 'info_outline';
+}
+
+/* Texto com elipses */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

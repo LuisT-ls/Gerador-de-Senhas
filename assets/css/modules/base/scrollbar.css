@@ -1,17 +1,80 @@
-/* Scrollbar */
+/* scrollbar.css - Estilização da barra de rolagem */
+
+/* Scrollbar para Webkit (Chrome, Safari, Edge, Opera) */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-light);
+  background: var(--color-bg-secondary);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: var(--border-radius-pill);
+  background: var(--color-text-muted);
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+  background: var(--color-text-tertiary);
+}
+
+/* Scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-muted) var(--color-bg-secondary);
+}
+
+/* Scrollbar para elementos específicos com rolagem */
+.scrollable {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-muted) var(--color-bg-secondary);
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+/* Scrollbar horizontal para tabelas e outros elementos com rolagem horizontal */
+.scrollable-x {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-muted) var(--color-bg-secondary);
+}
+
+.scrollable-x::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollable-x::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+.scrollable-x::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+/* Ocultar a barra de rolagem, mas manter a funcionalidade */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
