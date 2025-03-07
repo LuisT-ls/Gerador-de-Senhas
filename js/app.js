@@ -1,64 +1,61 @@
-/**
- * Gerador de Senhas - Aplicativo Principal
- * Este arquivo importa e inicializa todos os módulos necessários
- */
-
-// Importar módulos principais
-import { initConfig } from './modules/config.js'
+// app.js - Arquivo principal da aplicação
 import { initDarkMode } from './modules/ui/darkMode.js'
 import { initTabs } from './modules/ui/tabs.js'
-import { initNotifications } from './modules/ui/notifications.js'
-import { initModals } from './modules/ui/modals.js'
 import { initFormControls } from './modules/ui/formControls.js'
-
-// Importar recursos de geração de senha
+import { initModals } from './modules/ui/modals.js'
+import { initNotifications } from './modules/ui/notifications.js'
 import { initPasswordGenerator } from './modules/features/passwordGen.js'
+import { initMultipleGenerator } from './modules/features/multipleGen.js'
+import { initPasswordAnalyzer } from './modules/features/analyzer.js'
 import { initWifiGenerator } from './modules/features/wifiGen.js'
 import { initPinGenerator } from './modules/features/pinGen.js'
 import { initPassphraseGenerator } from './modules/features/passphraseGen.js'
-import { initMultipleGenerator } from './modules/features/multipleGen.js'
-import { initPasswordAnalyzer } from './modules/features/analyzer.js'
-
-// Importar recursos de gestão de senhas
 import { initPasswordManager } from './modules/storage/passwordManager.js'
-import { initPasswordHistory } from './modules/storage/history.js'
+import { initHistoryManager } from './modules/storage/history.js'
 import { initExportImport } from './modules/storage/exportImport.js'
-
-// Importar recursos do glossário
 import { initGlossarySearch } from './modules/glossary/glossarySearch.js'
 
-// Função para inicializar o aplicativo
-const initApp = () => {
-  console.log('Inicializando Gerador de Senhas...')
-
-  // Inicializar configurações
-  initConfig()
-
-  // Inicializar interface de usuário
+// Função de inicialização da aplicação
+document.addEventListener('DOMContentLoaded', () => {
+  // Inicializar componentes da UI
   initDarkMode()
   initTabs()
-  initNotifications()
-  initModals()
   initFormControls()
+  initModals()
+  initNotifications()
 
-  // Inicializar recursos de senha
+  // Inicializar geradores de senha
   initPasswordGenerator()
+  initMultipleGenerator()
+  initPasswordAnalyzer()
   initWifiGenerator()
   initPinGenerator()
   initPassphraseGenerator()
-  initMultipleGenerator()
-  initPasswordAnalyzer()
 
-  // Inicializar armazenamento
+  // Inicializar gerenciamento de senhas
   initPasswordManager()
-  initPasswordHistory()
+  initHistoryManager()
   initExportImport()
 
   // Inicializar glossário
   initGlossarySearch()
 
-  console.log('Gerador de Senhas inicializado com sucesso!')
-}
+  // Exibir dicas na primeira visita
+  showTipsIfFirstVisit()
+})
 
-// Inicializar aplicativo quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', initApp)
+// Função para mostrar dicas na primeira visita
+function showTipsIfFirstVisit() {
+  if (!localStorage.getItem('passwordGeneratorVisited')) {
+    // Marcar como visitado
+    localStorage.setItem('passwordGeneratorVisited', 'true')
+
+    // Mostrar o modal de dicas após um pequeno delay
+    setTimeout(() => {
+      const modalDicas = document.getElementById('modalDicas')
+      if (modalDicas) {
+        modalDicas.showModal()
+      }
+    }, 1000)
+  }
+}
