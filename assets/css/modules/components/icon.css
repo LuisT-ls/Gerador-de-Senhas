@@ -1,0 +1,237 @@
+/* icon.css - Estilos para ícones */
+
+/* Estilo base para ícones Material */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2.4rem;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* Tamanhos de ícones */
+.icon-xs {
+  font-size: 1.6rem;
+}
+
+.icon-sm {
+  font-size: 2rem;
+}
+
+.icon-md {
+  font-size: 2.4rem;
+}
+
+.icon-lg {
+  font-size: 3.2rem;
+}
+
+.icon-xl {
+  font-size: 4rem;
+}
+
+/* Cores de ícones */
+.icon-primary {
+  color: var(--color-primary);
+}
+
+.icon-secondary {
+  color: var(--color-secondary);
+}
+
+.icon-success {
+  color: var(--color-success);
+}
+
+.icon-warning {
+  color: var(--color-warning);
+}
+
+.icon-error {
+  color: var(--color-error);
+}
+
+.icon-info {
+  color: var(--color-info);
+}
+
+.icon-muted {
+  color: var(--color-text-muted);
+}
+
+/* Ícones com fundo circular */
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--color-bg-secondary);
+}
+
+.icon-circle.primary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.icon-circle.secondary {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary);
+}
+
+.icon-circle.success {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.icon-circle.warning {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.icon-circle.error {
+  background-color: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.icon-circle.info {
+  background-color: var(--color-info-light);
+  color: var(--color-info);
+}
+
+/* Ícones com efeito de pulse */
+.icon-pulse {
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Ícones com rotação */
+.icon-rotate {
+  animation: iconRotate 2s linear infinite;
+}
+
+@keyframes iconRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ícones com borda */
+.icon-bordered {
+  border: 2px solid currentColor;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+/* Grupos de ícones (horizontal) */
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Grupos de ícones (vertical) */
+.icon-group-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Ícones com texto abaixo */
+.icon-with-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-align: center;
+}
+
+.icon-with-text .material-icons {
+  font-size: 3.2rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.icon-with-text span {
+  font-size: 1.4rem;
+  color: var(--color-text-secondary);
+}
+
+/* Ícones para ações específicas */
+.icon-action {
+  cursor: pointer;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.icon-action:hover {
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+/* Ícones dentro de componentes específicos */
+.categoria-titulo .material-icons,
+.dicas-seguranca h3 .material-icons,
+.senha-categoria .material-icons {
+  color: var(--color-primary);
+}
+
+.aviso-compromisso .material-icons {
+  color: var(--color-error);
+}
+
+.aviso-info-pessoal .material-icons {
+  color: var(--color-warning);
+}
+
+/* Ícones para indicadores de sucess/error */
+.icon-check {
+  color: var(--color-success);
+}
+
+.icon-error {
+  color: var(--color-error);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .material-icons {
+    font-size: 2.2rem;
+  }
+
+  .icon-lg {
+    font-size: 2.8rem;
+  }
+
+  .icon-xl {
+    font-size: 3.6rem;
+  }
+
+  .icon-circle {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+}

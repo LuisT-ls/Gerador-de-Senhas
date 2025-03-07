@@ -1,16 +1,190 @@
-/* Histórico de senhas */
-#listaSenhas {
-  list-style: none;
-}
+#historicoContagem strong {
+  margin-left: 0.6rem;
+  color: var(--color-primary);
+} /* history.css - Estilos para o histórico de senhas */
 
-#listaSenhas li {
-  padding: var(--spacing-small);
-  border-bottom: 1px solid var(--color-border);
+/* Barra de ações do histórico */
+.actions-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
 }
 
-#listaSenhas li:last-child {
+.actions-bar p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.actions-bar strong {
+  color: var(--color-primary);
+}
+
+/* Lista de senhas no histórico */
+.senha-lista {
+  margin: 0;
+  padding: 0;
+}
+
+/* Item de senha no histórico */
+.senha-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-divider);
+  transition: all var(--transition-fast);
+}
+
+.senha-item:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.senha-item:last-child {
   border-bottom: none;
+}
+
+/* Informações da senha */
+.senha-info {
+  flex: 1;
+}
+
+.senha-texto {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.senha-valor {
+  font-family: monospace;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.senha-tipo {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--border-radius-md);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.senha-data {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+}
+
+/* Ações para cada senha */
+.senha-acoes {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.senha-acoes button {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  transition: all var(--transition-fast);
+}
+
+.senha-acoes button:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary);
+}
+
+.senha-acoes .material-icons {
+  font-size: 2rem;
+}
+
+/* Estado vazio */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+.empty-state .material-icons {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-tertiary);
+}
+
+.empty-state p {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* Contadores de histórico */
+#historicoContagem {
+  display: flex;
+  align-items: center;
+}
+
+#historicoContagem::before {
+  content: 'history';
+  font-family: 'Material Icons';
+  margin-right: var(--spacing-sm);
+  color: var(--color-primary);
+  font-size: 2rem;
+}
+
+/* Botão para limpar histórico */
+#limparHistorico {
+  display: flex;
+  align-items: center;
+}
+
+/* Animação para novos itens */
+.senha-item-new {
+  animation: highlightItem 2s ease-out;
+}
+
+@keyframes highlightItem {
+  0% {
+    background-color: var(--color-primary-light);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .actions-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .senha-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .senha-acoes {
+    align-self: flex-end;
+  }
+
+  .senha-valor {
+    font-size: 1.5rem;
+  }
 }

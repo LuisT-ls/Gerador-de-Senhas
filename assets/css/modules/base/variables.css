@@ -21,6 +21,7 @@
   --color-info-light: #dbeafe;
 
   --color-bg-primary: #ffffff;
+  --color-bg-primary-rgb: 255, 255, 255;
   --color-bg-secondary: #f9fafb;
   --color-bg-tertiary: #f3f4f6;
   --color-bg-highlight: #f0f7ff;
@@ -113,6 +114,7 @@
   --color-info-light: #172554;
 
   --color-bg-primary: #111827;
+  --color-bg-primary-rgb: 17, 24, 39;
   --color-bg-secondary: #1e293b;
   --color-bg-tertiary: #283548;
   --color-bg-highlight: #1e3a5f;

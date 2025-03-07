@@ -1,161 +1,393 @@
-/* Password Result */
+.senhas-grid .senha-display input {
+  font-size: 1.4rem;
+  padding-right: 8rem;
+  white-space: nowrap;
+} /* result.css - Estilos para resultados e exibição de senhas */
+
+/* Container principal de resultado */
+#resultado {
+  margin-top: var(--spacing-xl);
+}
+
+/* Exibição da senha gerada */
 .password-display {
-  margin-top: var(--spacing-lg);
-  display: flex;
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--border-color);
+  position: relative;
+  margin-bottom: var(--spacing-md);
 }
 
-#senhaGerada {
-  flex: 1;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: none;
-  font-family: monospace;
-  font-size: var(--font-size-lg);
-  background-color: transparent;
-}
-
-.password-display .actions {
-  display: flex;
-  border-left: 2px solid var(--border-color);
-}
-
-.password-display button {
-  padding: var(--spacing-sm) var(--spacing-md);
-  color: var(--text-secondary);
-  background-color: transparent;
-  transition: color var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-.password-display button:hover {
-  color: var(--primary-color);
-  background-color: rgba(67, 97, 238, 0.1);
-}
-
-.forca-container {
-  margin-top: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-}
-
-#barraForca {
+.password-display input {
   width: 100%;
-  height: 10px;
-  background-color: var(--bg-dark);
-  border-radius: var(--border-radius-pill);
+  font-family: monospace;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  padding: 1.2rem;
+  padding-right: 12rem;
+  background-color: var(--color-bg-highlight);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-primary);
+}
+
+.password-display input::placeholder {
+  color: var(--color-text-muted);
+  letter-spacing: normal;
+  font-family: inherit;
+}
+
+/* Botões de ação na exibição da senha */
+.password-display .actions {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.2rem;
+}
+
+.password-display .actions button {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+}
+
+.password-display .actions button:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary);
+}
+
+.password-display .actions button .material-icons {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Medidor de força da senha */
+#medidorForca {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+#medidorForca h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.8rem;
+}
+
+#medidorForca h3 .material-icons {
+  color: var(--color-primary);
+  font-size: 2rem;
+}
+
+/* Container de medidor de força */
+.forca-container {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Barra de progresso */
+.barra-progresso {
+  height: 0.8rem;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-full);
   overflow: hidden;
   margin-bottom: var(--spacing-sm);
 }
 
-.barra-progresso {
+/* Estilos da barra de progresso baseados na força da senha */
+.barra-progresso[data-strength='muito-fraca'] {
+  background-color: var(--color-password-very-weak);
+  opacity: 0.2;
+}
+
+.barra-progresso[data-strength='fraca'] {
+  background-color: var(--color-password-weak);
+  opacity: 0.2;
+}
+
+.barra-progresso[data-strength='media'] {
+  background-color: var(--color-password-medium);
+  opacity: 0.2;
+}
+
+.barra-progresso[data-strength='forte'] {
+  background-color: var(--color-password-strong);
+  opacity: 0.2;
+}
+
+.barra-progresso[data-strength='muito-forte'] {
+  background-color: var(--color-password-very-strong);
+  opacity: 0.2;
+}
+
+/* Preenchimento da barra de progresso */
+.barra-progresso .barra-valor {
   height: 100%;
-  border-radius: var(--border-radius-pill);
-  transition: width var(--transition-normal),
-    background-color var(--transition-normal);
+  transition: width 0.5s ease;
 }
 
-.barra-progresso[data-strength='weak'] {
-  width: 25%;
-  background-color: var(--strength-weak);
+.barra-progresso[data-strength='muito-fraca'] .barra-valor {
+  width: 20%;
+  background-color: var(--color-password-very-weak);
 }
 
-.barra-progresso[data-strength='medium'] {
-  width: 50%;
-  background-color: var(--strength-medium);
+.barra-progresso[data-strength='fraca'] .barra-valor {
+  width: 40%;
+  background-color: var(--color-password-weak);
 }
 
-.barra-progresso[data-strength='good'] {
-  width: 75%;
-  background-color: var(--strength-good);
+.barra-progresso[data-strength='media'] .barra-valor {
+  width: 60%;
+  background-color: var(--color-password-medium);
 }
 
-.barra-progresso[data-strength='strong'] {
+.barra-progresso[data-strength='forte'] .barra-valor {
+  width: 80%;
+  background-color: var(--color-password-strong);
+}
+
+.barra-progresso[data-strength='muito-forte'] .barra-valor {
   width: 100%;
-  background-color: var(--strength-strong);
+  background-color: var(--color-password-very-strong);
 }
 
+/* Texto de feedback da força */
 #feedbackForca {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--color-text-primary);
 }
 
+/* Detalhes da análise de segurança */
 #detalhesSeguranca {
   margin-top: var(--spacing-md);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
 }
 
-summary {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--bg-light);
-  font-weight: 500;
+#detalhesSeguranca summary {
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  padding: var(--spacing-sm) 0;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
 }
 
-summary:hover {
-  background-color: var(--bg-dark);
+#detalhesSeguranca summary::before {
+  content: 'expand_more';
+  font-family: 'Material Icons';
+  margin-right: var(--spacing-sm);
+  transition: transform 0.3s ease;
 }
 
+#detalhesSeguranca[open] summary::before {
+  transform: rotate(180deg);
+}
+
+/* Lista de análise de segurança */
 #analiseSeguranca {
-  padding: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  padding-left: var(--spacing-md);
 }
 
 #analiseSeguranca li {
   margin-bottom: var(--spacing-sm);
-  padding-left: 24px;
+  position: relative;
+  padding-left: 2.8rem;
+}
+
+/* Estados da análise (positivo, negativo, info) */
+#analiseSeguranca li.positivo,
+#analiseSeguranca li.negativo,
+#analiseSeguranca li.info {
   position: relative;
 }
 
-#analiseSeguranca li::before {
+#analiseSeguranca li.positivo::before,
+#analiseSeguranca li.negativo::before,
+#analiseSeguranca li.info::before {
+  font-family: 'Material Icons';
   position: absolute;
   left: 0;
-  top: 2px;
-  font-family: 'Material Icons';
-  font-size: 18px;
+  font-size: 1.8rem;
+}
+
+#analiseSeguranca li.positivo {
+  color: var(--color-success);
 }
 
 #analiseSeguranca li.positivo::before {
   content: 'check_circle';
-  color: var(--success-color);
+}
+
+#analiseSeguranca li.negativo {
+  color: var(--color-error);
 }
 
 #analiseSeguranca li.negativo::before {
-  content: 'error';
-  color: var(--danger-color);
+  content: 'error_outline';
+}
+
+#analiseSeguranca li.info {
+  color: var(--color-info);
 }
 
 #analiseSeguranca li.info::before {
-  content: 'info';
-  color: var(--info-color);
+  content: 'info_outline';
 }
 
+/* Múltiplas senhas geradas */
 #senhasMultiplas {
   margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-divider);
 }
 
+#senhasMultiplas.hidden {
+  display: none;
+}
+
+#senhasMultiplas h3 {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+#senhasMultiplas h3::before {
+  content: 'dashboard';
+  font-family: 'Material Icons';
+  color: var(--color-primary);
+  font-size: 2.2rem;
+}
+
+/* Grid de múltiplas senhas */
 .senhas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
   gap: var(--spacing-md);
-  margin-top: var(--spacing-md);
 }
 
-.senha-item {
-  background-color: var(--bg-light);
-  padding: var(--spacing-md);
+/* Card de senha */
+.senha-card {
+  background-color: var(--color-bg-primary);
   border-radius: var(--border-radius-md);
-  border-left: 4px solid var(--primary-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
-.senha-item:hover {
+.senha-card:hover {
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-transparent);
+}
+
+/* Número da senha no grid */
+.senha-numero {
+  color: var(--color-text-muted);
+  font-size: 1.3rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Resultado de análise */
+#resultadoAnalise {
+  margin-top: var(--spacing-lg);
+}
+
+#resultadoAnalise.hidden {
+  display: none;
+}
+
+.result-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.result-card h4 {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.result-card h4::before {
+  content: 'analytics';
+  font-family: 'Material Icons';
+  color: var(--color-primary);
+}
+
+/* Resultado para outros tipos de senhas */
+#senhaWifiResultado,
+#pinResultado,
+#passphraseResultado {
+  margin-top: var(--spacing-lg);
+}
+
+#senhaWifiResultado.hidden,
+#pinResultado.hidden,
+#passphraseResultado.hidden {
+  display: none;
+}
+
+/* Texto do resultado */
+#senhaWifiTexto,
+#passphraseTexto,
+#pinGerado {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: var(--spacing-md) 0;
+  word-break: break-all;
+  font-family: monospace;
+}
+
+/* PIN gerado */
+#pinGerado {
+  font-size: 2.8rem;
+  letter-spacing: 0.2rem;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .password-display input {
+    font-size: 1.6rem;
+    padding-right: 10rem;
+  }
+
+  .password-display .actions button {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .password-display .actions button .material-icons {
+    font-size: 1.8rem;
+  }
+
+  .senhas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #senhaWifiTexto,
+  #passphraseTexto {
+    font-size: 1.6rem;
+  }
+
+  #pinGerado {
+    font-size: 2.4rem;
+  }
 }

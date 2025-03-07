@@ -1,41 +1,368 @@
-/* Result Cards */
-.result-card {
-  background-color: var(--bg-light);
-  padding: var(--spacing-lg);
+/* cards.css - Estilo de cards e containers */
+
+/* Card básico */
+.card {
+  background-color: var(--color-bg-primary);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
-  margin-top: var(--spacing-lg);
-  border-left: 4px solid var(--primary-color);
-  animation: slideInUp var(--transition-normal);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  border: 1px solid var(--color-border);
 }
 
-.result-card h4 {
-  color: var(--primary-color);
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.card-content {
+  color: var(--color-text-secondary);
+}
+
+.card-footer {
+  margin-top: var(--spacing-md);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+
+/* Card com gradiente de destaque */
+.card-highlight {
+  border-top: 3px solid var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+}
+
+/* Card com ícone */
+.card-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+.card-icon .material-icons {
+  font-size: 3.6rem;
+  color: var(--color-primary);
   margin-bottom: var(--spacing-md);
 }
 
-.result-card p:last-child {
-  margin-bottom: 0;
+/* Card interativo */
+.card-interactive {
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.card-info {
+.card-interactive:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-interactive:active {
+  transform: translateY(-2px);
+}
+
+/* Card de resultado */
+.result-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-md);
   margin-top: var(--spacing-md);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color);
-  font-style: italic;
-  color: var(--text-secondary);
+  box-shadow: var(--shadow-md);
 }
 
+.result-card h4 {
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.result-card h4::before {
+  content: 'check_circle';
+  font-family: 'Material Icons';
+  color: var(--color-success);
+}
+
+.result-card p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: var(--spacing-md) 0;
+  word-break: break-all;
+}
+
+/* Card de senha */
+.senha-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.senha-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.senha-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+.senha-categoria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.senha-nome {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin: 0;
+  flex: 1;
+}
+
+.senha-data {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+.senha-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+/* Cards múltiplos em grid */
+.senha-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+/* Card de PIN */
 .pin-display {
-  margin-top: var(--spacing-lg);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
   text-align: center;
 }
 
 #pinGerado {
-  font-size: var(--font-size-3xl);
-  font-family: monospace;
-  letter-spacing: 3px;
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  color: var(--color-text-primary);
   margin-bottom: var(--spacing-md);
-  color: var(--primary-color);
-  font-weight: 700;
+}
+
+/* Cartão de análise */
+.forca-container {
+  margin-bottom: var(--spacing-md);
+}
+
+.forca-valor {
+  font-weight: 600;
+  margin-top: var(--spacing-xs);
+}
+
+.forca-valor.muito-fraca {
+  color: var(--color-password-very-weak);
+}
+.forca-valor.fraca {
+  color: var(--color-password-weak);
+}
+.forca-valor.media {
+  color: var(--color-password-medium);
+}
+.forca-valor.forte {
+  color: var(--color-password-strong);
+}
+.forca-valor.muito-forte {
+  color: var(--color-password-very-strong);
+}
+
+.forca-info {
+  font-size: 1.4rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* Avisos especiais */
+.aviso-compromisso,
+.aviso-info-pessoal {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.aviso-compromisso .material-icons,
+.aviso-info-pessoal .material-icons {
+  margin-right: var(--spacing-sm);
+  font-size: 2.4rem;
+}
+
+.aviso-info-pessoal {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+/* Senha múltipla */
+.senhas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.senha-card {
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+}
+
+.senha-numero {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-xs);
+}
+
+.senha-display {
+  position: relative;
+}
+
+.senha-display input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  padding-right: 3.6rem;
+  font-family: monospace;
+  font-size: 1.5rem;
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-primary);
+}
+
+.senha-acoes {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.senha-acoes .btn-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.senha-acoes .btn-icon .material-icons {
+  font-size: 1.8rem;
+}
+
+/* Histórico de senhas */
+.senha-lista {
+  margin-top: var(--spacing-md);
+}
+
+.senha-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.senha-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.senha-texto {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.senha-valor {
+  font-family: monospace;
+  font-size: 1.6rem;
+  color: var(--color-text-primary);
+}
+
+.senha-tipo {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .senha-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .senhas-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,36 +1,197 @@
-/* Export/Import */
-.export-options,
-.import-options {
-  background-color: var(--bg-light);
-  padding: var(--spacing-lg);
+/* ex-import.css - Estilos para exportação e importação de senhas */
+
+/* Container para as opções de exportação */
+.export-options {
+  background-color: var(--color-bg-secondary);
   border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--color-border);
 }
 
+.export-options h3 {
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.export-options h3::before {
+  content: 'file_download';
+  font-family: 'Material Icons';
+  color: var(--color-primary);
+}
+
+.export-options p {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Container para as opções de importação */
+.import-options {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+}
+
+.import-options h3 {
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.import-options h3::before {
+  content: 'file_upload';
+  font-family: 'Material Icons';
+  color: var(--color-primary);
+}
+
+.import-options p {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Aviso de segurança */
 .warning {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  color: var(--warning-color);
-  margin: var(--spacing-md) 0;
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: rgba(244, 140, 6, 0.1);
   border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
 }
 
-.file-upload {
+.warning .material-icons {
+  margin-right: var(--spacing-sm);
+}
+
+/* Botões para exportação */
+.button-group {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  margin: var(--spacing-md) 0;
-  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
 
-.file-upload input {
-  display: none;
+/* Checkbox para encriptação */
+.checkbox-item {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Upload de arquivo */
+.file-upload {
+  margin-bottom: var(--spacing-md);
+}
+
+.file-upload label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid var(--color-border);
+}
+
+.file-upload label:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-primary);
+  border-color: var(--color-primary-transparent);
+}
+
+.file-upload label .material-icons {
+  font-size: 2rem;
+}
+
+.file-upload input[type='file'] {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
 }
 
 #arquivoSelecionado {
-  color: var(--text-secondary);
-  font-style: italic;
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-size: 1.4rem;
+  color: var(--color-text-tertiary);
+}
+
+/* Botão de importação */
+#importarSenhas {
+  margin-top: var(--spacing-md);
+}
+
+#importarSenhas:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Feedback de progresso */
+.import-progress {
+  margin-top: var(--spacing-md);
+  display: none;
+}
+
+.import-progress.active {
+  display: block;
+}
+
+.progress-bar {
+  height: 0.6rem;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.progress-value {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-full);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 1.4rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* Feedback de resultado */
+.import-result {
+  margin-top: var(--spacing-md);
+  display: none;
+}
+
+.import-result.success {
+  display: block;
+  color: var(--color-success);
+}
+
+.import-result.error {
+  display: block;
+  color: var(--color-error);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .export-options,
+  .import-options {
+    padding: var(--spacing-md);
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
 }

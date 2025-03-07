@@ -1,59 +1,274 @@
-/* Buttons */
-.btn-primary,
-.btn-secondary,
-.btn-danger {
+/* buttons.css - Estilos de botões */
+
+/* Estilo base para todos os botões */
+button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-md);
   font-weight: 500;
   transition: all var(--transition-fast);
+  border-radius: var(--border-radius-md);
+  padding: 0 var(--spacing-md);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: 4rem;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
   border: none;
   outline: none;
-  cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
+button:focus {
+  outline: none;
+}
+
+button:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-primary-transparent);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button .material-icons {
+  font-size: 1.8rem;
+  margin-right: var(--spacing-xs);
+}
+
+/* Botão primário */
 .btn-primary {
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
   color: white;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: var(--primary-dark);
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Botão secundário */
 .btn-secondary {
-  background-color: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus {
-  background-color: rgba(67, 97, 238, 0.1);
-  color: var(--primary-dark);
-  border-color: var(--primary-dark);
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-hover);
+  transform: translateY(-1px);
 }
 
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Botão de perigo / ações destrutivas */
 .btn-danger {
+  background-color: var(--color-error-light);
+  color: var(--color-error);
+  border: 1px solid transparent;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--color-error);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-danger:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Botão ícone */
+.btn-icon {
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  border-radius: var(--border-radius-md);
   background-color: transparent;
-  color: var(--danger-color);
-  border: 2px solid var(--danger-color);
+  color: var(--color-text-secondary);
+  box-shadow: none;
 }
 
-.btn-danger:hover,
-.btn-danger:focus {
-  background-color: rgba(229, 56, 59, 0.1);
-  color: darkred;
-  border-color: darkred;
+.btn-icon .material-icons {
+  margin-right: 0;
+  font-size: 2rem;
 }
 
+.btn-icon:hover:not(:disabled) {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.btn-icon:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Botão de link */
+.btn-link {
+  background-color: transparent;
+  color: var(--color-primary);
+  box-shadow: none;
+  text-decoration: none;
+  height: auto;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.btn-link:hover:not(:disabled) {
+  text-decoration: underline;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Botão com ícone à direita */
+.btn-icon-right .material-icons {
+  margin-right: 0;
+  margin-left: var(--spacing-xs);
+  order: 2;
+}
+
+/* Botão pequeno */
+.btn-sm {
+  height: 3.2rem;
+  padding: 0 var(--spacing-sm);
+  font-size: 1.4rem;
+}
+
+.btn-sm .material-icons {
+  font-size: 1.6rem;
+}
+
+/* Botão grande */
+.btn-lg {
+  height: 4.8rem;
+  padding: 0 var(--spacing-lg);
+  font-size: 1.7rem;
+}
+
+.btn-lg .material-icons {
+  font-size: 2rem;
+}
+
+/* Botão de largura total */
+.btn-block {
+  width: 100%;
+  display: flex;
+}
+
+/* Grupo de botões */
 .button-group {
   display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+}
+
+.button-group.center {
+  justify-content: center;
+}
+
+.button-group.end {
+  justify-content: flex-end;
+}
+
+.button-group.stack {
+  flex-direction: column;
+}
+
+/* Botão com efeito de loading */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  top: calc(50% - 0.8rem);
+  left: calc(50% - 0.8rem);
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+  animation: spin 0.6s linear infinite;
+}
+
+/* Botão com caret para dropdown */
+.btn-dropdown {
+  position: relative;
+  padding-right: 3.2rem;
+}
+
+.btn-dropdown::after {
+  content: '';
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.btn-dropdown.active::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Botão com efeito de ondulação */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.btn-ripple:active::after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .button-group {
+    flex-wrap: wrap;
+  }
+
+  .button-group .btn-primary,
+  .button-group .btn-secondary,
+  .button-group .btn-danger {
+    flex: 1 0 auto;
+  }
 }

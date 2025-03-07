@@ -1,0 +1,176 @@
+/* watermark.css - Estilos para marca d'água */
+
+/* Marca d'água do site */
+.watermark {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: var(--z-index-fixed);
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  user-select: none;
+}
+
+.watermark:hover {
+  opacity: 0.8;
+}
+
+.watermark img {
+  width: 10rem;
+  height: auto;
+}
+
+/* Marca d'água de texto */
+.text-watermark {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: var(--z-index-fixed);
+  opacity: 0.3;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  user-select: none;
+}
+
+.text-watermark:hover {
+  opacity: 0.6;
+}
+
+/* Marca d'água para imagens e cartões */
+.image-watermark {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  opacity: 0.6;
+  font-size: 1.2rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Marca d'água diagonal */
+.diagonal-watermark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.diagonal-watermark::before {
+  content: attr(data-watermark);
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  width: 200%;
+  transform: rotate(-45deg);
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0.03;
+  color: var(--color-text-primary);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Marca d'água de canto com ícone */
+.corner-watermark {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  font-size: 1.2rem;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: var(--z-index-fixed);
+}
+
+.corner-watermark:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.corner-watermark .material-icons {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+}
+
+/* Versão de desenvolvimento */
+.dev-watermark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.4rem;
+  background-color: var(--color-warning);
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  z-index: var(--z-index-fixed);
+}
+
+/* Marca d'água animada */
+.animated-watermark {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: var(--z-index-fixed);
+  animation: floatWatermark 5s ease-in-out infinite;
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+}
+
+.animated-watermark:hover {
+  opacity: 0.9;
+}
+
+@keyframes floatWatermark {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .watermark,
+  .text-watermark,
+  .corner-watermark,
+  .animated-watermark {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .watermark img {
+    width: 8rem;
+  }
+
+  .diagonal-watermark::before {
+    font-size: 3rem;
+  }
+}

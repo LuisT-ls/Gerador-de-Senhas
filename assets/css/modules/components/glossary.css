@@ -1,153 +1,203 @@
-/* Glossário */
+/* glossary.css - Estilo específico para o glossário */
+
+/* Seção de glossário */
+#glossario {
+  padding-bottom: var(--spacing-xxl);
+}
+
+/* Introdução do glossário */
 .glossario-introducao {
-  font-style: italic;
-  margin-bottom: var(--spacing-large);
-  color: var(--color-text-secondary);
-}
-
-.categorias {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-large);
-}
-
-.categoria {
-  background-color: var(--color-background);
-  padding: var(--spacing-medium);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.categoria-titulo {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-small);
-  margin-bottom: var(--spacing-medium);
-}
-
-.categoria-titulo i {
-  color: var(--color-primary-light);
-}
-
-dl {
-  display: grid;
-  gap: var(--spacing-small);
-}
-
-dt {
-  font-weight: bold;
-  color: var(--color-primary-light);
-}
-
-dd {
-  margin-left: var(--spacing-medium);
-  color: var(--color-text-secondary);
-}
-
-.glossario-introducao {
-  max-width: 800px;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  max-width: 80rem;
   margin-bottom: var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
 }
 
+/* Campo de pesquisa do glossário */
+#glossario .search-container {
+  max-width: 60rem;
+  margin: var(--spacing-lg) auto;
+}
+
+/* Categorias do glossário */
 .categorias {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
   gap: var(--spacing-xl);
-  margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
 }
 
-@media (min-width: 768px) {
-  .categorias {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .categorias {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
+/* Estilo de cada categoria */
 .categoria {
-  background-color: var(--bg-light);
+  background-color: var(--color-bg-primary);
   border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
   box-shadow: var(--shadow-md);
-  overflow: hidden;
+  border: 1px solid var(--color-border);
   transition: transform var(--transition-fast),
     box-shadow var(--transition-fast);
 }
 
 .categoria:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
+/* Título da categoria */
 .categoria-titulo {
+  font-size: 2rem;
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md);
-  background-color: var(--primary-color);
-  color: white;
-  margin-bottom: 0;
+  padding-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-divider);
 }
 
-.categoria dl {
-  padding: var(--spacing-lg);
+.categoria-titulo .material-icons {
+  color: var(--color-primary);
+  font-size: 2.2rem;
 }
 
+/* Categoria vazia (escondida quando filtrada) */
+.categoria-vazia {
+  display: none;
+}
+
+/* Container de cada termo */
 .termo-container {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--transition-fast);
 }
 
 .termo-container:last-child {
   margin-bottom: 0;
 }
 
+/* Termo em si (título) */
 .termo-container dt {
-  font-weight: 700;
-  color: var(--primary-color);
+  font-weight: 600;
+  color: var(--color-text-primary);
   margin-bottom: var(--spacing-xs);
-  font-size: var(--font-size-lg);
+  font-size: 1.7rem;
 }
 
+/* Definição do termo */
+.termo-container dd {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Destaque para resultados da pesquisa */
+.pesquisa-resultado {
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) -var(--spacing-sm);
+  background-color: var(--color-bg-highlight);
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Itens ocultos nos resultados de pesquisa */
+.pesquisa-oculto {
+  display: none;
+}
+
+/* Marca de destaque para termos encontrados */
+mark {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0 0.2rem;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Mensagem de sem resultados */
+.sem-resultados {
+  background-color: var(--color-warning-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-warning);
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.sem-resultados::before {
+  content: 'search_off';
+  font-family: 'Material Icons';
+  margin-right: var(--spacing-sm);
+  font-size: 2.4rem;
+}
+
+/* Seção de dicas de segurança no glossário */
 .dicas-seguranca {
-  margin-top: var(--spacing-2xl);
-  background-color: var(--bg-light);
-  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  background-color: var(--color-bg-secondary);
   border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
   box-shadow: var(--shadow-md);
-  border-left: 4px solid var(--success-color);
 }
 
 .dicas-seguranca h3 {
-  color: var(--success-color);
   margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.dicas-seguranca h3::before {
+  content: 'tips_and_updates';
+  font-family: 'Material Icons';
+  color: var(--color-primary);
+  font-size: 2.2rem;
 }
 
 .dicas-seguranca ul {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
+  list-style: disc;
+  padding-left: var(--spacing-xl);
+  column-count: 2;
+  column-gap: var(--spacing-xl);
 }
 
-@media (min-width: 768px) {
-  .dicas-seguranca ul {
-    grid-template-columns: repeat(2, 1fr);
+.dicas-seguranca ul li {
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  padding-left: var(--spacing-xs);
+}
+
+/* Animação para itens do glossário */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.dicas-seguranca li {
-  position: relative;
-  padding-left: 24px;
+/* Responsividade */
+@media (max-width: 992px) {
+  .categorias {
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
 }
 
-.dicas-seguranca li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--success-color);
-  font-weight: 700;
+@media (max-width: 768px) {
+  .categorias {
+    grid-template-columns: 1fr;
+  }
+
+  .dicas-seguranca ul {
+    column-count: 1;
+  }
+
+  .glossario-introducao {
+    font-size: 1.6rem;
+  }
 }

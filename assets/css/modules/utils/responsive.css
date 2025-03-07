@@ -1,15 +1,263 @@
-/* Responsividade */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
+/* responsive.css - Classes utilitárias para responsividade */
+
+/* Classes para ocultar elementos baseado no tamanho da tela */
+.hide-on-mobile {
+  display: block;
+}
+
+.show-on-mobile {
+  display: none;
+}
+
+.hide-on-tablet {
+  display: block;
+}
+
+.show-on-tablet {
+  display: none;
+}
+
+.hide-on-desktop {
+  display: none;
+}
+
+.show-on-desktop {
+  display: block;
+}
+
+/* Mobile (até 767px) */
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    display: none !important;
   }
 
-  #darkModeToggle {
-    margin-top: var(--spacing-small);
+  .show-on-mobile {
+    display: block !important;
   }
 
-  .categorias {
-    grid-template-columns: 1fr;
+  /* Texto centralizado em mobile */
+  .text-center-mobile {
+    text-align: center !important;
+  }
+
+  /* Padding reduzido em mobile */
+  .p-small-mobile {
+    padding: var(--spacing-sm) !important;
+  }
+
+  /* Margens reduzidas em mobile */
+  .m-small-mobile {
+    margin: var(--spacing-sm) !important;
+  }
+
+  /* Texto menor em mobile */
+  .text-smaller-mobile {
+    font-size: 90% !important;
+  }
+
+  /* Esticar para largura total em mobile */
+  .full-width-mobile {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Ajustes de flex para mobile */
+  .flex-column-mobile {
+    flex-direction: column !important;
+  }
+
+  .justify-center-mobile {
+    justify-content: center !important;
+  }
+
+  .align-center-mobile {
+    align-items: center !important;
+  }
+
+  /* Ordem dos elementos em flex */
+  .order-first-mobile {
+    order: -1 !important;
+  }
+
+  .order-last-mobile {
+    order: 999 !important;
+  }
+}
+
+/* Tablet (768px até 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hide-on-tablet {
+    display: none !important;
+  }
+
+  .show-on-tablet {
+    display: block !important;
+  }
+
+  /* Ajustes para tablet */
+  .text-center-tablet {
+    text-align: center !important;
+  }
+
+  .p-medium-tablet {
+    padding: var(--spacing-md) !important;
+  }
+
+  .m-medium-tablet {
+    margin: var(--spacing-md) !important;
+  }
+
+  /* Ajustes de layout para tablet */
+  .grid-2-cols-tablet {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .flex-wrap-tablet {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* Desktop (a partir de 1024px) */
+@media (min-width: 1024px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+
+  .show-on-desktop {
+    display: block !important;
+  }
+
+  /* Ajustes para desktop */
+  .max-width-desktop {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .grid-3-cols-desktop {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .grid-4-cols-desktop {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* Ajustes para telas muito grandes */
+@media (min-width: 1440px) {
+  .container-xl {
+    max-width: 1320px !important;
+  }
+
+  .text-larger-xl {
+    font-size: 110% !important;
+  }
+
+  .spacing-larger-xl {
+    padding: var(--spacing-xl) !important;
+    margin: var(--spacing-xl) !important;
+  }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+  .hide-on-small {
+    display: none !important;
+  }
+
+  .text-smaller-small {
+    font-size: 85% !important;
+  }
+
+  .p-xs-small {
+    padding: var(--spacing-xs) !important;
+  }
+
+  .stack-small {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+/* Ajustes para orientação */
+@media (orientation: landscape) and (max-height: 500px) {
+  .adjust-for-landscape {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .compact-for-landscape {
+    padding: var(--spacing-sm) !important;
+    margin: var(--spacing-sm) !important;
+  }
+}
+
+/* Ajustes para dispositivos com hover */
+@media (hover: hover) {
+  .hover-effect:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Utilitários para layout flexível */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+/* Utilitários para grid */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Adaptação de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,0 +1,129 @@
+/* darkmode.css - Estilos específicos para modo escuro */
+
+/* Nota: A maioria dos estilos do tema escuro é gerenciada pelas variáveis CSS em variables.css.
+   Este arquivo contém apenas ajustes específicos para alguns elementos no modo escuro. */
+
+/* Ajustes específicos para elementos no modo escuro */
+.dark-theme .barra-progresso {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme code,
+.dark-theme pre {
+  background-color: var(--color-bg-secondary);
+}
+
+.dark-theme mark {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.dark-theme .tab-button.active {
+  background-color: var(--color-primary-light);
+}
+
+.dark-theme .tab-navigation.secondary .tab-button.active {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Ajuste nas cores de fundo das caixas de resultado no modo escuro */
+.dark-theme .password-display input {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Ajuste na opacidade das notificações no modo escuro */
+.dark-theme .notificacao {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Melhorar visibilidade de texto em alguns elementos */
+.dark-theme .dicas-seguranca,
+.dark-theme .glossario-introducao,
+.dark-theme .categoria,
+.dark-theme .result-card {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Ajuste em elementos com bordas para maior contraste */
+.dark-theme .card,
+.dark-theme .senha-card,
+.dark-theme .result-card,
+.dark-theme fieldset,
+.dark-theme .export-options,
+.dark-theme .import-options {
+  border-color: var(--color-border);
+}
+
+/* Ajuste no hover de cartões para modo escuro */
+.dark-theme .senha-card:hover,
+.dark-theme .card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary-transparent);
+}
+
+/* Ajuste na cor de fundo para sombras mais sutis em tema escuro */
+.dark-theme .card,
+.dark-theme .senha-card,
+.dark-theme .result-card,
+.dark-theme dialog {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Ajuste no fundo do backdrop dos diálogos para maior escurecimento */
+.dark-theme dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Efeito de brilho para destacar elementos importantes em tema escuro */
+.dark-theme .btn-primary:hover {
+  box-shadow: 0 0 10px var(--color-primary);
+}
+
+/* Cores de texto para tema escuro em casos específicos */
+.dark-theme .categoria-titulo,
+.dark-theme .dicas-seguranca h3 {
+  color: var(--color-text-primary);
+}
+
+/* Ícones mais brilhantes em tema escuro */
+.dark-theme .material-icons {
+  filter: brightness(1.1);
+}
+
+/* Ajuste na cor de fundo dos elementos de formulário */
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Ajuste no alto contraste para pessoas com deficiência visual */
+@media (prefers-contrast: high) {
+  .dark-theme {
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e0e0e0;
+    --color-border: #666666;
+  }
+
+  .dark-theme input,
+  .dark-theme textarea,
+  .dark-theme select {
+    border-color: #888888;
+  }
+}
+
+/* Animação suave para a transição entre temas */
+body,
+input,
+select,
+textarea,
+button,
+.card,
+.senha-card,
+.tab-button,
+.material-icons,
+.barra-progresso {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}

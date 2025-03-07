@@ -35,11 +35,31 @@ function initRangeSliders() {
     // Atualizar valor inicial
     output.textContent = input.value
 
+    // Atualizar a barra de progresso do slider com o valor inicial
+    updateRangeProgress(input)
+
     // Adicionar evento para atualizar o valor durante a interação
     input.addEventListener('input', () => {
       output.textContent = input.value
+      updateRangeProgress(input)
     })
   })
+}
+
+/**
+ * Atualiza o progresso visual do slider
+ * @param {HTMLInputElement} input - Elemento input range
+ */
+function updateRangeProgress(input) {
+  // Calcular o percentual com base no valor, mínimo e máximo
+  const min = parseFloat(input.min) || 0
+  const max = parseFloat(input.max) || 100
+  const value = parseFloat(input.value) || 0
+
+  const percent = ((value - min) / (max - min)) * 100
+
+  // Definir a variável CSS personalizada para o gradiente
+  input.style.setProperty('--value-percent', `${percent}%`)
 }
 
 /**

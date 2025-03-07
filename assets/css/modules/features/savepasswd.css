@@ -1,47 +1,384 @@
-/* Saved Passwords */
+/* savepasswd.css - Estilos para salvar e gerenciar senhas */
+
+/* Modal de salvar senha */
+#modalSalvar,
+#modalDetalhes,
+#modalConfirmacao,
+#modalMultiplas,
+#modalDicas {
+  border: none;
+  padding: 0;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  background-color: var(--color-bg-primary);
+  width: 100%;
+  max-width: 50rem;
+  margin: auto;
+}
+
+/* Estilo para o backdrop do modal */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+/* Cabeçalho do modal */
+#modalSalvarTitulo,
+#modalDetalhesTitulo,
+#modalConfirmacaoTitulo,
+#modalMultiplasTitulo,
+#modalDicasTitulo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  margin: 0;
+}
+
+#modalSalvarTitulo .material-icons,
+#modalDetalhesTitulo .material-icons,
+#modalConfirmacaoTitulo .material-icons,
+#modalMultiplasTitulo .material-icons,
+#modalDicasTitulo .material-icons {
+  color: var(--color-primary);
+  font-size: 2.4rem;
+}
+
+/* Formulário para salvar senha */
+#formSalvarSenha,
+#formMultiplasSenhas {
+  padding: var(--spacing-lg);
+}
+
+/* Grupos de campos */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Botões no rodapé do modal */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+/* Container de senhas salvas */
+#senhasSalvas {
+  margin-top: var(--spacing-md);
+}
+
+/* Lista de senhas salvas em cards */
+.senha-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Card de senha salva */
+.senha-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.senha-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-transparent);
+}
+
+/* Cabeçalho do card de senha */
+.senha-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Categoria de senha (ícone) */
+.senha-categoria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.senha-categoria .material-icons {
+  font-size: 2.4rem;
+}
+
+/* Nome da senha */
+.senha-nome {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin: 0;
+  flex: 1;
+  color: var(--color-text-primary);
+}
+
+/* Data da senha */
+.senha-data {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Ações para o card de senha */
+.senha-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+/* Botões de ação */
+.senha-actions button {
+  width: 3.6rem;
+  height: 3.6rem;
+  padding: 0;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.senha-actions button:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-primary);
+}
+
+.senha-actions button .material-icons {
+  font-size: 2rem;
+}
+
+/* Estado vazio para senhas salvas */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+.empty-state .material-icons {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-tertiary);
+}
+
+.empty-state p {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* Modal de detalhes da senha */
+#senhaDetalhes {
+  padding: var(--spacing-lg);
+}
+
+.senha-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Badge de categoria */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Informações da senha */
+.senha-info {
+  margin-bottom: var(--spacing-lg);
+}
+
+.senha-item {
+  margin-bottom: var(--spacing-md);
+}
+
+.senha-item strong {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-primary);
+}
+
+/* Campo de senha com visibilidade toggle */
+.password-display {
+  position: relative;
+}
+
+.password-display input {
+  width: 100%;
+  font-family: monospace;
+  padding-right: 4rem;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  transition: color var(--transition-fast);
+}
+
+.toggle-visibility:hover {
+  color: var(--color-primary);
+}
+
+.toggle-visibility .material-icons {
+  font-size: 2rem;
+}
+
+/* Notas da senha */
+#detalheNotas {
+  white-space: pre-line;
+  color: var(--color-text-secondary);
+  margin: 0;
+  padding: var(--spacing-sm);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  min-height: 6rem;
+}
+
+/* Modal de confirmação */
+#modalConfirmacao {
+  max-width: 40rem;
+}
+
+#mensagemConfirmacao {
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+/* Modal de múltiplas senhas */
+#modalMultiplas {
+  max-width: 45rem;
+}
+
+/* Modal de dicas */
+#modalDicas {
+  max-width: 65rem;
+}
+
+.dicas-container {
+  padding: var(--spacing-lg);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.dica {
+  margin-bottom: var(--spacing-lg);
+}
+
+.dica:last-child {
+  margin-bottom: 0;
+}
+
+.dica h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.8rem;
+}
+
+.dica p,
+.dica li {
+  color: var(--color-text-secondary);
+}
+
+/* Barra de ações */
 .actions-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-lg);
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .search-container {
   position: relative;
   flex: 1;
-  max-width: 400px;
+  max-width: 40rem;
 }
 
 .search-container input {
   width: 100%;
-  padding-right: 40px;
+  padding-left: 4rem;
 }
 
 .search-container .material-icons {
   position: absolute;
-  right: var(--spacing-md);
+  left: 1.2rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-secondary);
+  color: var(--color-text-muted);
+  font-size: 2rem;
 }
 
-.empty-state {
-  text-align: center;
-  padding: var(--spacing-2xl);
-  color: var(--text-secondary);
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-lg);
-  border: 2px dashed var(--border-color);
-}
+/* Responsividade */
+@media (max-width: 768px) {
+  #modalSalvar,
+  #modalDetalhes,
+  #modalConfirmacao,
+  #modalMultiplas,
+  #modalDicas {
+    width: calc(100% - 3rem);
+    margin: 1.5rem;
+  }
 
-.empty-state .material-icons {
-  vertical-align: middle;
-  margin: 0 var(--spacing-xs);
-}
+  .senha-cards {
+    grid-template-columns: 1fr;
+  }
 
-.senha-lista {
-  display: grid;
-  gap: var(--spacing-md);
+  .actions-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .search-container {
+    max-width: none;
+    width: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .dicas-container {
+    max-height: 50vh;
+  }
 }
