@@ -1,23 +1,31 @@
-// glossarySearch.js - Funcionalidade de pesquisa no glossário
+// glossarySearch.js - Funcionalidade de pesquisa e interações no glossário reestruturado
 
 import { removeAccents, debounce } from '../core/utils.js'
 
 /**
- * Inicializa a funcionalidade de pesquisa no glossário
+ * Inicializa a funcionalidade de pesquisa e interações do glossário
  */
 export function initGlossarySearch() {
   const pesquisaGlossario = document.getElementById('pesquisaGlossario')
   const termos = document.querySelectorAll('.termo-container')
-  const categorias = document.querySelectorAll('.categoria')
+  const glossarioSection = document.getElementById('glossario')
+  const tabButtons = document.querySelectorAll('.tab-btn')
+  const tabPanels = document.querySelectorAll('.tab-panel')
 
-  if (!pesquisaGlossario) return
+  if (!pesquisaGlossario || !glossarioSection) return
+
+  // Inicializar sistema de abas
+  initTabs()
+
+  // Adicionar efeitos de hover aos termos
+  addHoverEffects()
 
   // Criar função debounce para pesquisar
   const debouncedSearch = debounce(searchTerm => {
     searchGlossary(searchTerm)
   }, 300)
 
-  // Adicionar evento de input
+  // Adicionar evento de input para o campo de pesquisa
   pesquisaGlossario.addEventListener('input', event => {
     const searchTerm = event.target.value.trim()
     debouncedSearch(searchTerm)
@@ -28,8 +36,39 @@ export function initGlossarySearch() {
     if (event.key === 'Escape') {
       pesquisaGlossario.value = ''
       showAllTerms()
+
+      // Focar novamente o campo após limpar
+      setTimeout(() => {
+        pesquisaGlossario.focus()
+      }, 10)
     }
   })
+
+  /**
+   * Inicializa o sistema de abas
+   */
+  function initTabs() {
+    // Adicionar evento de clique para cada botão de aba
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Desativar todas as abas
+        tabButtons.forEach(btn => btn.classList.remove('active'))
+        tabPanels.forEach(panel => panel.classList.remove('active'))
+
+        // Ativar a aba clicada
+        button.classList.add('active')
+
+        // Ativar o painel correspondente
+        const targetId = button.dataset.target
+        if (targetId) {
+          const targetPanel = document.getElementById(targetId)
+          if (targetPanel) {
+            targetPanel.classList.add('active')
+          }
+        }
+      })
+    })
+  }
 
   /**
    * Realiza a pesquisa no glossário
@@ -46,6 +85,12 @@ export function initGlossarySearch() {
 
     // Contador de resultados
     let foundCount = 0
+    let hasResultInPanels = {}
+
+    // Inicializar contagem de resultados por painel
+    tabPanels.forEach(panel => {
+      hasResultInPanels[panel.id] = false
+    })
 
     // Verificar cada termo
     termos.forEach(termo => {
@@ -57,32 +102,100 @@ export function initGlossarySearch() {
       const termText = normalizeText(dt.textContent)
       const definitionText = normalizeText(dd.textContent)
 
+      // Guardar conteúdo original se ainda não foi guardado
+      if (!dt.dataset.original) {
+        dt.dataset.original = dt.innerHTML
+      }
+      if (!dd.dataset.original) {
+        dd.dataset.original = dd.innerHTML
+      }
+
       // Verificar se o termo ou a definição contém o texto de pesquisa
       if (
         termText.includes(normalizedSearch) ||
         definitionText.includes(normalizedSearch)
       ) {
-        termo.classList.add('pesquisa-resultado')
+        // Adicionar classes com animação
         termo.classList.remove('pesquisa-oculto')
-        highlightMatchingText(dt, searchTerm)
-        highlightMatchingText(dd, searchTerm)
+
+        // Usar setTimeout para criar efeito de cascata na animação
+        setTimeout(() => {
+          termo.classList.add('pesquisa-resultado')
+        }, foundCount * 50)
+
+        // Destacar o texto que corresponde à pesquisa
+        highlightMatchingText(dt, searchTerm, dt.dataset.original)
+        highlightMatchingText(dd, searchTerm, dd.dataset.original)
+
+        // Registrar que o painel pai tem resultados
+        const parentPanel = termo.closest('.tab-panel')
+        if (parentPanel) {
+          hasResultInPanels[parentPanel.id] = true
+        }
+
         foundCount++
       } else {
-        termo.classList.remove('pesquisa-resultado')
-        termo.classList.add('pesquisa-oculto')
-        removeHighlighting(dt)
-        removeHighlighting(dd)
+        // Remover as classes com animação de fade out
+        termo.classList.add('fade-out')
+
+        setTimeout(() => {
+          termo.classList.add('pesquisa-oculto')
+          termo.classList.remove('pesquisa-resultado', 'fade-out')
+        }, 300)
+
+        // Restaurar o texto original
+        dt.innerHTML = dt.dataset.original
+        dd.innerHTML = dd.dataset.original
       }
     })
-
-    // Atualizar visibilidade das categorias
-    updateCategoriesVisibility()
 
     // Mostrar mensagem se nenhum resultado for encontrado
     if (foundCount === 0) {
       showNoResultsMessage(searchTerm)
+
+      // Mostrar o primeiro painel
+      showFirstPanel()
     } else {
       removeNoResultsMessage()
+
+      // Mostrar contador de resultados
+      showResultsCount(foundCount, searchTerm)
+
+      // Mostrar o primeiro painel com resultados
+      showFirstPanelWithResults(hasResultInPanels)
+    }
+  }
+
+  /**
+   * Mostra o primeiro painel com resultados
+   * @param {Object} resultsMap - Mapa de painéis com resultados
+   */
+  function showFirstPanelWithResults(resultsMap) {
+    // Tentar encontrar o primeiro painel com resultados
+    for (const panelId in resultsMap) {
+      if (resultsMap[panelId]) {
+        // Encontrar o botão correspondente
+        const targetButton = document.querySelector(
+          `.tab-btn[data-target="${panelId}"]`
+        )
+        if (targetButton) {
+          // Simular clique no botão
+          targetButton.click()
+          return
+        }
+      }
+    }
+
+    // Se não encontrou nenhum painel com resultados, mostrar o primeiro painel
+    showFirstPanel()
+  }
+
+  /**
+   * Mostra o primeiro painel
+   */
+  function showFirstPanel() {
+    if (tabButtons.length > 0) {
+      tabButtons[0].click()
     }
   }
 
@@ -90,40 +203,48 @@ export function initGlossarySearch() {
    * Mostra todos os termos (limpa a pesquisa)
    */
   function showAllTerms() {
-    // Mostrar todos os termos
-    termos.forEach(termo => {
-      termo.classList.remove('pesquisa-resultado')
-      termo.classList.remove('pesquisa-oculto')
-
-      const dt = termo.querySelector('dt')
-      const dd = termo.querySelector('dd')
-
-      if (dt) removeHighlighting(dt)
-      if (dd) removeHighlighting(dd)
-    })
-
-    // Mostrar todas as categorias
-    categorias.forEach(categoria => {
-      categoria.classList.remove('categoria-vazia')
-    })
+    // Remover contador de resultados
+    removeResultsCount()
 
     // Remover mensagem "nenhum resultado"
     removeNoResultsMessage()
-  }
 
-  /**
-   * Atualiza a visibilidade das categorias de acordo com os resultados
-   */
-  function updateCategoriesVisibility() {
-    categorias.forEach(categoria => {
-      const visibleTerms = categoria.querySelectorAll(
-        '.termo-container:not(.pesquisa-oculto)'
-      )
+    // Mostrar todos os termos
+    termos.forEach((termo, index) => {
+      const dt = termo.querySelector('dt')
+      const dd = termo.querySelector('dd')
 
-      if (visibleTerms.length === 0) {
-        categoria.classList.add('categoria-vazia')
-      } else {
-        categoria.classList.remove('categoria-vazia')
+      // Restaurar conteúdo original se existir
+      if (dt && dt.dataset.original) {
+        dt.innerHTML = dt.dataset.original
+      }
+
+      if (dd && dd.dataset.original) {
+        dd.innerHTML = dd.dataset.original
+      }
+
+      // Remover classes de resultado com animação de fade
+      if (termo.classList.contains('pesquisa-resultado')) {
+        termo.classList.add('fade-out')
+
+        setTimeout(() => {
+          termo.classList.remove('pesquisa-resultado', 'fade-out')
+        }, 300)
+      }
+
+      // Mostrar termos ocultos com animação suave
+      if (termo.classList.contains('pesquisa-oculto')) {
+        termo.classList.remove('pesquisa-oculto')
+        termo.style.opacity = '0'
+
+        setTimeout(() => {
+          termo.style.opacity = '1'
+          termo.style.transition = 'opacity 0.3s ease-in-out'
+        }, index * 30)
+
+        setTimeout(() => {
+          termo.style.transition = ''
+        }, index * 30 + 300)
       }
     })
   }
@@ -134,18 +255,40 @@ export function initGlossarySearch() {
    */
   function showNoResultsMessage(searchTerm) {
     removeNoResultsMessage()
+    removeResultsCount()
 
-    const glossarioIntroducao = document.querySelector('.glossario-introducao')
+    const glossarioHeader = document.querySelector('.glossario-header')
 
-    if (glossarioIntroducao) {
-      const noResultsMessage = document.createElement('p')
+    if (glossarioHeader) {
+      const noResultsMessage = document.createElement('div')
       noResultsMessage.className = 'sem-resultados'
-      noResultsMessage.innerHTML = `Nenhum resultado encontrado para "<strong>${searchTerm}</strong>". Tente termos mais gerais ou verifique a ortografia.`
+      noResultsMessage.innerHTML = `
+        Nenhum resultado encontrado para "<strong>${searchTerm}</strong>". 
+        <div>
+          <p>Sugestões:</p>
+          <ul>
+            <li>Verifique a ortografia</li>
+            <li>Tente palavras-chave diferentes</li>
+            <li>Use termos mais gerais</li>
+          </ul>
+        </div>
+      `
 
-      glossarioIntroducao.parentNode.insertBefore(
+      glossarioHeader.parentNode.insertBefore(
         noResultsMessage,
-        glossarioIntroducao.nextSibling
+        glossarioHeader.nextSibling
       )
+
+      // Adicionar animação de entrada
+      noResultsMessage.style.opacity = '0'
+      noResultsMessage.style.transform = 'translateY(20px)'
+
+      setTimeout(() => {
+        noResultsMessage.style.opacity = '1'
+        noResultsMessage.style.transform = 'translateY(0)'
+        noResultsMessage.style.transition =
+          'opacity 0.5s ease, transform 0.5s ease'
+      }, 10)
     }
   }
 
@@ -155,8 +298,68 @@ export function initGlossarySearch() {
   function removeNoResultsMessage() {
     const noResultsMessage = document.querySelector('.sem-resultados')
 
-    if (noResultsMessage && noResultsMessage.parentNode) {
-      noResultsMessage.parentNode.removeChild(noResultsMessage)
+    if (noResultsMessage) {
+      noResultsMessage.style.opacity = '0'
+      noResultsMessage.style.transform = 'translateY(20px)'
+      noResultsMessage.style.transition =
+        'opacity 0.3s ease, transform 0.3s ease'
+
+      setTimeout(() => {
+        if (noResultsMessage.parentNode) {
+          noResultsMessage.parentNode.removeChild(noResultsMessage)
+        }
+      }, 300)
+    }
+  }
+
+  /**
+   * Mostra contador de resultados encontrados
+   * @param {number} count - Número de resultados
+   * @param {string} searchTerm - Termo pesquisado
+   */
+  function showResultsCount(count, searchTerm) {
+    removeResultsCount()
+
+    const searchContainer = document.querySelector(
+      '#glossario .search-container'
+    )
+
+    if (searchContainer) {
+      const resultsCount = document.createElement('div')
+      resultsCount.className = 'resultados-contagem'
+      resultsCount.innerHTML = `
+        <span>${count} ${
+        count === 1 ? 'resultado encontrado' : 'resultados encontrados'
+      } para "${searchTerm}"</span>
+      `
+
+      searchContainer.appendChild(resultsCount)
+
+      // Animar entrada
+      resultsCount.style.opacity = '0'
+
+      setTimeout(() => {
+        resultsCount.style.opacity = '1'
+        resultsCount.style.transition = 'opacity 0.3s ease'
+      }, 10)
+    }
+  }
+
+  /**
+   * Remove o contador de resultados
+   */
+  function removeResultsCount() {
+    const resultsCount = document.querySelector('.resultados-contagem')
+
+    if (resultsCount) {
+      resultsCount.style.opacity = '0'
+      resultsCount.style.transition = 'opacity 0.3s ease'
+
+      setTimeout(() => {
+        if (resultsCount.parentNode) {
+          resultsCount.parentNode.removeChild(resultsCount)
+        }
+      }, 300)
     }
   }
 
@@ -164,11 +367,13 @@ export function initGlossarySearch() {
    * Destaca o texto correspondente à pesquisa
    * @param {Element} element - Elemento contendo o texto
    * @param {string} searchTerm - Termo de pesquisa
+   * @param {string} originalContent - Conteúdo original do elemento
    */
-  function highlightMatchingText(element, searchTerm) {
+  function highlightMatchingText(element, searchTerm, originalContent) {
     if (!element || !searchTerm) return
 
-    const originalText = element.textContent
+    // Se não temos conteúdo original, usar o conteúdo atual
+    const originalText = originalContent || element.textContent
 
     // Escapar caracteres especiais de regex
     const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -179,20 +384,32 @@ export function initGlossarySearch() {
     // Substituir ocorrências com spans destacados
     const highlightedText = originalText.replace(regex, '<mark>$1</mark>')
 
-    // Atualizar o conteúdo
+    // Atualizar o conteúdo com animação
     element.innerHTML = highlightedText
   }
 
   /**
-   * Remove o destaque do texto
-   * @param {Element} element - Elemento com texto destacado
+   * Adiciona efeitos de hover aos termos
    */
-  function removeHighlighting(element) {
-    if (!element) return
+  function addHoverEffects() {
+    termos.forEach(termo => {
+      // Adicionar classe para estilização avançada no hover
+      termo.classList.add('termo-interativo')
 
-    // Restaurar o texto original (sem marcações)
-    const originalText = element.textContent
-    element.textContent = originalText
+      // Adicionar efeito de foco ao clicar
+      termo.tabIndex = 0
+
+      // Adicionar evento para acessibilidade via teclado
+      termo.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          termo.classList.add('termo-focus')
+          setTimeout(() => {
+            termo.classList.remove('termo-focus')
+          }, 300)
+        }
+      })
+    })
   }
 
   /**
@@ -205,4 +422,48 @@ export function initGlossarySearch() {
 
     return removeAccents(text.toLowerCase())
   }
+
+  /**
+   * Adiciona funcionalidade de acessibilidade para usuários de teclado
+   */
+  function setupKeyboardAccessibility() {
+    // Adicionar navegação de teclado para as abas
+    tabButtons.forEach((button, index) => {
+      button.addEventListener('keydown', e => {
+        // Teclas de seta esquerda e direita para navegar entre abas
+        if (e.key === 'ArrowRight') {
+          e.preventDefault()
+          const nextIndex = (index + 1) % tabButtons.length
+          tabButtons[nextIndex].focus()
+          tabButtons[nextIndex].click()
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault()
+          const prevIndex = (index - 1 + tabButtons.length) % tabButtons.length
+          tabButtons[prevIndex].focus()
+          tabButtons[prevIndex].click()
+        }
+      })
+    })
+  }
+
+  // Verificar se a URL contém um parâmetro de pesquisa
+  function checkUrlForSearch() {
+    const urlParams = new URLSearchParams(window.location.search)
+    const searchParam = urlParams.get('search')
+
+    if (searchParam) {
+      // Preencher o campo de pesquisa
+      pesquisaGlossario.value = searchParam
+
+      // Executar a pesquisa
+      searchGlossary(searchParam)
+    }
+  }
+
+  // Inicializar funcionalidades adicionais
+  setupKeyboardAccessibility()
+  checkUrlForSearch()
+
+  // Iniciar com o primeiro painel ativo
+  showFirstPanel()
 }

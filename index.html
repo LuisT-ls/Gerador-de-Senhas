@@ -683,216 +683,450 @@
             Glossário de Segurança
           </h2>
 
-          <p class="glossario-introducao">
-            Compreender os termos de segurança digital é essencial para proteger
-            suas informações online. Aqui está um guia prático dos principais
-            conceitos de cibersegurança.
-          </p>
+          <div class="glossario-header">
+            <p class="glossario-introducao">
+              Compreender os termos de segurança digital é essencial para
+              proteger suas informações online. Explore nosso guia dos
+              principais conceitos de cibersegurança para aprender como manter
+              suas senhas e dados seguros.
+            </p>
 
-          <div class="search-container">
-            <input
-              type="search"
-              id="pesquisaGlossario"
-              placeholder="Pesquisar no glossário..."
-              aria-label="Pesquisar no glossário"
-            />
-            <span class="material-icons" aria-hidden="true">search</span>
+            <div class="search-container" role="search">
+              <input
+                type="search"
+                id="pesquisaGlossario"
+                placeholder="Pesquisar no glossário..."
+                aria-label="Pesquisar no glossário"
+              />
+              <span class="material-icons" aria-hidden="true">search</span>
+            </div>
           </div>
 
-          <div class="categorias">
-            <article class="categoria">
-              <h3 class="categoria-titulo">
-                <span class="material-icons" aria-hidden="true">security</span>
+          <div class="categorias-tabs">
+            <div class="tabs-header">
+              <button class="tab-btn active" data-target="tab-conceitos">
                 Conceitos Básicos
-              </h3>
-              <dl>
-                <div class="termo-container">
-                  <dt>Senha Forte</dt>
-                  <dd>
-                    Combinação complexa de caracteres difícil de adivinhar,
-                    geralmente incluindo letras maiúsculas e minúsculas, números
-                    e símbolos.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Ataque de Força Bruta</dt>
-                  <dd>
-                    Método de tentar descobrir senhas testando todas as
-                    combinações possíveis de caracteres até encontrar a correta.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Entropia de Senha</dt>
-                  <dd>
-                    Medida matemática da aleatoriedade de uma senha, indicando
-                    sua imprevisibilidade e resistência a ataques.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Hash de Senha</dt>
-                  <dd>
-                    Função criptográfica que converte senhas em uma sequência
-                    fixa de caracteres, permitindo armazenamento seguro sem
-                    revelar a senha original.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Sal Criptográfico</dt>
-                  <dd>
-                    Dados aleatórios que são adicionados a uma senha antes de
-                    ser transformada em hash para tornar o resultado único,
-                    mesmo para senhas idênticas.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Zero Trust</dt>
-                  <dd>
-                    Modelo de segurança que não confia em nenhum usuário ou
-                    sistema por padrão, exigindo verificação contínua para
-                    acesso a recursos.
-                  </dd>
-                </div>
-              </dl>
-            </article>
-
-            <article class="categoria">
-              <h3 class="categoria-titulo">
-                <span class="material-icons" aria-hidden="true">warning</span>
+              </button>
+              <button class="tab-btn" data-target="tab-ameacas">
                 Tipos de Ameaças
-              </h3>
-              <dl>
-                <div class="termo-container">
-                  <dt>Phishing</dt>
-                  <dd>
-                    Técnica de enganar usuários para revelar informações
-                    confidenciais como senhas e dados bancários por meio de
-                    e-mails ou sites falsos.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Credential Stuffing</dt>
-                  <dd>
-                    Ataque que utiliza combinações de nomes de usuário e senhas
-                    vazadas para tentar acessar múltiplas contas online.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Keylogger</dt>
-                  <dd>
-                    Software malicioso que registra as teclas digitadas pelo
-                    usuário para capturar senhas e outras informações sensíveis.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Ataque de Dicionário</dt>
-                  <dd>
-                    Método que testa senhas comuns e palavras de dicionário para
-                    quebrar a segurança de contas.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Engenharia Social</dt>
-                  <dd>
-                    Manipulação psicológica que induz pessoas a revelarem
-                    informações confidenciais ou realizarem ações que
-                    comprometem a segurança.
-                  </dd>
-                </div>
-
-                <div class="termo-container">
-                  <dt>Password Spraying</dt>
-                  <dd>
-                    Ataque que tenta senhas comuns em muitas contas diferentes
-                    para evitar bloqueios por tentativas múltiplas.
-                  </dd>
-                </div>
-              </dl>
-            </article>
-
-            <article class="categoria">
-              <h3 class="categoria-titulo">
-                <span class="material-icons" aria-hidden="true">shield</span>
+              </button>
+              <button class="tab-btn" data-target="tab-protecao">
                 Proteção e Prevenção
-              </h3>
-              <dl>
-                <div class="termo-container">
-                  <dt>Autenticação de Dois Fatores (2FA)</dt>
-                  <dd>
-                    Sistema de segurança que requer dois métodos de verificação:
-                    algo que você sabe (senha) e algo que você possui (como um
-                    celular).
-                  </dd>
-                </div>
+              </button>
+              <button class="tab-btn" data-target="tab-tecnicos">
+                Termos Técnicos
+              </button>
+            </div>
 
-                <div class="termo-container">
-                  <dt>Gerenciador de Senhas</dt>
-                  <dd>
-                    Aplicativo que armazena e gerencia senhas de forma segura e
-                    criptografada, permitindo o uso de senhas únicas e complexas
-                    sem precisar memorizá-las.
-                  </dd>
-                </div>
+            <div class="tabs-content">
+              <div id="tab-conceitos" class="tab-panel active">
+                <article class="categoria">
+                  <h3 class="categoria-titulo">
+                    <span class="material-icons" aria-hidden="true"
+                      >security</span
+                    >
+                    Conceitos Básicos
+                  </h3>
+                  <dl class="termo-grid">
+                    <div class="termo-container">
+                      <dt>Senha Forte</dt>
+                      <dd>
+                        Combinação complexa de caracteres difícil de adivinhar,
+                        geralmente incluindo letras maiúsculas e minúsculas,
+                        números e símbolos. Uma senha forte deve ter pelo menos
+                        12 caracteres e não conter informações pessoais
+                        facilmente descobertas.
+                      </dd>
+                    </div>
 
-                <div class="termo-container">
-                  <dt>Passphrase</dt>
-                  <dd>
-                    Sequência de palavras usada como alternativa às senhas
-                    tradicionais, geralmente mais fácil de lembrar e mais
-                    difícil de quebrar.
-                  </dd>
-                </div>
+                    <div class="termo-container">
+                      <dt>Ataque de Força Bruta</dt>
+                      <dd>
+                        Método de tentar descobrir senhas testando todas as
+                        combinações possíveis de caracteres até encontrar a
+                        correta. Quanto mais complexa a senha, mais tempo leva
+                        para ser quebrada por este método, podendo levar de
+                        minutos a milhares de anos.
+                      </dd>
+                    </div>
 
-                <div class="termo-container">
-                  <dt>Rotação de Senhas</dt>
-                  <dd>
-                    Prática de alterar senhas periodicamente para reduzir o
-                    risco de acesso não autorizado por senhas comprometidas.
-                  </dd>
-                </div>
+                    <div class="termo-container">
+                      <dt>Entropia de Senha</dt>
+                      <dd>
+                        Medida matemática da aleatoriedade de uma senha,
+                        indicando sua imprevisibilidade e resistência a ataques.
+                        Expressa em bits, uma entropia mais alta significa maior
+                        segurança. Uma senha forte deve ter pelo menos 60 bits
+                        de entropia.
+                      </dd>
+                    </div>
 
-                <div class="termo-container">
-                  <dt>FIDO2/WebAuthn</dt>
-                  <dd>
-                    Padrões de autenticação que permitem login seguro sem senha,
-                    usando chaves de segurança físicas ou biometria.
-                  </dd>
-                </div>
+                    <div class="termo-container">
+                      <dt>Hash de Senha</dt>
+                      <dd>
+                        Função criptográfica que converte senhas em uma
+                        sequência fixa de caracteres, permitindo armazenamento
+                        seguro sem revelar a senha original. Os hashes são
+                        unidirecionais, o que significa que não é possível
+                        reverter o processo para obter a senha original.
+                      </dd>
+                    </div>
 
-                <div class="termo-container">
-                  <dt>Autenticação Biométrica</dt>
-                  <dd>
-                    Método de verificação de identidade baseado em
-                    características físicas únicas como impressões digitais,
-                    reconhecimento facial ou de íris.
-                  </dd>
-                </div>
-              </dl>
-            </article>
+                    <div class="termo-container">
+                      <dt>Sal Criptográfico</dt>
+                      <dd>
+                        Dados aleatórios que são adicionados a uma senha antes
+                        de ser transformada em hash para tornar o resultado
+                        único, mesmo para senhas idênticas. Esta técnica protege
+                        contra ataques de tabela arco-íris e de dicionário
+                        pré-computado.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Zero Trust</dt>
+                      <dd>
+                        Modelo de segurança que não confia em nenhum usuário ou
+                        sistema por padrão, exigindo verificação contínua para
+                        acesso a recursos. Baseia-se no princípio "nunca confie,
+                        sempre verifique" e trata todas as solicitações como se
+                        viessem de uma rede não confiável.
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              </div>
+
+              <div id="tab-ameacas" class="tab-panel">
+                <article class="categoria">
+                  <h3 class="categoria-titulo">
+                    <span class="material-icons" aria-hidden="true"
+                      >warning</span
+                    >
+                    Tipos de Ameaças
+                  </h3>
+                  <dl class="termo-grid">
+                    <div class="termo-container">
+                      <dt>Phishing</dt>
+                      <dd>
+                        Técnica de enganar usuários para revelar informações
+                        confidenciais como senhas e dados bancários por meio de
+                        e-mails ou sites falsos. Os ataques de phishing
+                        geralmente imitam empresas legítimas e criam um senso de
+                        urgência para que a vítima aja rapidamente sem pensar.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Credential Stuffing</dt>
+                      <dd>
+                        Ataque que utiliza combinações de nomes de usuário e
+                        senhas vazadas para tentar acessar múltiplas contas
+                        online. Esta técnica explora o hábito comum de
+                        reutilizar as mesmas credenciais em diferentes serviços
+                        e pode ser altamente eficaz.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Keylogger</dt>
+                      <dd>
+                        Software malicioso que registra as teclas digitadas pelo
+                        usuário para capturar senhas e outras informações
+                        sensíveis. Keyloggers podem ser instalados através de
+                        anexos de e-mail infectados, downloads de software
+                        comprometido ou vulnerabilidades do sistema.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Ataque de Dicionário</dt>
+                      <dd>
+                        Método que testa senhas comuns e palavras de dicionário
+                        para quebrar a segurança de contas. Diferente da força
+                        bruta, que tenta todas as combinações possíveis, o
+                        ataque de dicionário usa uma lista predefinida de
+                        palavras prováveis e suas variações.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Engenharia Social</dt>
+                      <dd>
+                        Manipulação psicológica que induz pessoas a revelarem
+                        informações confidenciais ou realizarem ações que
+                        comprometem a segurança. Exploram confiança, medo,
+                        urgência ou curiosidade para contornar medidas de
+                        segurança técnicas.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Password Spraying</dt>
+                      <dd>
+                        Ataque que tenta senhas comuns em muitas contas
+                        diferentes para evitar bloqueios por tentativas
+                        múltiplas. Esta técnica é eficaz contra políticas de
+                        bloqueio de conta padrão, pois tenta poucas senhas em
+                        muitas contas em vez de muitas senhas em uma única
+                        conta.
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              </div>
+
+              <div id="tab-protecao" class="tab-panel">
+                <article class="categoria">
+                  <h3 class="categoria-titulo">
+                    <span class="material-icons" aria-hidden="true"
+                      >shield</span
+                    >
+                    Proteção e Prevenção
+                  </h3>
+                  <dl class="termo-grid">
+                    <div class="termo-container">
+                      <dt>Autenticação de Dois Fatores (2FA)</dt>
+                      <dd>
+                        Sistema de segurança que requer dois métodos de
+                        verificação: algo que você sabe (senha) e algo que você
+                        possui (como um celular) ou algo que você é (biometria).
+                        Mesmo que sua senha seja comprometida, um atacante ainda
+                        precisaria do segundo fator para acessar sua conta.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Gerenciador de Senhas</dt>
+                      <dd>
+                        Aplicativo que armazena e gerencia senhas de forma
+                        segura e criptografada, permitindo o uso de senhas
+                        únicas e complexas sem precisar memorizá-las. Você
+                        precisa lembrar apenas de uma senha mestra para
+                        desbloquear todo o seu cofre de senhas.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Passphrase</dt>
+                      <dd>
+                        Sequência de palavras usada como alternativa às senhas
+                        tradicionais, geralmente mais fácil de lembrar e mais
+                        difícil de quebrar. Uma boa passphrase deve conter pelo
+                        menos 4-5 palavras aleatórias não relacionadas e pode
+                        incluir números e símbolos para aumentar a segurança.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Rotação de Senhas</dt>
+                      <dd>
+                        Prática de alterar senhas periodicamente para reduzir o
+                        risco de acesso não autorizado por senhas comprometidas.
+                        No entanto, pesquisas recentes sugerem que alterações
+                        muito frequentes podem levar a hábitos de senha mais
+                        fracos.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>FIDO2/WebAuthn</dt>
+                      <dd>
+                        Padrões de autenticação que permitem login seguro sem
+                        senha, usando chaves de segurança físicas ou biometria.
+                        Estes protocolos resistem a ataques de phishing e
+                        eliminam os riscos associados às senhas tradicionais,
+                        pois a autenticação é vinculada ao site específico.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Autenticação Biométrica</dt>
+                      <dd>
+                        Método de verificação de identidade baseado em
+                        características físicas únicas como impressões digitais,
+                        reconhecimento facial ou de íris. Oferece uma combinação
+                        de segurança e conveniência, embora possa apresentar
+                        desafios de privacidade e não ser facilmente alterável
+                        se comprometida.
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              </div>
+
+              <div id="tab-tecnicos" class="tab-panel">
+                <article class="categoria">
+                  <h3 class="categoria-titulo">
+                    <span class="material-icons" aria-hidden="true">code</span>
+                    Termos Técnicos
+                  </h3>
+                  <dl class="termo-grid">
+                    <div class="termo-container">
+                      <dt>Criptografia</dt>
+                      <dd>
+                        Processo de codificar informações para que apenas
+                        pessoas autorizadas possam acessá-las. A criptografia
+                        moderna usa algoritmos matemáticos complexos para
+                        transformar dados legíveis em formato criptografado que
+                        parece aleatório para quem não possui a chave de
+                        decodificação.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>VPN (Rede Privada Virtual)</dt>
+                      <dd>
+                        Tecnologia que cria uma conexão segura e criptografada
+                        sobre uma rede menos segura, como a internet. VPNs
+                        protegem a privacidade online ao mascarar seu endereço
+                        IP e criptografar seus dados, sendo especialmente úteis
+                        em redes Wi-Fi públicas.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Firewall</dt>
+                      <dd>
+                        Sistema de segurança que monitora e controla o tráfego
+                        de rede de entrada e saída com base em regras
+                        predeterminadas. Atua como uma barreira entre redes
+                        confiáveis e não confiáveis, bloqueando acessos não
+                        autorizados enquanto permite comunicações legítimas.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Malware</dt>
+                      <dd>
+                        Software malicioso projetado para danificar, interromper
+                        ou ganhar acesso não autorizado a sistemas de
+                        computador. Inclui vírus, worms, trojans, ransomware,
+                        spyware e adware, cada um com métodos e objetivos
+                        específicos.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>SSL/TLS</dt>
+                      <dd>
+                        Protocolos criptográficos que fornecem comunicações
+                        seguras pela internet. Usados em sites HTTPS, e-mails e
+                        outros aplicativos, esses protocolos criam um canal
+                        criptografado entre dois dispositivos para proteger a
+                        privacidade e a integridade dos dados transmitidos.
+                      </dd>
+                    </div>
+
+                    <div class="termo-container">
+                      <dt>Token de Segurança</dt>
+                      <dd>
+                        Dispositivo físico ou código digital que gera senhas
+                        temporárias para autenticação. Tokens de hardware como
+                        YubiKeys ou tokens de software como Google Authenticator
+                        fornecem um segundo fator de autenticação que aumenta
+                        significativamente a segurança das contas.
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              </div>
+            </div>
           </div>
 
           <div class="dicas-seguranca">
             <h3>Dicas para Senhas Seguras</h3>
             <ul>
-              <li>Use senhas longas (pelo menos 12 caracteres)</li>
-              <li>Crie senhas únicas para cada serviço</li>
-              <li>Combine letras, números e símbolos</li>
-              <li>Evite informações pessoais facilmente descobertas</li>
-              <li>Considere usar um gerenciador de senhas</li>
-              <li>Ative a autenticação de dois fatores quando disponível</li>
               <li>
-                Troque senhas regularmente, especialmente após vazamentos de
-                dados
+                Use senhas longas com pelo menos 12 caracteres para maximizar a
+                segurança
+              </li>
+              <li>
+                Crie senhas únicas para cada serviço online que você utiliza
+              </li>
+              <li>
+                Combine letras maiúsculas, minúsculas, números e símbolos
+                especiais
+              </li>
+              <li>
+                Evite informações pessoais como datas de nascimento ou nomes de
+                familiares
+              </li>
+              <li>
+                Considere usar um gerenciador de senhas confiável para armazenar
+                suas credenciais
+              </li>
+              <li>Ative a autenticação de dois fatores sempre que possível</li>
+              <li>
+                Verifique regularmente se suas senhas foram comprometidas em
+                vazamentos de dados
+              </li>
+              <li>
+                Troque senhas imediatamente se houver suspeita de
+                comprometimento
+              </li>
+              <li>
+                Use passphrases quando precisar memorizar senhas (sequências de
+                palavras aleatórias)
+              </li>
+              <li>
+                Nunca compartilhe suas senhas com outras pessoas, mesmo que
+                pareçam confiáveis
+              </li>
+              <li>
+                Evite anotar senhas em papel ou salvá-las em arquivos não
+                criptografados
+              </li>
+              <li>
+                Não use a mesma base de senha com pequenas variações entre
+                diferentes serviços
               </li>
             </ul>
+          </div>
+
+          <div class="recursos-adicionais">
+            <h3>Recursos de Segurança Recomendados</h3>
+            <div class="recursos-grid">
+              <div class="recurso-card">
+                <span class="material-icons">event_available</span>
+                <h4>Verificadores de Violação</h4>
+                <p>
+                  Utilize serviços como "Have I Been Pwned" para verificar se
+                  suas credenciais foram expostas em vazamentos de dados
+                  conhecidos.
+                </p>
+              </div>
+
+              <div class="recurso-card">
+                <span class="material-icons">verified_user</span>
+                <h4>Gerenciadores de Senha</h4>
+                <p>
+                  Considere o uso de aplicativos de gerenciamento de senhas
+                  confiáveis que podem gerar, armazenar e preencher
+                  automaticamente senhas fortes e únicas.
+                </p>
+              </div>
+
+              <div class="recurso-card">
+                <span class="material-icons">phonelink_lock</span>
+                <h4>Aplicativos de Autenticação</h4>
+                <p>
+                  Instale aplicativos como Google Authenticator, Microsoft
+                  Authenticator ou Authy para configurar a autenticação de dois
+                  fatores em suas contas.
+                </p>
+              </div>
+
+              <div class="recurso-card">
+                <span class="material-icons">privacy_tip</span>
+                <h4>Ferramentas de Privacidade</h4>
+                <p>
+                  Explore ferramentas de privacidade como bloqueadores de
+                  anúncios, extensões anti-rastreamento e VPNs para proteger
+                  melhor sua identidade online.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </div>
