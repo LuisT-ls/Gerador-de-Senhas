@@ -33,16 +33,55 @@ export function initPasswordGenerator() {
   const strengthFeedback = document.getElementById('feedbackForca')
   const securityAnalysisList = document.getElementById('analiseSeguranca')
 
-  // Atualizar valor do comprimento ao mover o slider
+  // Variável para controlar o temporizador de delay
+  let sliderTimeout = null
+
+  // Atualizar valor do comprimento
   lengthSlider.addEventListener('input', () => {
+    // Atualizar o valor exibido imediatamente
     lengthOutput.textContent = lengthSlider.value
+
+    // Gerar nova senha sem adicionar ao histórico
+    generateAndDisplayPassword(false)
   })
 
-  // Gerar senha quando o botão for clicado
-  generateButton.addEventListener('click', generateAndDisplayPassword)
+  // Quando o usuário terminar de ajustar o slider, adicionar ao histórico
+  lengthSlider.addEventListener('change', () => {
+    // Adicionar a senha final ao histórico
+    const password = passwordField.value
+    if (password) {
+      addPasswordToHistory(password)
+    }
+  })
+
+  // Adicionar event listeners para todas as opções de checkbox
+  const optionElements = [
+    includeUppercase,
+    includeLowercase,
+    includeNumbers,
+    includeSymbols,
+    excludeAmbiguous,
+    excludeRepeating,
+    startWithUppercase,
+    endWithNumber
+  ]
+
+  optionElements.forEach(element => {
+    element.addEventListener('change', () => {
+      // Quando mudar qualquer opção, gerar senha e adicionar ao histórico
+      generateAndDisplayPassword(true)
+    })
+  })
+
+  // Gerar senha quando o botão for clicado (sempre adiciona ao histórico)
+  generateButton.addEventListener('click', () => {
+    generateAndDisplayPassword(true)
+  })
 
   // Atualizar senha
-  refreshPasswordButton.addEventListener('click', generateAndDisplayPassword)
+  refreshPasswordButton.addEventListener('click', () => {
+    generateAndDisplayPassword(true)
+  })
 
   // Mostrar/esconder senha
   viewPasswordButton.addEventListener('click', () => {
@@ -83,8 +122,11 @@ export function initPasswordGenerator() {
     }
   })
 
-  // Função para gerar e exibir a senha
-  function generateAndDisplayPassword() {
+  /**
+   * Gera e exibe uma senha
+   * @param {boolean} addToHistory - Se verdadeiro, adiciona a senha ao histórico
+   */
+  function generateAndDisplayPassword(addToHistory = true) {
     // Obter opções da interface
     const options = {
       length: parseInt(lengthSlider.value),
@@ -119,8 +161,10 @@ export function initPasswordGenerator() {
     // Analisar a força da senha
     updatePasswordStrength(password)
 
-    // Adicionar ao histórico
-    addPasswordToHistory(password)
+    // Adicionar ao histórico apenas se solicitado
+    if (addToHistory) {
+      addPasswordToHistory(password)
+    }
   }
 
   // Função para atualizar os indicadores de força da senha
@@ -166,5 +210,5 @@ export function initPasswordGenerator() {
   }
 
   // Gerar uma senha inicial quando a página carrega
-  generateAndDisplayPassword()
+  generateAndDisplayPassword(true)
 }
