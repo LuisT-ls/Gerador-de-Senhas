@@ -3,18 +3,77 @@
 import { analyzePassword } from './entropy.js'
 
 /**
- * Verifica se uma senha foi comprometida em algum vazamento conhecido
+ * Calcula o hash SHA-1 de uma string
+ * @param {string} str - String para calcular o hash
+ * @returns {Promise<string>} Hash SHA-1 em formato hexadecimal
+ */
+async function sha1Hash(str) {
+  // Converter a string para um array de bytes
+  const encoder = new TextEncoder()
+  const data = encoder.encode(str)
+
+  // Calcular o hash SHA-1
+  const hashBuffer = await crypto.subtle.digest('SHA-1', data)
+
+  // Converter o buffer para string hexadecimal
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+
+  return hashHex.toUpperCase()
+}
+
+/**
+ * Verifica se uma senha foi comprometida em vazamentos conhecidos usando a API do HIBP
  * @param {string} password - Senha a ser verificada
  * @returns {Promise<boolean>} Promise resolvida com true se comprometida
  */
 export async function checkPasswordCompromised(password) {
-  // Esta é uma implementação simulada
-  // Em uma aplicação real, seria usada uma API como a do Have I Been Pwned
-  // Usando k-anonymity para não enviar a senha completa
+  try {
+    // Calcular o hash SHA-1 da senha
+    const hash = await sha1Hash(password)
 
-  // Simular uma verificação
-  return new Promise(resolve => {
-    // Lista de senhas comuns para simulação
+    // Pegar os primeiros 5 caracteres do hash (prefixo k-anonymity)
+    const prefix = hash.substring(0, 5)
+    const suffix = hash.substring(5)
+
+    // Fazer a requisição à API do Have I Been Pwned (HIBP)
+    // Usando o método k-anonymity para não enviar a senha completa
+    const response = await fetch(
+      `https://api.pwnedpasswords.com/range/${prefix}`,
+      {
+        method: 'GET',
+        headers: {
+          'Add-Padding': 'true', // Dificulta análise de timing
+          'User-Agent': 'PasswordGenerator-SecurityTool' // Identificar a aplicação
+        }
+      }
+    )
+
+    if (!response.ok) {
+      console.error('Falha ao verificar senha comprometida:', response.status)
+      return false // Em caso de erro, assumir que não está comprometida
+    }
+
+    // Obter a lista de sufixos e contagens
+    const data = await response.text()
+    const lines = data.split('\n')
+
+    // Procurar pelo sufixo do hash na resposta
+    for (const line of lines) {
+      const [hashSuffix, count] = line.split(':')
+
+      if (hashSuffix.trim() === suffix) {
+        // Encontrou uma correspondência
+        return parseInt(count) > 0
+      }
+    }
+
+    // Nenhuma correspondência encontrada
+    return false
+  } catch (error) {
+    console.error('Erro ao verificar senha comprometida:', error)
+
+    // Fallback para verificação local em caso de erro na API
     const commonPasswords = [
       'password',
       '123456',
@@ -28,13 +87,8 @@ export async function checkPasswordCompromised(password) {
       'password1'
     ]
 
-    // Aguardar um pouco para simular uma requisição
-    setTimeout(() => {
-      // Verificar se está na lista de senhas comuns
-      const isCompromised = commonPasswords.includes(password.toLowerCase())
-      resolve(isCompromised)
-    }, 500)
-  })
+    return commonPasswords.includes(password.toLowerCase())
+  }
 }
 
 /**
@@ -47,7 +101,7 @@ export function evaluatePasswordCommonality(password) {
 
   // Verificar padrões comuns e reduzir a pontuação
 
-  // Palavras comuns
+  // Palavras comuns em português e inglês
   const commonWords = [
     'password',
     'senha',
@@ -59,7 +113,21 @@ export function evaluatePasswordCommonality(password) {
     'qwerty',
     'iloveyou',
     'monkey',
-    'dragon'
+    'dragon',
+    'football',
+    'baseball',
+    'twitter',
+    'facebook',
+    'instagram',
+    'linkedin',
+    'google',
+    'youtube',
+    'brasil',
+    'soccer',
+    'master',
+    'sunshine',
+    'princess',
+    'starwars'
   ]
 
   for (const word of commonWords) {
@@ -78,7 +146,11 @@ export function evaluatePasswordCommonality(password) {
     '654321',
     'qwertyuiop',
     'asdfghjkl',
-    'zxcvbnm'
+    'zxcvbnm',
+    '1qaz2wsx',
+    'qazwsx',
+    'azerty',
+    '102030'
   ]
 
   for (const sequence of keyboardSequences) {
@@ -88,7 +160,7 @@ export function evaluatePasswordCommonality(password) {
     }
   }
 
-  // Repetições
+  // Repetições de caracteres
   if (/(.)\1{2,}/.test(password)) {
     score -= 10
   }
@@ -111,7 +183,7 @@ export function evaluatePasswordCommonality(password) {
   }
 
   // Anos comuns (1950-2030)
-  if (/(?:19[5-9]\d|20[0-2]\d)/.test(password)) {
+  if (/(?:19[5-9]\d|20[0-3]\d)/.test(password)) {
     score -= 5
   }
 
@@ -136,6 +208,25 @@ export function evaluatePasswordCommonality(password) {
     'sex',
     'sab',
     'dom',
+    'jan',
+    'feb',
+    'mar',
+    'apr',
+    'may',
+    'jun',
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec',
+    'mon',
+    'tue',
+    'wed',
+    'thu',
+    'fri',
+    'sat',
+    'sun',
     'janeiro',
     'fevereiro',
     'marco',
@@ -157,25 +248,109 @@ export function evaluatePasswordCommonality(password) {
     }
   }
 
+  // Padrões l33t (substituições de letras por números ou símbolos)
+  if (/[0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
+    const l33tPattern = password
+      .toLowerCase()
+      .replace(/0/g, 'o')
+      .replace(/1/g, 'i')
+      .replace(/3/g, 'e')
+      .replace(/4/g, 'a')
+      .replace(/5/g, 's')
+      .replace(/7/g, 't')
+      .replace(/8/g, 'b')
+      .replace(/\$/g, 's')
+      .replace(/@/g, 'a')
+
+    for (const word of commonWords) {
+      if (l33tPattern.includes(word)) {
+        score -= 15
+        break
+      }
+    }
+  }
+
+  // Variantes comuns de senhas
+  if (/^[a-zA-Z]+[0-9]{1,4}$/.test(password)) {
+    // palavra seguida de números
+    score -= 10
+  }
+
+  if (/^[a-zA-Z]+[0-9!@#$%^&*]{1,2}$/.test(password)) {
+    // palavra seguida de 1-2 símbolos/números
+    score -= 10
+  }
+
   // Limitar entre 0 e 100
   return Math.max(0, Math.min(100, score))
 }
 
 /**
- * Avalia se uma senha contém informações pessoais (simulação)
+ * Avalia se uma senha contém informações pessoais, com verificações mais avançadas
  * @param {string} password - Senha a ser avaliada
- * @returns {boolean} Verdadeiro se contém informações pessoais
+ * @param {Object} userData - Dados pessoais do usuário (opcional)
+ * @returns {Object} Resultado da verificação com detalhes
  */
-export function containsPersonalInfo(password) {
-  // Em uma aplicação real, isso seria verificado com informações do usuário
-  // Aqui apenas simulamos algumas verificações comuns
-
-  // Padrões de datas (DD/MM/YYYY, DD-MM-YYYY, etc.)
-  if (/\d{2}[\/\-\.]\d{2}[\/\-\.]\d{2,4}/.test(password)) {
-    return true
+export function containsPersonalInfo(password, userData = {}) {
+  const lowercasePassword = password.toLowerCase()
+  const result = {
+    containsPersonalInfo: false,
+    detectedPatterns: []
   }
 
-  // Nomes de meses dentro da senha podem indicar datas de nascimento
+  // Verificar dados do usuário se disponíveis
+  if (userData.name) {
+    const nameParts = userData.name.toLowerCase().split(/\s+/)
+    for (const part of nameParts) {
+      if (part.length > 2 && lowercasePassword.includes(part)) {
+        result.containsPersonalInfo = true
+        result.detectedPatterns.push('nome')
+        break
+      }
+    }
+  }
+
+  if (userData.email) {
+    const emailParts = userData.email.split('@')[0].toLowerCase()
+    if (emailParts.length > 2 && lowercasePassword.includes(emailParts)) {
+      result.containsPersonalInfo = true
+      result.detectedPatterns.push('email')
+    }
+  }
+
+  if (userData.birthdate) {
+    const birthDate = new Date(userData.birthdate)
+    const birthYear = birthDate.getFullYear().toString()
+    const birthMonth = (birthDate.getMonth() + 1).toString().padStart(2, '0')
+    const birthDay = birthDate.getDate().toString().padStart(2, '0')
+
+    if (
+      lowercasePassword.includes(birthYear) ||
+      lowercasePassword.includes(birthYear.substring(2)) ||
+      lowercasePassword.includes(`${birthDay}${birthMonth}`) ||
+      lowercasePassword.includes(`${birthMonth}${birthDay}`)
+    ) {
+      result.containsPersonalInfo = true
+      result.detectedPatterns.push('data de nascimento')
+    }
+  }
+
+  // Verificar padrões de datas (independentemente dos dados do usuário)
+  const datePatterns = [
+    /\b\d{2}[\/\-\.]\d{2}[\/\-\.]\d{2,4}\b/, // DD/MM/YYYY, DD-MM-YYYY
+    /\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b/, // D/M/YYYY
+    /\b\d{4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,2}\b/ // YYYY/MM/DD
+  ]
+
+  for (const pattern of datePatterns) {
+    if (pattern.test(password)) {
+      result.containsPersonalInfo = true
+      result.detectedPatterns.push('formato de data')
+      break
+    }
+  }
+
+  // Verificar meses junto com números (possível data de nascimento)
   const months = [
     'jan',
     'fev',
@@ -188,35 +363,110 @@ export function containsPersonalInfo(password) {
     'set',
     'out',
     'nov',
-    'dez'
+    'dez',
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december'
   ]
+
   for (const month of months) {
-    if (password.toLowerCase().includes(month) && /\d{1,4}/.test(password)) {
-      return true
+    if (lowercasePassword.includes(month) && /\d{1,4}/.test(password)) {
+      result.containsPersonalInfo = true
+      result.detectedPatterns.push('mês com número')
+      break
     }
   }
 
-  // Formato de telefone
-  if (/\(?(\d{2})\)?[-. ]?(\d{4,5})[-. ]?(\d{4})/.test(password)) {
-    return true
+  // Verificar formatos de telefone
+  const phonePatterns = [
+    /\b\d{10,11}\b/, // Número de telefone brasileiro sem formatação
+    /\b\d{8,9}\b/, // Apenas o número sem DDD
+    /\(\d{2}\)\s*\d{4,5}[\-\s]?\d{4}\b/, // (XX) XXXXX-XXXX
+    /\b\d{2}[\s\-]?\d{4,5}[\s\-]?\d{4}\b/ // XX XXXXX XXXX
+  ]
+
+  for (const pattern of phonePatterns) {
+    if (pattern.test(password)) {
+      result.containsPersonalInfo = true
+      result.detectedPatterns.push('número de telefone')
+      break
+    }
   }
 
-  return false
+  // Verificar CEPs brasileiros
+  if (/\b\d{5}[\-]?\d{3}\b/.test(password)) {
+    result.containsPersonalInfo = true
+    result.detectedPatterns.push('CEP')
+  }
+
+  // Verificar possíveis nomes de pessoas
+  const commonNames = [
+    'maria',
+    'jose',
+    'joao',
+    'ana',
+    'antonio',
+    'carlos',
+    'paulo',
+    'pedro',
+    'lucas',
+    'luiz',
+    'marcos',
+    'luis',
+    'gabriel',
+    'rafael',
+    'daniel',
+    'marcelo',
+    'bruno',
+    'eduardo',
+    'felipe',
+    'rodrigo',
+    'manoel',
+    'john',
+    'mary',
+    'james',
+    'robert',
+    'michael',
+    'william',
+    'david',
+    'richard'
+  ]
+
+  for (const name of commonNames) {
+    if (name.length > 3 && lowercasePassword.includes(name)) {
+      result.containsPersonalInfo = true
+      result.detectedPatterns.push('nome próprio')
+      break
+    }
+  }
+
+  return result
 }
 
 /**
  * Executa uma análise completa da senha
  * @param {string} password - Senha a ser analisada
+ * @param {Object} userData - Dados do usuário para verificação (opcional)
  * @returns {Promise<Object>} Resultado da análise
  */
-export async function fullPasswordAnalysis(password) {
+export async function fullPasswordAnalysis(password, userData = {}) {
   if (!password) {
     return {
       entropy: 0,
       strength: 'muito-fraca',
       suggestions: ['Digite uma senha para analisar'],
       isCompromised: false,
-      uniqueness: 0
+      uniqueness: 0,
+      personalInfo: { containsPersonalInfo: false, detectedPatterns: [] }
     }
   }
 
@@ -230,7 +480,7 @@ export async function fullPasswordAnalysis(password) {
   const uniqueness = evaluatePasswordCommonality(password)
 
   // Verificar informações pessoais
-  const hasPersonalInfo = containsPersonalInfo(password)
+  const personalInfo = containsPersonalInfo(password, userData)
 
   // Gerar sugestões
   const suggestions = []
@@ -247,9 +497,11 @@ export async function fullPasswordAnalysis(password) {
     )
   }
 
-  if (hasPersonalInfo) {
+  if (personalInfo.containsPersonalInfo) {
     suggestions.push(
-      'A senha parece conter informações pessoais, o que reduz a segurança.'
+      `A senha contém possíveis informações pessoais (${personalInfo.detectedPatterns.join(
+        ', '
+      )}), o que reduz a segurança.`
     )
   }
 
@@ -286,7 +538,7 @@ export async function fullPasswordAnalysis(password) {
     ...basicAnalysis,
     isCompromised,
     uniqueness,
-    hasPersonalInfo,
+    personalInfo,
     suggestions
   }
 }
