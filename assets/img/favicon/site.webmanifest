@@ -1,19 +1,42 @@
 {
-  "name": "",
-  "short_name": "",
+  "name": "Gerador de Senhas Seguras",
+  "short_name": "Senhas Seguras",
+  "description": "Crie senhas fortes, seguras e personalizadas para proteger suas contas online",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/assets/img/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/assets/img/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2E3B84",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "categories": ["utilities", "security", "productivity"],
+  "screenshots": [
+    {
+      "src": "/assets/img/screenshots/desktop-1.jpg",
+      "sizes": "1280x800",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "Tela principal do Gerador de Senhas"
+    },
+    {
+      "src": "/assets/img/screenshots/mobile-1.jpg",
+      "sizes": "750x1334",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "Versão móvel do Gerador de Senhas"
+    }
+  ]
 }

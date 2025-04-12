@@ -1,0 +1,17 @@
+# robots.txt para Gerador de Senhas Seguras
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /assets/img/
+Allow: /assets/css/
+Allow: /js/
+
+# Áreas sensíveis ou desnecessárias para indexação
+Disallow: /js/modules/core/
+Disallow: /assets/css/modules/
+
+# Permitir acesso ao sitemap
+Sitemap: https://geracaodesenhas.vercel.app/sitemap.xml
+
+# Taxa de rastreamento para evitar sobrecarga do servidor
+Crawl-delay: 10

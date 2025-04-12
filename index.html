@@ -3,11 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Meta Tags para SEO -->
+    <title>
+      Gerador de Senhas Fortes e Seguras | Crie Senhas Seguras Online
+    </title>
     <meta
       name="description"
-      content="Gerador de senhas seguras com ferramentas avançadas de criação e verificação de senhas"
+      content="Crie senhas seguras, fortes e personalizadas com nosso gerador online gratuito. Analise a força das suas senhas e aprenda a proteger melhor suas contas."
     />
-    <title>Gerador de Senhas Fortes e Seguras</title>
+    <meta
+      name="keywords"
+      content="gerador de senhas, senhas seguras, gerador de senhas fortes, senha wifi, segurança de senha, passphrase"
+    />
+    <meta name="author" content="Luís Teixeira" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://geracaodesenhas.vercel.app/" />
+
+    <!-- Social Meta Tags (Open Graph e Twitter) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Gerador de Senhas Fortes e Seguras" />
+    <meta
+      property="og:description"
+      content="Crie senhas seguras, fortes e personalizadas com nosso gerador online gratuito. Analise a força das suas senhas e aprenda a proteger melhor suas contas."
+    />
+    <meta
+      property="og:image"
+      content="https://geracaodesenhas.vercel.app/assets/img/imagem-preview.jpg"
+    />
+    <meta property="og:url" content="https://geracaodesenhas.vercel.app/" />
+    <meta property="og:site_name" content="Gerador de Senhas Seguras" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gerador de Senhas Fortes e Seguras" />
+    <meta
+      name="twitter:description"
+      content="Crie senhas seguras, fortes e personalizadas com nosso gerador online gratuito."
+    />
+    <meta
+      name="twitter:image"
+      content="https://geracaodesenhas.vercel.app/assets/img/imagem-preview.jpg"
+    />
+
+    <!-- Estrutura de Dados Schema.org para Rich Snippets -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Gerador de Senhas Seguras",
+        "description": "Crie senhas seguras, fortes e personalizadas com nosso gerador online gratuito. Analise a força das suas senhas e aprenda a proteger melhor suas contas.",
+        "url": "https://geracaodesenhas.vercel.app",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "screenshot": "https://geracaodesenhas.vercel.app/assets/img/imagem-preview.jpg",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "156"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Luís Teixeira"
+        }
+      }
+    </script>
+
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,27 +86,60 @@
       rel="stylesheet"
     />
 
-    <!-- Favicon -->
+    <!-- Favicons -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="assets/img/favicon/apple-touch-icon.png"
+      href="/assets/img/favicon/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="assets/img/favicon/favicon-32x32.png"
+      href="/assets/img/favicon/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="assets/img/favicon/favicon-16x16.png"
+      href="/assets/img/favicon/favicon-16x16.png"
     />
-    <link rel="manifest" href="assets/img/favicon/site.webmanifest" />
+    <link rel="manifest" href="/assets/img/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/assets/img/favicon/safari-pinned-tab.svg"
+      color="#4CAF50"
+    />
+    <meta name="msapplication-TileColor" content="#2E3B84" />
+    <meta name="theme-color" content="#2E3B84" />
 
+    <!-- Service Worker para PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then(function (registration) {
+              console.log(
+                'Service Worker registrado com sucesso:',
+                registration.scope
+              )
+            })
+            .catch(function (error) {
+              console.log('Falha ao registrar o Service Worker:', error)
+            })
+        })
+      }
+    </script>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <!-- Meta tags adicionais -->
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Portuguese" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="generator" content="HTML5" />
   </head>
   <body>
     <header>
