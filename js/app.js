@@ -14,6 +14,7 @@ import { initPasswordManager } from './modules/storage/passwordManager.js'
 import { initHistoryManager } from './modules/storage/history.js'
 import { initExportImport } from './modules/storage/exportImport.js'
 import { initGlossarySearch } from './modules/glossary/glossarySearch.js'
+import { initFooterFeatures } from './modules/ui/footerFeatures.js'
 
 // Função de inicialização da aplicação
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormControls()
   initModals()
   initNotifications()
+  initFooterFeatures()
 
   // Inicializar geradores de senha
   initPasswordGenerator()
