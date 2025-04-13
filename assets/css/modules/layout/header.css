@@ -1,4 +1,4 @@
-/* header.css - Estilo do cabeçalho */
+/* header.css - Estilo do cabeçalho aprimorado para melhor responsividade */
 
 header {
   background-color: var(--color-bg-primary);
@@ -7,7 +7,13 @@ header {
   top: 0;
   z-index: var(--z-index-sticky);
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Header recolhível ao rolar para baixo (aparece ao rolar para cima) */
+.header-hidden {
+  transform: translateY(-100%);
 }
 
 header .container {
@@ -15,6 +21,7 @@ header .container {
   align-items: center;
   justify-content: space-between;
   height: 7rem;
+  padding: 0 var(--spacing-md);
 }
 
 header h1 {
@@ -24,24 +31,35 @@ header h1 {
   font-weight: 700;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  transition: font-size 0.3s ease;
 }
 
+/* Ícone no título com melhor alinhamento */
 header h1::before {
   content: 'lock';
   font-family: 'Material Icons';
   margin-right: var(--spacing-xs);
   font-size: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Navegação central com melhor distribuição de espaço */
 header nav {
   flex: 1;
   display: flex;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 header nav ul {
   display: flex;
   gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 header nav a {
@@ -52,6 +70,8 @@ header nav a {
   border-radius: var(--border-radius-md);
   transition: all var(--transition-fast);
   position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
 header nav a:hover {
@@ -64,6 +84,7 @@ header nav a.active {
   background-color: var(--color-primary-light);
 }
 
+/* Indicador de item ativo com animação suave */
 header nav a.active::after {
   content: '';
   position: absolute;
@@ -74,48 +95,87 @@ header nav a.active::after {
   height: 0.6rem;
   background-color: var(--color-primary);
   border-radius: 50%;
+  transition: all 0.2s ease;
 }
 
+/* Botão de alternância de tema melhorado */
 #darkModeToggle {
   background: none;
   border: none;
   color: var(--color-text-secondary);
   cursor: pointer;
   padding: 0.8rem;
+  margin-left: var(--spacing-sm);
   border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color var(--transition-fast),
-    color var(--transition-fast);
+    color var(--transition-fast), transform 0.2s ease;
 }
 
 #darkModeToggle:hover {
   background-color: var(--color-bg-secondary);
   color: var(--color-primary);
+  transform: rotate(12deg);
+}
+
+#darkModeToggle:active {
+  transform: rotate(30deg) scale(0.9);
 }
 
 #darkModeToggle .material-icons {
   font-size: 2.4rem;
 }
 
-/* Menu mobile */
+/* Menu mobile aprimorado */
 .menu-mobile-toggle {
   display: none;
-  width: 4rem;
-  height: 4rem;
+  width: 4.4rem;
+  height: 4.4rem;
   border-radius: var(--border-radius-md);
   background: none;
   border: none;
   cursor: pointer;
   color: var(--color-text-secondary);
+  margin-right: var(--spacing-sm);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+.menu-mobile-toggle:hover,
+.menu-mobile-toggle.active {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary);
 }
 
 .menu-mobile-toggle .material-icons {
   font-size: 2.4rem;
+  transition: transform 0.3s ease;
 }
 
-/* Responsividade */
+.menu-mobile-toggle.active .material-icons {
+  transform: rotate(180deg);
+}
+
+/* ================ RESPONSIVIDADE APRIMORADA ================ */
+
+/* Large devices (desktops, 1200px and down) */
+@media (max-width: 1200px) {
+  header .container {
+    height: 6.5rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header nav ul {
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Medium devices (tablets, 992px and down) */
 @media (max-width: 992px) {
   header .container {
     height: 6rem;
@@ -125,43 +185,69 @@ header nav a.active::after {
     font-size: 1.8rem;
   }
 
+  header h1::before {
+    font-size: 2rem;
+  }
+
   header nav {
     flex: 0;
   }
 
   header nav ul {
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
   }
 
   header nav a {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 1.4rem;
   }
+
+  #darkModeToggle .material-icons {
+    font-size: 2.2rem;
+  }
 }
 
+/* Small devices (landscape phones, 768px and down) */
 @media (max-width: 768px) {
+  header .container {
+    height: 5.5rem;
+    padding: 0 var(--spacing-sm);
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
   .menu-mobile-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  /* Animação suave para o menu móvel */
   header nav {
     position: fixed;
-    top: 6rem;
+    top: 5.5rem;
     left: 0;
     right: 0;
     background-color: var(--color-bg-primary);
     border-bottom: 1px solid var(--color-border);
-    padding: var(--spacing-md);
-    transform: translateY(-100%);
-    transition: transform var(--transition-normal);
+    padding: var(--spacing-sm) var(--spacing-md);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease;
     box-shadow: var(--shadow-md);
     z-index: var(--z-index-dropdown);
+    opacity: 0;
+    visibility: hidden;
   }
 
   header nav.active {
-    transform: translateY(0);
+    max-height: calc(100vh - 5.5rem);
+    padding: var(--spacing-md);
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
   }
 
   header nav ul {
@@ -172,16 +258,145 @@ header nav a.active::after {
 
   header nav li {
     width: 100%;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
+  /* Efeito cascata nos itens do menu */
+  header nav.active li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  header nav.active li:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  header nav.active li:nth-child(2) {
+    transition-delay: 0.15s;
+  }
+  header nav.active li:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  header nav.active li:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+  header nav.active li:nth-child(5) {
+    transition-delay: 0.3s;
+  }
+
+  /* Estilo de item de menu móvel melhorado */
   header nav a {
-    display: block;
+    display: flex;
     width: 100%;
     padding: var(--spacing-md);
     text-align: center;
+    justify-content: center;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid transparent;
+    font-size: 1.5rem;
+  }
+
+  header nav a:hover {
+    border-color: var(--color-primary-light);
+  }
+
+  header nav a.active {
+    border-color: var(--color-primary);
   }
 
   header nav a.active::after {
     display: none;
+  }
+
+  /* Reposiciona o toggle de tema no canto direito em dispositivos móveis */
+  #darkModeToggle {
+    margin-left: auto;
+    padding: 0.7rem;
+  }
+
+  #darkModeToggle .material-icons {
+    font-size: 2rem;
+  }
+}
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  header .container {
+    height: 5rem;
+    padding: 0 var(--spacing-xs);
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  header h1::before {
+    font-size: 1.8rem;
+  }
+
+  header nav {
+    top: 5rem;
+  }
+
+  .menu-mobile-toggle {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .menu-mobile-toggle .material-icons {
+    font-size: 2.2rem;
+  }
+}
+
+/* Extra extra small devices (small phones, 375px and down) */
+@media (max-width: 375px) {
+  header .container {
+    justify-content: center;
+    position: relative;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .menu-mobile-toggle {
+    position: absolute;
+    left: var(--spacing-xs);
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  #darkModeToggle {
+    position: absolute;
+    right: var(--spacing-xs);
+    padding: 0.6rem;
+  }
+
+  #darkModeToggle .material-icons {
+    font-size: 1.8rem;
+  }
+}
+
+/* ================ MELHORIAS DE ACESSIBILIDADE ================ */
+
+/* Melhora o foco nos elementos interativos */
+header nav a:focus-visible,
+#darkModeToggle:focus-visible,
+.menu-mobile-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Suporte para redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  header,
+  header *,
+  #darkModeToggle,
+  #darkModeToggle *,
+  .menu-mobile-toggle,
+  .menu-mobile-toggle * {
+    transition-duration: 0.1s !important;
+    animation-duration: 0.1s !important;
   }
 }

@@ -1,263 +1,496 @@
-/* responsive.css - Classes utilitárias para responsividade */
+/* responsive.css - Estilos responsivos para o Gerador de Senhas Seguras
+ * Parte do módulo de utilidades
+ */
 
-/* Classes para ocultar elementos baseado no tamanho da tela */
-.hide-on-mobile {
-  display: block;
+/* Variáveis de breakpoints */
+:root {
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
 }
 
-.show-on-mobile {
-  display: none;
+/* ================ LAYOUT RESPONSIVO GERAL ================ */
+
+/* Base responsiva para contêineres */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
 }
 
-.hide-on-tablet {
-  display: block;
-}
+/* ================ MEDIA QUERIES ================ */
 
-.show-on-tablet {
-  display: none;
-}
-
-.hide-on-desktop {
-  display: none;
-}
-
-.show-on-desktop {
-  display: block;
-}
-
-/* Mobile (até 767px) */
-@media (max-width: 767px) {
-  .hide-on-mobile {
-    display: none !important;
-  }
-
-  .show-on-mobile {
-    display: block !important;
-  }
-
-  /* Texto centralizado em mobile */
-  .text-center-mobile {
-    text-align: center !important;
-  }
-
-  /* Padding reduzido em mobile */
-  .p-small-mobile {
-    padding: var(--spacing-sm) !important;
-  }
-
-  /* Margens reduzidas em mobile */
-  .m-small-mobile {
-    margin: var(--spacing-sm) !important;
-  }
-
-  /* Texto menor em mobile */
-  .text-smaller-mobile {
-    font-size: 90% !important;
-  }
-
-  /* Esticar para largura total em mobile */
-  .full-width-mobile {
-    width: 100% !important;
-    max-width: none !important;
-  }
-
-  /* Ajustes de flex para mobile */
-  .flex-column-mobile {
-    flex-direction: column !important;
-  }
-
-  .justify-center-mobile {
-    justify-content: center !important;
-  }
-
-  .align-center-mobile {
-    align-items: center !important;
-  }
-
-  /* Ordem dos elementos em flex */
-  .order-first-mobile {
-    order: -1 !important;
-  }
-
-  .order-last-mobile {
-    order: 999 !important;
-  }
-}
-
-/* Tablet (768px até 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .hide-on-tablet {
-    display: none !important;
-  }
-
-  .show-on-tablet {
-    display: block !important;
-  }
-
-  /* Ajustes para tablet */
-  .text-center-tablet {
-    text-align: center !important;
-  }
-
-  .p-medium-tablet {
-    padding: var(--spacing-md) !important;
-  }
-
-  .m-medium-tablet {
-    margin: var(--spacing-md) !important;
-  }
-
-  /* Ajustes de layout para tablet */
-  .grid-2-cols-tablet {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  .flex-wrap-tablet {
-    flex-wrap: wrap !important;
-  }
-}
-
-/* Desktop (a partir de 1024px) */
-@media (min-width: 1024px) {
-  .hide-on-desktop {
-    display: none !important;
-  }
-
-  .show-on-desktop {
-    display: block !important;
-  }
-
-  /* Ajustes para desktop */
-  .max-width-desktop {
-    max-width: 1200px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .grid-3-cols-desktop {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-
-  .grid-4-cols-desktop {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-}
-
-/* Ajustes para telas muito grandes */
-@media (min-width: 1440px) {
-  .container-xl {
-    max-width: 1320px !important;
-  }
-
-  .text-larger-xl {
-    font-size: 110% !important;
-  }
-
-  .spacing-larger-xl {
-    padding: var(--spacing-xl) !important;
-    margin: var(--spacing-xl) !important;
-  }
-}
-
-/* Ajustes para telas muito pequenas */
+/* Extra small devices (phones, 480px and down) */
 @media (max-width: 480px) {
-  .hide-on-small {
-    display: none !important;
+  /* Ajustes de tamanho de fonte para dispositivos pequenos */
+  html {
+    font-size: 14px;
   }
 
-  .text-smaller-small {
-    font-size: 85% !important;
+  /* Ajustes de cabeçalho */
+  header h1 {
+    font-size: 1.5rem;
   }
 
-  .p-xs-small {
-    padding: var(--spacing-xs) !important;
+  /* Simplifica navegação */
+  header nav ul {
+    gap: 0.5rem;
   }
 
-  .stack-small {
-    display: flex !important;
-    flex-direction: column !important;
+  /* Ajustes para inputs e controles de formulário */
+  input[type='text'],
+  input[type='password'],
+  input[type='email'],
+  input[type='number'],
+  select,
+  textarea {
+    font-size: 16px; /* Evita zoom automático em dispositivos iOS */
+  }
+
+  /* Ajusta botões para dispositivos móveis */
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-group button {
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+
+  /* Layout de senha gerada */
+  .password-display {
+    flex-direction: column;
+  }
+
+  .password-display .actions {
+    margin-top: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* Seção de múltiplas senhas */
+  .senhas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tabs em largura total */
+  .tab-navigation {
+    flex-wrap: wrap;
+  }
+
+  .tab-navigation button {
+    flex: 1 0 calc(50% - 0.5rem);
+    margin: 0.25rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .tab-navigation button .material-icons {
+    margin-right: 0.25rem;
+    font-size: 1rem;
+  }
+
+  /* Ajusta glossário */
+  .categorias-tabs .tabs-header {
+    flex-wrap: wrap;
+  }
+
+  .categorias-tabs .tab-btn {
+    flex: 1 0 calc(50% - 0.5rem);
+    margin: 0.25rem;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .termo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer simplificado */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 }
 
-/* Ajustes para orientação */
-@media (orientation: landscape) and (max-height: 500px) {
-  .adjust-for-landscape {
+/* Small devices (tablets, 640px and up) */
+@media (min-width: 481px) and (max-width: 640px) {
+  /* Ajustes de layout para tablets pequenos */
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* Ajustes do layout de cabeçalho */
+  header .container {
+    flex-direction: column;
+  }
+
+  header nav {
+    margin-top: 0.5rem;
+  }
+
+  /* Melhora o espaço em controles de formulário */
+  .opcoes-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Torna o medidor de força mais claro */
+  .forca-container {
+    flex-direction: column;
+  }
+
+  #barraForca {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Melhora o layout das ferramentas */
+  .tab-panels {
+    padding: 1rem;
+  }
+
+  /* Ajusta o glossário */
+  .termo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer simplificado */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 641px) and (max-width: 768px) {
+  /* Ajusta o layout do container para dispositivos médios */
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Melhora o layout de controles de senha */
+  .opcoes-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .checkbox-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Ajusta o layout das ferramentas */
+  .tabs {
+    border-radius: 0.5rem;
+  }
+
+  /* Grid de senhas múltiplas */
+  .senhas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Recursos no footer */
+  .recursos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Ajusta footer */
+  .footer-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+  }
+
+   .password-display {
+    height: 5rem;
+  }
+  
+  #senhaGerada {
+    font-size: 1.6rem;
+    padding: 1rem 1.4rem;
+  }
+  
+  .password-display .actions {
+    gap: 0.4rem;
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  /* Ajusta o layout de opções */
+  .opcoes-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Grid de múltiplas senhas */
+  .senhas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Termos no glossário */
+  .termo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Extra large devices (large desktops, 1280px and up) */
+@media (min-width: 1025px) {
+  .container {
+    padding: 0 2.5rem;
+  }
+
+  /* Aumenta espaçamento e legibilidade */
+  main {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Layout de opções completo */
+  .opcoes-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  /* Grid de múltiplas senhas */
+  .senhas-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Layout de glossário */
+  .termo-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .password-display {
+    height: 5.4rem;
+  }
+
+  #senhaGerada {
+    font-size: 1.8rem;
+  }
+
+  .password-display .actions {
+    gap: 0.6rem;
+  }
+
+  .password-display .actions button {
+    padding: 0.8rem;
+  }
+
+  .password-display .actions .material-icons {
+    font-size: 2.2rem;
+  }
+}
+
+/* ================ AJUSTES ESPECÍFICOS DE COMPONENTES ================ */
+
+/* Responsividade do medidor de força */
+@media (max-width: 640px) {
+  #medidorForca {
+    flex-direction: column;
+  }
+
+  .forca-container {
+    width: 100%;
+  }
+}
+
+/* Responsividade das notificações */
+@media (max-width: 768px) {
+  #notificacoes {
+    width: calc(100% - 2rem);
+    max-width: 100%;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Responsividade dos modais */
+@media (max-width: 640px) {
+  dialog {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+  }
+
+  dialog h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Ajustes para o gerador de PIN em dispositivos pequenos */
+@media (max-width: 480px) {
+  .pin-display {
+    flex-direction: column;
+  }
+
+  #pinGerado {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Responsividade do botão para voltar ao topo */
+@media (max-width: 768px) {
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* ================ ORIENTAÇÃO DE DISPOSITIVO ================ */
+
+/* Ajustes para dispositivos em orientação paisagem */
+@media (max-height: 480px) and (orientation: landscape) {
+  /* Ajusta altura do cabeçalho */
+  header {
+    padding: 0.5rem 0;
+  }
+
+  /* Compacta conteúdo vertical */
+  main {
+    padding-top: 0.5rem;
+  }
+
+  /* Ajusta modais para não ultrapassarem a área visível */
+  dialog {
     max-height: 80vh;
     overflow-y: auto;
   }
+}
 
-  .compact-for-landscape {
-    padding: var(--spacing-sm) !important;
-    margin: var(--spacing-sm) !important;
+/* ================ SUPORTE A IMPRESSÃO ================ */
+
+@media print {
+  /* Remove elementos desnecessários para impressão */
+  header,
+  footer,
+  #notificacoes,
+  button:not(.btn-primary),
+  .actions,
+  #back-to-top {
+    display: none !important;
+  }
+
+  /* Ajusta cores para impressão */
+  :root {
+    --color-bg-primary: white !important;
+    --color-text-primary: black !important;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  /* Quebras de página apropriadas */
+  section {
+    page-break-inside: avoid;
+    margin-bottom: 1cm;
+  }
+
+  /* Expande detalhes automaticamente */
+  details {
+    display: block;
+  }
+
+  details > summary {
+    display: none;
+  }
+
+  details > * {
+    display: block !important;
+  }
+
+  /* URL visíveis para links */
+  a::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
   }
 }
 
-/* Ajustes para dispositivos com hover */
-@media (hover: hover) {
-  .hover-effect:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+/* ================ ACESSIBILIDADE / UTILIDADES RESPONSIVAS ================ */
+
+/* Oculta elementos apenas visualmente (mantém para leitores de tela) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Oculta/mostra elementos baseado no breakpoint */
+@media (max-width: 640px) {
+  .hide-sm {
+    display: none !important;
   }
 }
 
-/* Utilitários para layout flexível */
-.flex {
-  display: flex;
+@media (min-width: 641px) {
+  .show-sm-only {
+    display: none !important;
+  }
 }
 
-.flex-col {
-  flex-direction: column;
+@media (max-width: 768px) {
+  .hide-md {
+    display: none !important;
+  }
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
+@media (min-width: 769px) {
+  .show-md-only {
+    display: none !important;
+  }
 }
 
-.items-center {
-  align-items: center;
+/* Ajustes específicos para dispositivos com tela sensível ao toque */
+@media (hover: none) {
+  /* Aumenta área de toque para elementos interativos */
+  button,
+  input[type='checkbox'] + label,
+  input[type='radio'] + label,
+  select,
+  .tab-button,
+  .tab-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove efeitos de hover que não funcionam bem em touch */
+  .result-card:hover {
+    transform: none;
+  }
 }
 
-.justify-center {
-  justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.gap-sm {
-  gap: var(--spacing-sm);
-}
-
-.gap-md {
-  gap: var(--spacing-md);
-}
-
-/* Utilitários para grid */
-.grid {
-  display: grid;
-}
-
-.grid-cols-1 {
-  grid-template-columns: 1fr;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* Adaptação de acessibilidade */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+/* Ajustes para telas de alta resolução (Retina, etc) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Ajustes de bordas e elementos finos para melhor visualização */
+  .barra-progresso,
+  .tab-button,
+  input[type='range'] {
+    border-width: 0.5px;
   }
 }
