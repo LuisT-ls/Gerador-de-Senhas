@@ -157,3 +157,37 @@ function showTipsIfFirstVisit() {
     }, 1000)
   }
 }
+
+const gerarQrCodeWifi = (ssid, senha, tipo = 'WPA') => {
+  const conteudo = `WIFI:T:${tipo};S:${ssid};P:${senha};;`
+  const container = document.getElementById('wifiQrCode')
+
+  container.innerHTML = ''
+  new QRCode(container, {
+    text: conteudo,
+    width: 180,
+    height: 180,
+    colorDark: '#000',
+    colorLight: '#fff',
+    correctLevel: QRCode.CorrectLevel.H
+  })
+
+  document.getElementById('wifiQrCodeSection').classList.remove('hidden')
+}
+
+document.getElementById('gerarSenhaWifi').addEventListener('click', () => {
+  const ssid = prompt('Informe o nome da rede Wi-Fi (SSID):')
+  if (!ssid) return alert('É necessário informar o nome da rede.')
+
+  const senha = document.getElementById('senhaWifiTexto').textContent
+  gerarQrCodeWifi(ssid, senha)
+})
+
+// Botão para baixar o QR Code
+document.getElementById('baixarQrCode').addEventListener('click', () => {
+  const canvas = document.querySelector('#wifiQrCode canvas')
+  const link = document.createElement('a')
+  link.download = 'wifi-qr-code.png'
+  link.href = canvas.toDataURL()
+  link.click()
+})

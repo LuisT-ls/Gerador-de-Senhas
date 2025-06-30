@@ -355,6 +355,17 @@
   font-family: monospace;
 }
 
+#wifiQrCodeSection {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+#wifiQrCode canvas {
+  margin: 0.5rem auto;
+  border: 1px solid #ccc;
+  padding: 8px;
+  background: #fff;
+}
+
 /* PIN gerado */
 #pinGerado {
   font-size: 2.8rem;
