@@ -131,6 +131,12 @@
   --color-input-bg: #1f2937;
   --color-input-placeholder: #6b7280;
 
+  --color-password-very-weak: #ef4444;
+  --color-password-weak: #f97316;
+  --color-password-medium: #f59e0b;
+  --color-password-strong: #16a34a;
+  --color-password-very-strong: #15803d;
+
   /* Sombras mais escuras para tema escuro */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3),

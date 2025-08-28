@@ -101,40 +101,18 @@
   border-radius: var(--border-radius-full);
   overflow: hidden;
   margin-bottom: var(--spacing-sm);
-}
-
-/* Estilos da barra de progresso baseados na força da senha */
-.barra-progresso[data-strength='muito-fraca'] {
-  background-color: var(--color-password-very-weak);
-  opacity: 0.2;
-}
-
-.barra-progresso[data-strength='fraca'] {
-  background-color: var(--color-password-weak);
-  opacity: 0.2;
-}
-
-.barra-progresso[data-strength='media'] {
-  background-color: var(--color-password-medium);
-  opacity: 0.2;
-}
-
-.barra-progresso[data-strength='forte'] {
-  background-color: var(--color-password-strong);
-  opacity: 0.2;
-}
-
-.barra-progresso[data-strength='muito-forte'] {
-  background-color: var(--color-password-very-strong);
-  opacity: 0.2;
+  position: relative;
 }
 
 /* Preenchimento da barra de progresso */
 .barra-progresso .barra-valor {
   height: 100%;
-  transition: width 0.5s ease;
+  transition: width 0.5s ease, background-color 0.5s ease;
+  border-radius: inherit;
+  width: 0%;
 }
 
+/* Estilos da barra de progresso baseados na força da senha */
 .barra-progresso[data-strength='muito-fraca'] .barra-valor {
   width: 20%;
   background-color: var(--color-password-very-weak);

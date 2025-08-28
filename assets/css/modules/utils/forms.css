@@ -554,45 +554,6 @@ textarea[readonly] {
   margin-top: var(--spacing-md);
 }
 
-.barra-progresso {
-  height: 0.8rem;
-  background-color: var(--color-bg-tertiary);
-  border-radius: var(--border-radius-full);
-  margin-bottom: var(--spacing-sm);
-  overflow: hidden;
-}
-
-.barra-progresso[data-strength='muito-fraca'] .barra-valor {
-  width: 20%;
-  background-color: var(--color-password-very-weak);
-}
-
-.barra-progresso[data-strength='fraca'] .barra-valor {
-  width: 40%;
-  background-color: var(--color-password-weak);
-}
-
-.barra-progresso[data-strength='media'] .barra-valor {
-  width: 60%;
-  background-color: var(--color-password-medium);
-}
-
-.barra-progresso[data-strength='forte'] .barra-valor {
-  width: 80%;
-  background-color: var(--color-password-strong);
-}
-
-.barra-progresso[data-strength='muito-forte'] .barra-valor {
-  width: 100%;
-  background-color: var(--color-password-very-strong);
-}
-
-.barra-valor {
-  height: 100%;
-  border-radius: inherit;
-  transition: width 0.3s ease, background-color 0.3s ease;
-}
-
 /* Responsividade para formulários */
 @media (max-width: 768px) {
   .opcoes-grid {

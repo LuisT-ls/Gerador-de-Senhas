@@ -33,6 +33,17 @@ export function initPasswordGenerator() {
   const strengthFeedback = document.getElementById('feedbackForca')
   const securityAnalysisList = document.getElementById('analiseSeguranca')
 
+  // Verificar se os elementos existem
+  if (!strengthBar) {
+    console.error('Elemento .barra-progresso não encontrado')
+  }
+  if (!strengthFeedback) {
+    console.error('Elemento #feedbackForca não encontrado')
+  }
+  if (!securityAnalysisList) {
+    console.error('Elemento #analiseSeguranca não encontrado')
+  }
+
   // Variável para controlar o temporizador de delay
   let sliderTimeout = null
 
